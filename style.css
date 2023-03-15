@@ -1,0 +1,460 @@
+html,body{height:100%;}
+
+.nav-item {
+    color:#498ffc; 
+    margin-top: 10%;
+}
+
+.nav-item-icons{
+    color:rgb(0, 0, 0); 
+    
+    margin-right: 30%;
+    font-size: 1.5rem;
+    padding: 3%;
+}
+.nav-background {
+    margin-right: 0%;
+  }
+
+  .footer-background {
+    background-image: url("assets/images/pngfind.com-dog-paw-png-337026.png");
+    background-size: 8%;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+  }
+  .navbar-toggler{
+    margin-right: 10%;
+  }
+
+  .bi-chevron-left,
+  .bi-chevron-right{
+    font-size: 8vw;
+    background-size: 100%, 100%;
+    color:black;
+  }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100%;
+  width: 100%;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 2px solid #498ffc;
+  background-image: none;
+  background-color: black;
+  font-size: 4.0 em;
+  line-height: 50px;
+}
+
+
+  .carousel-caption {
+    color: rgb(255, 255, 255);
+    font-size: 3.0 em;
+    background-color: rgb(0, 0, 0, 0.5);
+    top: 5%;
+    bottom: initial;
+    border-radius: 10px;
+    animation: fadeIn 4s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.justify{
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 20px;
+}
+
+#logo{
+    margin-top:-10px; 
+    margin-left:55px;
+}
+#cim{
+   color:antiquewhite;
+   text-shadow: 1px 1px 2px #000000;
+}
+
+#alcim{
+margin-top:-25px;
+margin-left:120px;
+text-shadow: none;
+}
+
+.modal-title{
+    margin-left: 28%;
+    text-align: center;
+    color: rgb(64, 94, 151);
+}
+.socialoffcanvas{
+    display: none;
+    color: #000000;
+}
+.dropdown-menu{
+    z-index: 999;
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+/* Galaxy Fold (portrait) ----------- */
+@media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
+    html,body{width:100%;}
+
+    .offcanvas-body {
+        background-image: url("assets/images/huskey2.jpg");
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: center;
+        }
+        .nav-item-icons,
+        .dropdown {
+            display: none;
+         }
+         .socialoffcanvas{
+            display: flex;
+            position: absolute;
+            padding: 1%;
+            margin-left: -20%;
+            top: 0%;
+        }
+        .socialoffcanvas a{
+            color: #000000;
+            margin-left: 10%;
+        }
+
+         .navbar-brand{
+            font-size: 0.5rem;
+            height: 5%;
+            width: 5%;
+            margin-left: -9%;
+         }
+         .navbar-toggler{
+            display: flex;
+            justify-content: center;
+            margin-right:0%;
+
+         }
+         #logo2{
+            height: 70%;
+            width: 9.5%;
+            padding-right: 1%;
+        }
+
+        .offcanvas-header{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+         }
+         .offcanvas-title{
+            font-size: 1 rem;
+         }
+         .offcanvas-header .btn-close {
+            padding: 5%;
+          
+        }
+        .offcanvas-body{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+        }
+        .nav-link{
+            font-size: 110%;
+        }
+        .carousel-caption{
+            font-size: 50%;
+        }
+        .footer-background {
+            background-size: 15%;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-position-x: left;
+          }
+
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-device-width : 319px) and (max-device-width : 567px) {
+	.offcanvas-body {
+        background-image: url("assets/images/huskey2.jpg");
+        background-size: 40%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: center;
+        }
+        .nav-item-icons,
+        .dropdown {
+            display: none;
+         }
+         .socialoffcanvas{
+            display: flex;
+            position: absolute;
+            bottom: 25%;
+            margin-left: -20%;
+
+        }
+        .socialoffcanvas a{
+            color: #000000;
+            margin-left: 10%;
+        }
+
+
+         .navbar-brand{
+            font-size: 0.6rem;
+            height: 5%;
+            width: 5%;
+         }
+         .navbar-toggler{
+            display: flex;
+            justify-content: center;
+            margin-right:0%;
+
+         }
+         #logo2{
+            height: 70%;
+            width: 9.5%;
+            padding-right: 1%;
+        }
+
+        .offcanvas-header{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+         }
+         .offcanvas-title{
+            font-size: 1 rem;
+         }
+         .offcanvas-header .btn-close {
+            padding: 5%;
+          
+        }
+        .offcanvas-body{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+        }
+        .nav-link{
+            font-size: 110%;
+        }
+        .carousel-caption{
+            font-size: 50%;
+        }
+        .footer-background {
+            background-size: 15%;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-position-x: left;
+          }
+
+       
+    }
+/* ------------------------------------------------------------------------------------------------------------ */
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-device-width : 568px) and (max-device-width : 768px) {
+	.offcanvas-body {
+        background-image: url("assets/images/huskey2.jpg");
+        background-size: 30%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: right;
+        }
+        .nav-item-icons,
+        .dropdown {
+            display: none;
+         }
+
+         .socialoffcanvas{
+            display: flex;
+            position: absolute;
+            bottom: 25%;
+            margin-left: -20%;
+
+        }
+        .socialoffcanvas a{
+            color: #000000;
+            margin-left: 10%;
+        }
+
+         .navbar-brand{
+            font-size: 0.8rem;
+            height: 8%;
+            width: 8%;
+         }
+         .navbar-toggler{
+            display: flex;
+            justify-content: center;
+            margin-right:0%;
+
+         }
+         #logo2{
+            height: 65%;
+            width: 9.5%;
+            padding-right: 1%;
+        }
+
+        .offcanvas-header{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+         }
+         .offcanvas-title{
+            font-size: 1 rem;
+         }
+         .offcanvas-header .btn-close {
+            padding: 5%;
+          
+        }
+        .offcanvas-body{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+            margin-top: 5%;
+        }
+        .nav-link{
+            font-size: 110%;
+        }
+        .carousel-caption{
+            font-size: 50%;
+        }
+        .footer-background {
+            background-size: 15%;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-position-x: left;
+          }
+
+       
+    }
+
+/* ------------------------------------------------------------------------------------------------------------ */
+/* iPads, tablets (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	.offcanvas-body {
+        background-image: url("assets/images/huskey2.jpg");
+        background-size: 42%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: right;
+        }
+        .nav-item-icons {
+            margin-right: 4%;
+            font-size: 0.7 rem;
+            margin-left: 5%;
+         }
+
+         .navbar-brand{
+            font-size: 0.7 rem;
+            height: 20%;
+            width: 20%;
+         }
+         .navbar-toggler{
+            display: flex;
+            justify-content: center;
+            margin-right:0%;
+
+         }
+         #logo2{
+            height: 85%;
+            width: 11.5%;
+            padding-right: 1%;
+        }
+
+        .offcanvas-header{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+         }
+         .offcanvas-title{
+            font-size: 1.8 rem;
+         }
+         .offcanvas-header .btn-close {
+            padding: 5%;
+          
+        }
+        .offcanvas-body{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+        }
+        .nav-link{
+            font-size: 130%;
+        }
+        .carousel-caption{
+            font-size: 70%;
+        }
+        .footer-background {
+            background-size: 15%;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-position-x: left;
+          }
+
+       
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1024px) {
+	.offcanvas-body {
+        background-image: url("assets/images/huskey2.jpg");
+        background-size: 60%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: right;
+        }
+        .nav-item-icons {
+            margin-right: 2%;
+            font-size: 0.8 rem;
+            margin-left: 4%;
+         }
+
+         .navbar-brand{
+            font-size: 1 rem;
+            height: 25%;
+            width: 25%;
+         }
+         .navbar-toggler{
+            display: flex;
+            justify-content: center;
+            margin-right:0%;
+
+         }
+         #logo2{
+            height: 90%;
+            width: 13%;
+            padding-right: 2%;
+        }
+
+        .offcanvas-header{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+         }
+         .offcanvas-title{
+            font-size: 110%;
+         }
+         .offcanvas-header .btn-close {
+            padding: 5%;
+          
+        }
+        .offcanvas-body{
+            display: flex;
+            justify-content: center;
+            margin-left: -5%;
+        }
+        .nav-link{
+            font-size: 140%;
+        }
+
+       
+}
+
+/* ------------------------------------------------------------------------------------------------------------ */
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+	/* Styles */
+}
+
