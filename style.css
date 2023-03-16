@@ -88,14 +88,35 @@ text-shadow: none;
 .modal-title{
     margin-left: 28%;
     text-align: center;
-    color: rgb(64, 94, 151);
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px #000000;
 }
+.modal-header{
+    background-color: #498ffc;
+}
+
 .socialoffcanvas{
     display: none;
     color: #000000;
 }
 .dropdown-menu{
     z-index: 999;
+}
+.form-label{
+    text-align: center;
+}
+#password,
+#username{
+    text-align: center;
+}
+#welcome {
+    color: white;
+    text-align: center;
+    padding-top: 8px;
+    margin-right: 20px;
+}
+.dropdown-item{
+    padding: 10px;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */

@@ -1,5 +1,6 @@
 <?php
 require 'loginmodal.php';
+require 'registmodal.php'
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ require 'loginmodal.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="./jQuery/jquery-3.6.4.min.js"></script>
     <title>LodInn kutyapanzió</title>
 </head>
 
@@ -24,6 +25,28 @@ require 'loginmodal.php';
     <div id="alcim" class="fw-light">kutyusa a legjobb kezekben</div>
     </a>
     <ul class="navbar-nav flex-row mr-lg-0">
+
+            <?php
+            if(isset($_SESSION["username"]))
+            {
+                echo '<h5 id="welcome">Üdvözlünk '.$_SESSION["username"]. '!</h5>';
+            ?>
+            <li class="nav-item-icons" >
+                <a class="nav-link pr-2"><i class="bi bi-person"></i></a></li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    <ul class="dropdown-menu position-absolute dropdown-menu-right ">
+                        <li><a class="dropdown-item" href="login.php" id="login"><i class="bi bi-person"></i> Profilom</a></li>
+                        <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-calendar-check"></i> Foglalásaim</a></li>
+                        <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-heart"></i> Kutyáim</a></li>
+                        <li><a class="dropdown-item" href="logout.php" id="register"><i class="bi bi-box-arrow-left"></i> Kijelentkezés</a></li>
+                    </ul>
+            </li>
+            <?php 
+            }
+                else {
+            ?>
+           
             <li class="nav-item-icons">
                 <a class="nav-link pr-2"><i class="bi bi-person"></i></a>
             </li>
@@ -31,9 +54,12 @@ require 'loginmodal.php';
                 <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu position-absolute dropdown-menu-right">
                         <li><a class="dropdown-item" href="#" id="login"><i class="bi bi-box-arrow-in-right"></i> Bejelentkezés</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person-add"></i> Regisztráció</a></li>
+                        <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-person-add"></i> Regisztráció</a></li>
                     </ul>
             </li>
+            <?php
+                }
+            ?>
             <li class="nav-item-icons">
                 <a class="nav-link pr-2" href="tel:+36301234567"><i class="bi bi-telephone"></i></a>
             </li>
@@ -100,5 +126,12 @@ require 'loginmodal.php';
 <script> 
 $('#login').click(function(){
     $('#myModal').modal('show');
+})
+$('#register').click(function(){
+    $('#registmodal').modal('show');
+})
+$('#register2').click(function(){
+    $('#myModal').modal('toggle');
+    $('#registmodal').modal('show');
 })
 </script>
