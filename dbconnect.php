@@ -20,11 +20,19 @@
 //     }
 //   }
 
-$felh = "root";
-$jelsz = "";
+// $felh = "root";
+// $jelsz = "";
 
-$conn = new PDO('mysql:host = localhost; dbname = rendezveny_reg', $felh, $jelsz);
-$conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// $conn = new PDO('mysql:host = localhost; dbname = lodinn', $felh, $jelsz);
+// $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+define("DBHOST","localhost");
+define("DBNAME","lodinn");
+define("DBUSER","root");
+define("DBPASSWORD","");
+$conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME,DBUSER,DBPASSWORD);
+$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
 
 try {
     $conn->beginTransaction();

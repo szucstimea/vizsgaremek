@@ -1,5 +1,5 @@
 <?php
-include 'dbconnect.php';
+require_once ("dbconnect.php");
 
 class CheckUsername extends Database{
 

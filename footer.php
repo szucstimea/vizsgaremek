@@ -1,3 +1,5 @@
+<?php require_once ("inndata.php"); ?>
+
 <div class="ratio ratio-21x9">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.575560759822!2d19.887092015931895!3d46.218897779117164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474483f623bef64b%3A0xeabcc793bc22e06c!2zU3plZ2VkaSBTWkMgVMOzdGggSsOhbm9zIFN6YWtrw6lwesWRIElza29sYSDDqXMgU3ppbMOhZ3lpIE1paMOhbHkgS29sbMOpZ2l1bQ!5e0!3m2!1shu!2shu!4v1678217806892!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
@@ -35,7 +37,7 @@
           <i class="bi bi-clipboard-data"></i> Vállalkozásunk adatai
           </h6>
           <p>
-            Székhely: 6782 Mórahalom, <br>Dosztig köz 3.<br><br>
+            Székhely: 6782 <?php echo $panziovaros ?>, <br><?php echo $panzioutca." ".$panziohazszam?><br><br>
             Adószám: 16518611<br><br>
             Cégjegyzékszám: 12135486161<br><br>
             Engedély: 13616/31321
@@ -49,12 +51,13 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4"> <i class="bi bi-telephone"></i> Kapcsolat</h6>
-          <p><i class="bi bi-house-door"></i> 6782 Mórahalom, Dosztig köz 3. </p>
+          <p><i class="bi bi-house-door"></i> 6782 <?php echo $panziovaros." ".$panzioutca." ".$panziohazszam?> </p>
           <p>
-          <i class="bi bi-envelope-at"></i></i> 
-            lodinn@lodinn.hu
+          <i class="bi bi-envelope-at"></i></i>
+          <?php echo $panzioemail ?>
+            <!-- lodinn@lodinn.hu -->
           </p>
-          <p><i class="bi bi-phone-vibrate"></i>  + 36 (30) 123-45-67</p>
+          <p><i class="bi bi-phone-vibrate"></i>  <?php echo $panziotel ?></p>
         </div>
         <!-- Grid column -->
       </div>
@@ -66,7 +69,7 @@
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
     © <span id="spanYear"></span> Copyright:
-    <a class="text-reset fw-bold" href="index.php">LodInn kutyapanzió</a>
+    <a class="text-reset fw-bold" href="index.php"><?php echo $panzionev ?> kutyapanzió</a>
   </div>
   <!-- Copyright -->
 </footer>
