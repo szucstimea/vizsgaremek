@@ -5,7 +5,7 @@ require 'registmodal.php'
 
 <!DOCTYPE html>
 <html lang="hu">
-<head>
+<head class="">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@ require 'registmodal.php'
     <title>LodInn kutyapanzió</title>
 </head>
 
-<nav class="nav navbar navbar-dark" style="background-color: #498ffc;">
+<nav class="nav navbar navbar-dark fixed-top" style="background-color: #498ffc;">
 <div id="alcim" class="fw-light">kutyusa második otthona</div>
   <div class="container-fluid">
     <a class="navbar" href="index.php" id="cim">
@@ -136,4 +136,5 @@ $('#register2').click(function(){
     $('#myModal').modal('toggle');
     $('#registmodal').modal('show');
 })
+
 </script>
