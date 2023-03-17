@@ -27,7 +27,13 @@ include 'login.php';
             </div>
             <div class="row g-3 align-items-center" style="margin-top: 5%;">
                 <label class="form-label fw-bold" for="pass">Jelszó </label>
-                    <input type="password" class="form-control" id="password" name="pass" required value="" placeholder="Kérem adja meg jelszavát"><br><br>
+
+                <div class="input-group" id="show_hide_password">
+                    <input type="password" class="form-control" id="password" name="pass" required value="" placeholder="Kérem adja meg jelszavát"><br><br>    
+                <span class="input-group-text"><a href=""><i class="bi bi-eye"></i></a></span>
+                </div>          
+                
+
                 <label>
                     <div id="result2">
                     </div>
@@ -120,6 +126,21 @@ $(document).ready(function(){
      }
     });
 
+});
+
+$(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "bi-eye" );
+            $('#show_hide_password i').removeClass( "bi-eye-slash" );
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "bi-eye" );
+            $('#show_hide_password i').addClass( "bi-eye-slash" );
+        }
+    });
 });
 
 </script>
