@@ -2,15 +2,18 @@ html,body{height:100%;}
 
 .nav-item {
     color:#498ffc; 
-    margin-top: 10%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
 }
 
 .nav-item-icons{
     color:rgb(0, 0, 0); 
     
-    margin-right: 30%;
+    margin-right:1%;
     font-size: 1.5rem;
-    padding: 3%;
+    padding:1%;
 }
 .nav-background {
     margin-right: 0%;
@@ -23,8 +26,11 @@ html,body{height:100%;}
     background-position-y: center;
     background-position-x: center;
   }
-  .navbar-toggler{
+  .navbar-toggler,
+  .navbar-toggler-icon{
     margin-right: 10%;
+    margin-left:5%;
+    font-size: 100%;
   }
 
   .bi-chevron-left,
@@ -71,18 +77,25 @@ html,body{height:100%;}
 }
 
 #logo{
-    margin-top:-10px; 
-    margin-left:55px;
+    height:42px;
+    width:42px;
 }
 #cim{
    color:antiquewhite;
    text-shadow: 1px 1px 2px #000000;
+   display: flex;
+   text-decoration: none;
+   margin-top: -1.5%;
 }
 
 #alcim{
-margin-top:-25px;
-margin-left:120px;
-text-shadow: none;
+    display: flex;
+    color: aliceblue;
+    margin-top: 0%;
+    margin-left: 6%;
+    font-size: 1.0rem;
+    text-decoration: none;
+    text-align: center;
 }
 
 .modal-title{
@@ -118,6 +131,16 @@ text-shadow: none;
 .dropdown-item{
     padding: 10px;
 }
+.navbar-brand{
+   color:antiquewhite;
+   text-shadow: 1px 1px 2px #000000;
+   box-sizing: content-box;
+   height: auto;
+   margin-top: -2%;
+}
+
+
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -152,10 +175,13 @@ text-shadow: none;
             width: 5%;
             margin-left: -9%;
          }
-         .navbar-toggler{
+         .navbar-toggler,
+         .navbar-toggler-icon{
             display: flex;
             justify-content: center;
             margin-right:0%;
+            margin-left:5%;
+            font-size: 40%;
 
          }
          #logo2{
@@ -193,7 +219,16 @@ text-shadow: none;
             background-position-y: bottom;
             background-position-x: left;
           }
+          #cim{
+            color:antiquewhite;
+            text-shadow: 1px 1px 2px #000000;
+            display: flex;
+         }
+         
+         #alcim{
+             display: flex;
 
+         }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Smartphones (portrait) ----------- */
@@ -227,10 +262,13 @@ text-shadow: none;
             height: 5%;
             width: 5%;
          }
-         .navbar-toggler{
+         .navbar-toggler,
+         .navbar-toggler-icon{
             display: flex;
             justify-content: center;
             margin-right:0%;
+            margin-left:5%;
+            
 
          }
          #logo2{
@@ -268,7 +306,16 @@ text-shadow: none;
             background-position-y: bottom;
             background-position-x: left;
           }
+          #cim{
+            color:antiquewhite;
+            text-shadow: 1px 1px 2px #000000;
+            display: flex;
+         }
+         
+         #alcim{
+             display: flex;
 
+         }
        
     }
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -289,9 +336,8 @@ text-shadow: none;
          .socialoffcanvas{
             display: flex;
             position: absolute;
-            bottom: 25%;
             margin-left: -20%;
-
+            top:0%;
         }
         .socialoffcanvas a{
             color: #000000;
@@ -303,10 +349,12 @@ text-shadow: none;
             height: 8%;
             width: 8%;
          }
-         .navbar-toggler{
+         .navbar-toggler,
+         .navbar-toggler-icon{
             display: flex;
             justify-content: center;
-            margin-right:0%;
+            margin-left:5%;
+            font-size: 80%;
 
          }
          #logo2{
@@ -345,7 +393,15 @@ text-shadow: none;
             background-position-y: bottom;
             background-position-x: left;
           }
-
+          #cim{
+            color:antiquewhite;
+            text-shadow: 1px 1px 2px #000000;
+            display: flex;
+         }
+         
+         #alcim{
+             display: flex;
+         }
        
     }
 
@@ -360,9 +416,8 @@ text-shadow: none;
         background-position-x: right;
         }
         .nav-item-icons {
-            margin-right: 4%;
-            font-size: 0.7 rem;
-            margin-left: 5%;
+            padding: 1%;
+            font-size: 0.2 rem;;
          }
 
          .navbar-brand{
@@ -374,6 +429,8 @@ text-shadow: none;
             display: flex;
             justify-content: center;
             margin-right:0%;
+            margin-left:5%;
+            font-size: 90%;
 
          }
          #logo2{
@@ -411,8 +468,17 @@ text-shadow: none;
             background-position-y: bottom;
             background-position-x: left;
           }
+          #cim{
+            color:antiquewhite;
+            text-shadow: 1px 1px 2px #000000;
+            display: flex;
+            
+         }
+         
+         #alcim{
+             display: flex;
 
-       
+         }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
@@ -426,9 +492,9 @@ and (min-width : 1024px) {
         background-position-x: right;
         }
         .nav-item-icons {
-            margin-right: 2%;
-            font-size: 0.8 rem;
-            margin-left: 4%;
+            margin-right: 1%;
+            font-size: 0.5 rem;
+            margin-left: 3%;
          }
 
          .navbar-brand{
@@ -439,7 +505,8 @@ and (min-width : 1024px) {
          .navbar-toggler{
             display: flex;
             justify-content: center;
-            margin-right:0%;
+            margin-right:5%;
+            margin-left:5%;
 
          }
          #logo2{
@@ -468,14 +535,23 @@ and (min-width : 1024px) {
         .nav-link{
             font-size: 140%;
         }
+        #cim{
+            color:antiquewhite;
+            text-shadow: 1px 1px 2px #000000;
+            display: flex;
+            text-decoration: none;
+            
+         }
+         
+         #alcim{
+             display: flex;
 
        
-}
-
+        }
+    }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Large screens ----------- */
 @media only screen 
 and (min-width : 1824px) {
 	/* Styles */
 }
-

@@ -17,14 +17,15 @@ require 'registmodal.php'
     <title>LodInn kutyapanzió</title>
 </head>
 
-<nav class="navbar navbar-dark" style="background-color: #498ffc;">
+<nav class="nav navbar navbar-dark" style="background-color: #498ffc;">
+<div id="alcim" class="fw-light">kutyusa második otthona</div>
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="index.php" id="cim">
-    <img src="assets/images/dog3.png" alt="Logo" class="d-inline-block align-text-top" id="logo">
-    LODINN KUTYAPANZIÓ<br>
-    <div id="alcim" class="fw-light">kutyusa a legjobb kezekben</div>
+    <a class="navbar" href="index.php" id="cim">
+    <img src="assets/images/dog3.png" alt="Logo" class="" id="logo">
+    <h2>LODINN KUTYAPANZIÓ</h2><br>
     </a>
-    <ul class="navbar-nav flex-row mr-lg-0">
+    
+    <ul class=" navbar-nav flex-row">
 
             <?php
             if(isset($_SESSION["username"]))
@@ -122,6 +123,7 @@ require 'registmodal.php'
         </div>
     </div>
   </div>
+ 
 </nav>
 <script> 
 $('#login').click(function(){
