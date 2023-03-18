@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ("dbconnect.php");
+include 'dbconnect.php';
 $output ="";
 if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
         $username = $_POST["usern"];
@@ -23,9 +23,23 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
                 $_SESSION["username"] = $_POST["usern"];
                 // header("Location: index.php");
 
+                if(!empty($_POST['remember'])){
+
+                    $remember_checkbox = $_POST['remember'];
+        
+                    setcookie('username',  $username, time()+3600*24*7);
+                    setcookie('password',  $pass, time()+3600*24*7);
+                    } else {
+        
+                    setcookie('username',  $username,30);
+                    setcookie('password',  $pass, 30);
+                    }
+
             } else {
                 return 0;
             }
+            
+
         } echo $output;
     }catch (PDOException $e){
         echo "Adatbázis hiba: " .$e->getMessage();    

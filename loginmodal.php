@@ -2,26 +2,24 @@
 include 'usernamesearch.php';
 include 'registmodal.php';
 include 'login.php';
+
 ?>
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title"><i class="bi bi-box-arrow-in-right"></i>   BEJELENTKEZÉS</h4>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-
-
       <!-- Modal body -->
       <div class="modal-body">
         <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
             <div class="row g-3 align-items-center">
                 <label class="form-label fw-bold" for="username">Felhasználónév </label>
-                    <input type="text" class="form-control" id="username" name="username" required value="" placeholder="Kérem adja meg felhasználónevét"><br>
+                    <input type="text" class="form-control" id="username" name="username" required value="<?php if(isset($_COOKIE ['username'])){echo $_COOKIE ['username'];};?>" placeholder="Kérem adja meg felhasználónevét"><br>
                 <div id="result">
                 </div>
             </div>
@@ -29,27 +27,23 @@ include 'login.php';
                 <label class="form-label fw-bold" for="pass">Jelszó </label>
 
                 <div class="input-group" id="show_hide_password">
-                    <input type="password" class="form-control" id="password" name="pass" required value="" placeholder="Kérem adja meg jelszavát"><br><br>    
+                    <input type="password" class="form-control" id="password" name="pass" required value="<?php if(isset($_COOKIE ['password'])){echo $_COOKIE ['password'];};?>" placeholder="Kérem adja meg jelszavát"><br><br>    
                 <span class="input-group-text"><a href=""><i class="bi bi-eye"></i></a></span>
                 </div>          
-                
-
                 <label>
                     <div id="result2">
                     </div>
                 <label class="form-check-label" for="exampleCheck1">Megjegyez</label>
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
                 </label>
                 <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-box-arrow-in-right"></i>  Bejelentkezés</button>
-            </div>
-           
+            </div>      
         </form>     
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
         <a href="#" id="register2"><p><i class="bi bi-person-add" style="color: cornflowerblue;"></i>Még nem regisztált? Hozza létra fiókját itt.</p></a>
       </div>
-
     </div>
   </div>
 </div>
@@ -96,6 +90,7 @@ $(document).ready(function(){
         e.preventDefault();
         var username = $('#username').val();
         var password = $('#password').val();
+        var remember = $('#remember').val();
         $('#result2').html('');
         if (password.length >=0)
          {
@@ -103,7 +98,8 @@ $(document).ready(function(){
             url: "login.php",
             method: "post",
             data: {usern: username,
-                   pswrd: password
+                   pswrd: password,
+                   remember: remember,
                   },
             dataType: "text",
             success: function(data){
@@ -127,7 +123,7 @@ $(document).ready(function(){
     });
 
 });
-
+// jelszó mutatása, elrejtése 
 $(document).ready(function() {
     $("#show_hide_password a").on('click', function(event) {
         event.preventDefault();
@@ -142,5 +138,7 @@ $(document).ready(function() {
         }
     });
 });
+
+
 
 </script>
