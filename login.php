@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'dbconnect.php';
+require_once 'dbconnect.php';
 $output ="";
 if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
         $username = $_POST["usern"];
