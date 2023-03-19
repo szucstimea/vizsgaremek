@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Már 15. 19:20
+-- Létrehozás ideje: 2023. Már 19. 16:07
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.0
 
@@ -160,12 +160,23 @@ CREATE TABLE `panziok` (
   `telszam` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `kapacitas` int(11) NOT NULL,
+  `iranyitoszam` int(11) NOT NULL,
   `megye` varchar(50) NOT NULL,
   `varos` varchar(50) NOT NULL,
   `utca` varchar(50) DEFAULT NULL,
+  `adoszam` varchar(20) DEFAULT NULL,
+  `cegjegyzek` varchar(20) DEFAULT NULL,
+  `engedely` varchar(20) DEFAULT NULL,
   `hazszam` varchar(10) DEFAULT NULL,
   `bemutatkozas` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `panziok`
+--
+
+INSERT INTO `panziok` (`panzioID`, `nev`, `telszam`, `email`, `kapacitas`, `iranyitoszam`, `megye`, `varos`, `utca`, `adoszam`, `cegjegyzek`, `engedely`, `hazszam`, `bemutatkozas`) VALUES
+(1, 'LodInn', '+36301234567', 'lodinn@lodinn.hu', 50, 6782, 'Csongrád-Csanád vármegye', 'Mórahalom', 'Dosztig köz', '16518611', '12135486161', '13616/31321', '3.', 'A LodInn kutyapanzió megbízható, kedves és szakértő munkatársai biztosítják a családias, kényelmes és biztonságos átmeneti otthont házikedvencének. A külön töltött idő kutyusától nyugalomban telhet, hiszen biztosítjuk arról, hogy megfelelő bánásmódban részesítjük az összes nálunk vendégeskedő szőrmókot.');
 
 -- --------------------------------------------------------
 
@@ -194,6 +205,10 @@ CREATE TABLE `vendegek` (
   `kerNev` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telszam` varchar(20) NOT NULL,
+  `iranyitoszam` int(11) DEFAULT NULL,
+  `megye` varchar(50) DEFAULT NULL,
+  `varos` varchar(50) DEFAULT NULL,
+  `hazszam` varchar(10) DEFAULT NULL,
   `felh_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -311,7 +326,7 @@ ALTER TABLE `dolgozok`
 -- AUTO_INCREMENT a táblához `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
-  MODIFY `felhID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `felhID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `foglalasok`
@@ -347,7 +362,7 @@ ALTER TABLE `linkek`
 -- AUTO_INCREMENT a táblához `panziok`
 --
 ALTER TABLE `panziok`
-  MODIFY `panzioID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `panzioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `vendegek`
