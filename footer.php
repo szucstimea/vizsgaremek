@@ -37,10 +37,10 @@
           <i class="bi bi-clipboard-data"></i> Vállalkozásunk adatai
           </h6>
           <p>
-            Székhely: 6782 <?php echo $panziovaros ?>, <br><?php echo $panzioutca." ".$panziohazszam?><br><br>
-            Adószám: 16518611<br><br>
-            Cégjegyzékszám: 12135486161<br><br>
-            Engedély: 13616/31321
+            Székhely: <?php echo $panzioirsz." ".$panziovaros ?>, <br><?php echo $panzioutca." ".$panziohazszam?><br><br>
+            Adószám: <?php echo $panzioadoszam ?> <br><br>
+            Cégjegyzékszám: <?php echo $panziocegjegyzek ?><br><br>
+            Engedély: <?php echo $panzioengedely ?>
           </p>
         </div>
         <!-- Grid column -->
@@ -51,13 +51,13 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4"> <i class="bi bi-telephone"></i> Kapcsolat</h6>
-          <p><i class="bi bi-house-door"></i> 6782 <?php echo $panziovaros." ".$panzioutca." ".$panziohazszam?> </p>
+          <p><i class="bi bi-house-door"></i><?php echo $panzioirsz." ".$panziovaros." ".$panzioutca." ".$panziohazszam?> </p>
           <p>
           <i class="bi bi-envelope-at"></i></i>
-          <?php echo $panzioemail ?>
+          <?php echo "<a class=\"text-white ref-nostyle \" href=\"mailto:".$panzioemail."\">".$panzioemail."</a>" ?>
             <!-- lodinn@lodinn.hu -->
           </p>
-          <p><i class="bi bi-phone-vibrate"></i>  <?php echo $panziotel ?></p>
+          <p><i class="bi bi-phone-vibrate"></i><?php echo "<a class=\"text-white ref-nostyle \" href=\"tel:".$panziotel."\">".$panziotel."</a>" ?></p>
         </div>
         <!-- Grid column -->
       </div>
