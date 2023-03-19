@@ -27,7 +27,7 @@ include 'login.php';
                 <label class="form-label fw-bold" for="pass">Jelszó </label>
 
                 <div class="input-group" id="show_hide_password">
-                    <input type="password" class="form-control" id="password" name="pass" required value="<?php if(isset($_COOKIE ['password'])){echo $_COOKIE ['password'];};?>" placeholder="Kérem adja meg jelszavát"><br><br>    
+                    <input type="password" class="form-control" id="password" name="password" required value="<?php if(isset($_COOKIE ['password'])){echo $_COOKIE ['password'];};?>" placeholder="Kérem adja meg jelszavát"><br><br>    
                 <span class="input-group-text"><a href=""><i class="bi bi-eye"></i></a></span>
                 </div>          
                 <label>
@@ -35,6 +35,8 @@ include 'login.php';
                     </div>
                 <label class="form-check-label" for="exampleCheck1">Megjegyez</label>
                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <input type="text" class="form-check-input" id="textbox1" name="textbox1" style="display:none";>
+
                 </label>
                 <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-box-arrow-in-right"></i>  Bejelentkezés</button>
             </div>      
@@ -86,11 +88,21 @@ $(document).ready(function(){
 });
 // felhasználónév és jelszó ellenőrzés 
 $(document).ready(function(){
+
+    $('#remember').click(function() {
+        if ($("#remember").is(":checked") == true) {
+            $('#textbox1').val('yes');
+        } else {
+            $('#textbox1').val('no');
+            }
+        });
+
     $('#submit').click(function(e){
         e.preventDefault();
         var username = $('#username').val();
         var password = $('#password').val();
-        var remember = $('#remember').val();
+        var remember = $('#textbox1').val();
+        
         $('#result2').html('');
         if (password.length >=0)
          {
@@ -99,14 +111,12 @@ $(document).ready(function(){
             method: "post",
             data: {usern: username,
                    pswrd: password,
-                   remember: remember,
+                   rem: remember,
                   },
             dataType: "text",
             success: function(data){
                 $('#result2').html("");
                 if (data != 0){
-                    // $('#result2').html(data); 
-                    // $('#myModal').modal('toggle');
                     location.reload();
                 }else {
                     $('#password').focus();
@@ -138,7 +148,4 @@ $(document).ready(function() {
         }
     });
 });
-
-
-
 </script>

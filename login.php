@@ -2,7 +2,9 @@
 session_start();
 require_once 'dbconnect.php';
 $output ="";
+
 if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
+
         $username = $_POST["usern"];
         $pass = $_POST["pswrd"];
 
@@ -21,26 +23,21 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
                     <h5 style="color:green;"><i class="bi bi-box-arrow-in-right"></i> Sikeres bejelentkezés!</h5>
                 ';
                 $_SESSION["username"] = $_POST["usern"];
-                // header("Location: index.php");
-
-                if(!empty($_POST['remember'])){
-
-                    $remember_checkbox = $_POST['remember'];
-        
-                    setcookie('username',  $username, time()+3600*24*7);
-                    setcookie('password',  $pass, time()+3600*24*7);
-                    } else {
-        
-                    setcookie('username',  $username,30);
-                    setcookie('password',  $pass, 30);
-                    }
-
+               
             } else {
                 return 0;
-            }
-            
+            }  
 
         } echo $output;
+
+        if($_POST["rem"] == "yes"){   
+            setcookie('username',  $username, time()+3600*24*7);
+            setcookie('password',  $pass, time()+3600*24*7);
+            } else {
+            setcookie('username', '', time()-3600);
+            setcookie('password', '', time()-3600);
+            }
+            
     }catch (PDOException $e){
         echo "Adatbázis hiba: " .$e->getMessage();    
     } catch (Exception $e){
@@ -48,4 +45,5 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
         die();
     } 
 }
+
 ?>
