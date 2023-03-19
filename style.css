@@ -26,6 +26,11 @@ html,body{height:100%;}
     background-position-y: center;
     background-position-x: center;
   }
+
+  .ref-nostyle{
+    text-decoration: none;
+  }
+
   .navbar-toggler,
   .navbar-toggler-icon{
     margin-right: 10%;
