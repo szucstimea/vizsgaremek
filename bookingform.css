@@ -1,0 +1,49 @@
+#booking{
+    background: url(assets/images/booking-background-smaller.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.booking-form{
+    max-width:70%;
+    margin:auto;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.68);
+    border: 1px solid transparent;
+    color: rgb(255, 255, 255);
+    border-radius:6px;
+}
+
+.booking-form ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.booking-form ul li{
+    padding: 1.2rem;
+}
+
+.form-header-group{
+    padding: 24px 36px 24px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.68);
+    border-top: 1px solid rgba(0, 0, 0, 0.68);
+    border-color: #ccc;
+}
+
+.form-textbox{
+    border-radius: 6px;
+    border:1px solid #ccc;
+    background:transparent;
+    padding: 6px 6px;
+    color:rgb(255, 255, 255);
+}
+
+#kutyakszama:focus{
+    background:transparent;
+    color: rgb(255, 255, 255)
+}
+
+.input-group{
+    color: #ccc !important;
+}
