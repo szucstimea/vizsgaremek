@@ -1,17 +1,172 @@
 <style>
 <?php include 'style.css'; ?>
+<?php include 'bookingform.css'; ?>
 </style>
 
 <div class="container-fluid" id="booking">
     <div class="text-center">
         <h1 h1 style="padding:2%;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
-    <div>
-        <p class="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ante erat, luctus pellentesque nisl et, molestie scelerisque velit. Praesent condimentum ante id mi ornare viverra. Etiam velit arcu, molestie aliquet congue ut, dignissim non neque. Nulla auctor maximus scelerisque. Ut nunc libero, pellentesque non ante ac, egestas ullamcorper orci. Praesent auctor quis nibh venenatis viverra. Donec sollicitudin pretium fringilla. Vestibulum eu felis dui. Cras id odio ullamcorper ante elementum rhoncus quis at purus. Pellentesque sodales congue tempus. Praesent turpis neque, faucibus ac dolor vel, convallis efficitur metus. Vivamus sodales imperdiet libero, eget aliquam est pretium ut. Quisque lobortis orci tincidunt tortor dignissim, at pretium metus scelerisque. Duis aliquam purus at odio ultricies finibus. Praesent ultricies mauris ac ultrices finibus. Proin nec maximus massa, eu sagittis est.
+    <div class="booking-form-container">
+        <form class="booking-form" action="" method="post" name="" id="" autocomplete="on">
+            <ul>
+                <li id="" class="form-header-group">
+                    <h2 id="header_2" class="form-header">Gazdi adatai</h2>
+                    <div id="subHeader_1" class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
+                </li>
+                <li>
+                    <span>Név</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="gazdikernev" class=""><br>
+                            <label class="form-sub-label" for="gazdikernev">Keresztnév</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="gazdiveznev" class=""><br>
+                            <label class="form-sub-label" for="lgazdiveznev">Vezetéknév</label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>E-mail</span><br>
+                    <div class="col">
+                        <input class="form-textbox" type="email" id="gazdiveznev" class=""><br>
+                        <label class="form-sub-label" for="lgazdiveznev">pelda@pelda.hu</label>
+                    </div>
+                </li>
+                <li>
+                    <span>Telefonszám</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="gazdikernev" class=""><br>
+                            <label class="form-sub-label" for="gazdikernev">Körzetszám</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="gazdiveznev" class=""><br>
+                            <label class="form-sub-label" for="lgazdiveznev">Telefonszám</label>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>Hány kutya számára kíván foglalni?</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input min="1" max="5" type="number" id="kutyakszama" class="form-textbox" />
+                        </div>
+                    </div>
+                </li>
+                <li id="kutya-adatai" class="form-header-group">
+                    <h2 id="header_2" class="form-header">Kutya adatai</h2>
+                    <div id="subHeader_1" class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
+                </li>
+                <li>
+                    <span>Kutya neve</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="kutyaneve" class=""><br>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>Kutya fajtája</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-textbox" type="text" id="kutyaneve" class=""><br>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>Hány hónapos?</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input min="0" type="number" id="kutyakszama" class="form-textbox" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>Foglalás kezdő napja</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='date' class="form-textbox" />
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>Foglalás vége</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='date' class="form-textbox" />
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <fieldset>
+                        <legend>Szállítás</legend>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Kérek
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> Nem kérek
+                            </label>                            
+                        </div>
+                    </fieldset>
+                </li>
+                <li>
+                    <fieldset>
+                        <legend>Jelölje be mely szolgáltatásokat kéri:</legend>
+                            <div>
+                                <input type="checkbox" id="furdetes" name="szolgaltatas" value="furdetes">
+                                <label for="furdetes">Fürdetés</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="setaltatas" name="szolgaltatas" value="setaltatas">
+                                <label for="setaltatas">Sétáltatás</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="kozmetika" name="szolgaltatas" value="kozmetika">
+                                <label for="kozmetika">Kozmetika</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tanitas" name="szolgaltatas" value="tanitas">
+                                <label for="tanitas">Tanítás</label>
+                            </div>
+                    </fieldset>
+                </li>
+                <li>
+                <span>Egéyb speciális igényeit ide írhatja:</span><br>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="specigeny" class="form-textbox" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" name="submitbooking" id="submitbooking">Foglalás</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
 
-        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas ultrices sit amet arcu eget placerat. Sed nisl mi, malesuada pulvinar condimentum vitae, semper at massa. Donec dictum porta posuere. Duis magna orci, ullamcorper eu ornare quis, lobortis eget sem. Aenean dictum varius arcu non dapibus. Donec molestie volutpat nibh, quis cursus mi pretium vitae. Vivamus blandit eu nisl a interdum. Quisque quis ante magna. Pellentesque id efficitur metus, semper dapibus eros. Nullam magna ipsum, iaculis vitae fringilla quis, semper luctus nisi. Nam sed dui tempus, dictum nulla at, euismod sapien. Nunc non nisi eget risus pharetra eleifend. Donec sed convallis ante. Mauris nec dui vitae quam euismod sagittis nec varius ex.
-
-        Morbi scelerisque pharetra tortor, eget elementum arcu. Aliquam erat volutpat. Nunc a massa consectetur, condimentum nisi a, mattis diam. Etiam non leo vulputate, suscipit dui vel, eleifend purus. Donec vitae ligula ac augue congue pretium. Vivamus lobortis euismod nunc id ultrices. Phasellus turpis nisl, semper ut tincidunt sit amet, convallis non lacus. Sed ullamcorper, leo id tincidunt lobortis, nibh ante imperdiet libero, eget gravida odio erat at nisl. Phasellus commodo finibus tincidunt. Etiam sodales tristique tellus in dignissim. Praesent tempor sed dui eget convallis. Suspendisse at iaculis ante. Nam at tincidunt diam.
-        </p>
+        <!-- Dátum script -->
+        <script type="text/javascript">
+         $(function () {
+             $('#datetimepicker1').datetimepicker();
+         });
+      </script>
     </div>
 </div>
+
