@@ -59,7 +59,7 @@ html,body{height:100%;}
     color: rgb(255, 255, 255);
     font-size: 3.0 em;
     background-color: rgb(0, 0, 0, 0.5);
-    top: 5%;
+    top: 21%;
     bottom: initial;
     border-radius: 10px;
     animation: fadeIn 4s;
@@ -79,6 +79,7 @@ html,body{height:100%;}
 #logo{
     height:42px;
     width:42px;
+    
 }
 #cim{
    color:antiquewhite;
@@ -119,7 +120,12 @@ html,body{height:100%;}
     text-align: center;
 }
 #password,
-#username{
+#username,
+#veznev,
+#keresztnev,
+#email,
+#phone,
+#submit{
     text-align: center;
 }
 #welcome {
@@ -130,6 +136,7 @@ html,body{height:100%;}
 }
 .dropdown-item{
     padding: 10px;
+    position: relative;
 }
 .navbar-brand{
    color:antiquewhite;
@@ -140,6 +147,23 @@ html,body{height:100%;}
 }
 
 
+.carousel-inner{
+    width:100% !important;
+  }
+.container-fluid {
+    width: 100% !important;
+    padding:0% !important;
+    margin: 0% !important;
+
+  }
+  .navbar-fixed-top {
+    position: sticky;
+    top: 0;
+   
+  }
+  .hover-effect:hover {
+    opacity: 0.8;
+  }
 
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
