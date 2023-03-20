@@ -1,23 +1,28 @@
 html,body{height:100%;}
 
+.navbar{
+    padding-bottom: 40px; 
+}
+
 .nav-item {
     color:#498ffc; 
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
-    display: flex;
+
 }
 
 .nav-item-icons{
-    color:rgb(0, 0, 0); 
-    
     margin-right:1%;
     font-size: 1.5rem;
     padding:1%;
+    display: flex;
 }
 .nav-background {
     margin-right: 0%;
   }
+
+
 
   .footer-background {
     background-image: url("assets/images/pngfind.com-dog-paw-png-337026.png");
@@ -26,11 +31,6 @@ html,body{height:100%;}
     background-position-y: center;
     background-position-x: center;
   }
-
-  .ref-nostyle{
-    text-decoration: none;
-  }
-
   .navbar-toggler,
   .navbar-toggler-icon{
     margin-right: 10%;
@@ -91,7 +91,7 @@ html,body{height:100%;}
    text-shadow: 1px 1px 2px #000000;
    display: flex;
    text-decoration: none;
-   margin-top: -1.5%;
+   margin-top: -0.5%;
 }
 
 #alcim{
@@ -105,7 +105,7 @@ html,body{height:100%;}
 }
 
 .modal-title{
-    margin-left: 28%;
+    
     text-align: center;
     color:rgb(255, 255, 255);
     text-shadow: 1px 1px 2px #000000;
@@ -126,9 +126,10 @@ html,body{height:100%;}
 }
 #password,
 #username,
+#user,
 #veznev,
 #keresztnev,
-#email,
+#mail,
 #phone,
 #submit{
     text-align: center;
@@ -161,7 +162,7 @@ html,body{height:100%;}
     margin: 0% !important;
 
   }
-  .navbar-fixed-top {
+  .fixed-top {
     position: sticky;
     top: 0;
    
@@ -169,7 +170,91 @@ html,body{height:100%;}
   .hover-effect:hover {
     opacity: 0.8;
   }
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0.5%;
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #498ffc;
+  }
+  
+  .separator:not(:empty)::before {
+    margin-right: .7em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: .7em;
+  }
 
+  #message {
+    display:none;
+    background: #ffffff;
+    color: #498ffc;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  #message p {
+    padding: 10px 35px;
+    font-size: 15px;
+  }
+  
+  /* Add a green text color and a checkmark when the requirements are right */
+  .valid {
+    color: green;
+  }
+  
+  .valid:before {
+    position: relative;
+    left: -35px;
+    content: "👌";
+  }
+  
+  /* Add a red text color and an "x" icon when the requirements are wrong */
+  .invalid {
+    color: red;
+  }
+  
+  .invalid:before {
+    position: relative;
+    left: -35px;
+    content: "x";
+  }
+
+
+
+.tooltip{
+    width: auto;
+    font-size: 16px;
+}
+  .tooltip.animated:before {
+    transform: scale3d(.2,.2,1);
+    transition: all .3s ease-in-out;
+    
+  }
+  .tooltip.animated:after {
+    transform: translate3d(0,8px,0);
+    transition: all .2s ease-in-out;
+  }
+  .tooltip.animated:hover:before,
+  .tooltip.animated:hover:after {
+    opacity: 1;
+    transform: scale3d(1,1,1);
+  }
+  .tooltip.animated:hover:after {
+    transition: all .2s .1s ease-in-out;
+  }
+  .tooltip-inner {
+    max-width: 350px; /* set this to your maximum fitting width */
+    width: inherit; /* will take up least amount of space */ 
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -559,7 +644,7 @@ and (min-width : 1024px) {
         .offcanvas-body{
             display: flex;
             justify-content: center;
-            margin-left: -5%;
+            margin-left: -2%;
         }
         .nav-link{
             font-size: 140%;
@@ -574,6 +659,7 @@ and (min-width : 1024px) {
          
          #alcim{
              display: flex;
+             font-family:cursive;
 
        
         }

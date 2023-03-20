@@ -1,6 +1,5 @@
 <?php
 include 'usernamesearch.php';
-include 'registmodal.php';
 include 'login.php';
 
 ?>
@@ -18,13 +17,13 @@ include 'login.php';
       <div class="modal-body">
         <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
             <div class="row g-3 align-items-center">
-                <label class="form-label fw-bold" for="username">Felhasználónév </label>
-                    <input type="text" class="form-control" id="username" name="username" required value="<?php if(isset($_COOKIE ['username'])){echo $_COOKIE ['username'];};?>" placeholder="Kérem adja meg felhasználónevét"><br>
+                <label class="form-label fw-bold" for="username"><i class="bi bi-person" style="color:#498ffc"></i> Felhasználónév </label>
+                    <input type="text" class="form-control" id="username" name="username" required value="<?php if(isset($_COOKIE ['username'])){echo $_COOKIE ['username'];};?>" placeholder="Kérem adja meg felhasználónevét" autofocus><br>
                 <div id="result">
                 </div>
             </div>
             <div class="row g-3 align-items-center" style="margin-top: 5%;">
-                <label class="form-label fw-bold" for="pass">Jelszó </label>
+                <label class="form-label fw-bold" for="pass"><i class="bi bi-person-lock" style="color:#498ffc"></i> Jelszó </label>
 
                 <div class="input-group" id="show_hide_password">
                     <input type="password" class="form-control" id="password" name="password" required value="<?php if(isset($_COOKIE ['password'])){echo $_COOKIE ['password'];};?>" placeholder="Kérem adja meg jelszavát"><br><br>    
@@ -33,10 +32,11 @@ include 'login.php';
                 <label>
                     <div id="result2">
                     </div>
-                <label class="form-check-label" for="exampleCheck1">Megjegyez</label>
+                <label class="form-check-label" for="exampleCheck1" >Bejeletkezve maradok</label>
                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
                     <input type="text" class="form-check-input" id="textbox1" name="textbox1" style="display:none";>
-
+                    <button type="button" class="btn" id="bovebben" data-toggle="tooltip" data-html="true" data-placement="top" title="Amenyiben a 'Bejelentkezve maradok' opciót választja, 30 napig bejelentkezett státuszban marad ügyfélfiókjába. Az ön biztonsága érdekében 30 nap után automatikusan kijelentkeztetjük, amennyiben időközben nem jeletkezik ki. Kijelentkezés után felhasználóneve és jelszava megadásával ismét be kell jelentkeznie."><i class="bi bi-question-circle"></i></button>
+                    
                 </label>
                 <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-box-arrow-in-right"></i>  Bejelentkezés</button>
             </div>      
@@ -49,6 +49,9 @@ include 'login.php';
     </div>
   </div>
 </div>
+
+
+
 <?php
 //$usern = new CheckUsername();
 //$usern->check($username);
@@ -148,4 +151,16 @@ $(document).ready(function() {
         }
     });
 });
+
+
+// $('#bovebben').click(function(){
+//     alert ("Amenyiben a 'Bejelentkezve maradok' opciót választja, 30 napig bejelentkezett státuszban marad ügyfélfiókjába. Az ön biztonsága érdekében 30 nap után automatikusan kijelentkeztetjük ügyfélfiókjából, amennyiben időközben nem jeletkezik ki. Kijelentkezés után felhasználóneve és jelszava megadásával ismét be kell jelentkeznie.");
+// })
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').on('shown.bs.tooltip', function () {
+        $('.tooltip').addClass('animated');
+    })
+})
 </script>

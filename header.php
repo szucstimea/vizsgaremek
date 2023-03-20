@@ -1,8 +1,3 @@
-<?php
-require 'loginmodal.php';
-require 'registmodal.php'
-?>
-
 <!DOCTYPE html>
 <html lang="hu">
 <head class="">
@@ -18,6 +13,11 @@ require 'registmodal.php'
     <title>LodInn kutyapanzió</title>
 </head>
 
+<?php
+require 'loginmodal.php';
+require 'registmodal.php';
+?>
+
 <nav class="nav navbar navbar-dark fixed-top" style="background-color: #498ffc;">
 <div id="alcim" class="fw-light">kutyusa második otthona</div>
   <div class="container-fluid">
@@ -29,9 +29,20 @@ require 'registmodal.php'
     <ul class=" navbar-nav flex-row">
 
             <?php
+            $username ="";
             if(isset($_SESSION["username"]))
             {
-                echo '<h5 id="welcome">Üdvözlünk '.$_SESSION["username"]. '!</h5>';
+                $username = $_SESSION["username"];
+            }
+
+            if(isset($_COOKIE ['username']))
+            {
+                $username = $_COOKIE ['username'];
+            }
+        
+            if($username !=""){
+                echo '<h5 id="welcome">Üdvözlünk '.$username.'!</h5>';
+                
             ?>
             <li class="nav-item-icons" >
                 <a class="nav-link pr-2"><i class="bi bi-person"></i></a></li>
@@ -93,23 +104,23 @@ require 'registmodal.php'
         </div>
         <div class="offcanvas-body position-relative">
             <ul class="navbar-nav position-absolute top-1 start-50 translate-middle-x">
-                <li class="nav-item">
-                    <a class="nav-link active text-dark" aria-current="page" href="#"><i class="bi bi-house-heart"></i> Kezdőlap</a>
+                <li class="nav-item" >
+                    <a class="nav-link active text-dark hover-effect" aria-current="page" href="#"><i class="bi bi-house-heart"></i> Kezdőlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
+                    <a class="nav-link text-dark hover-effect" href="#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#booking"><i class="bi bi-calendar2-check"></i> Foglalás</a>
+                    <a class="nav-link text-dark hover-effect" href="#booking"><i class="bi bi-calendar2-check"></i> Foglalás</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#prices"><i class="bi bi-credit-card"></i> Áraink</a>
+                    <a class="nav-link text-dark hover-effect" href="#prices"><i class="bi bi-credit-card"></i> Áraink</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#news"><i class="bi bi-newspaper"></i> Hírek</a>
+                    <a class="nav-link text-dark hover-effect" href="#news"><i class="bi bi-newspaper"></i> Hírek</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
+                    <a class="nav-link text-dark hover-effect" href="#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
                 </li>
             </ul>
             <div class="socialoffcanvas">
@@ -137,5 +148,11 @@ $('#register2').click(function(){
     $('#myModal').modal('toggle');
     $('#registmodal').modal('show');
 })
-
+$('#register3').click(function(){
+    $('#registmodal').modal('toggle');
+    $('#myModal').modal('show');
+})
+$('.modal').on('shown.bs.modal', function() {
+  $(this).find('[autofocus]').focus();
+});
 </script>
