@@ -16,7 +16,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-      <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
+      <form id="form" class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
       <div class="separator">
            <b>ALAPADATOK</b>
           </div>
@@ -114,10 +114,11 @@
 
 
           <div class="row g-3">
-            <input type="password" class="form-control" id="password2" name="pass2" required value="" placeholder="jelszó megerősítése">
-            <div class="col" id="pass2"> 
-            </div>
+            <input type="password" class="form-control" id="password2" name="password2" required value="" placeholder="jelszó megerősítése"> 
           </div>
+
+            <div class="col" id="ellenorzes"> 
+            </div>
 
            <div class="row g-3 align-items-center" style="margin-top: 0.1%;" >
             <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-person-add"></i>  Regisztrálok</button>
@@ -260,5 +261,119 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 }
+
+// jelszo és jelszo ellenőrzés mezők ellenőrzése
+$(document).ready(function(){
+    $('#password2').keyup(function(){
+        var passw = $('#pswd').val();
+        var passw2 = $('#password2').val();
+        if(passw2.length >= 3)
+        {
+          if(passw != passw2){
+            $('#ellenorzes').html('<p style ="color: red;"><i class="bi bi-exclamation-circle"></i> A jelszó és a jelszó megerősítés mezők nem egyeznek meg!</p>');
+            $(':input[type="submit"]').prop('disabled', true);
+          }else{
+            $('#ellenorzes').html("<i class='bi bi-check' style='color:green;'></i>A jelszó és a jelszó megerősítés mezők megegyeznek");
+            $(':input[type="submit"]').prop('disabled', false);
+          } 
+        }
+        });
+     });
+// regisztráció
+$(document).ready(function() {
+  $('#form').on("submit",(function(e){
+        e.preventDefault();
+        var veznev = $('#veznev').val();
+        var keresztnev = $('#keresztnev').val();
+        var user = $('#user').val();
+        var mail = $('#mail').val();
+        var phone = $('#phone').val();
+        var megye = $('#megye').val();
+        var iranyitoszam = $('#iranyitoszam').val();
+        var telepules = $('#telepules').val();
+        var utca = $('#utca').val();
+        var hazszam = $('#hazszam').val();
+        var passw = $('#pswd').val();
+        console.log(veznev,keresztnev,user,mail,phone,megye,iranyitoszam,telepules,utca,hazszam,passw);
+        if((veznev !="")){
+            $.ajax({
+                url:"registinsert.php",
+                method:"post",   
+                data:{
+                  ve: veznev,
+                  ke: keresztnev,
+                  us: user,
+                  ma: mail,
+                  ph: phone,
+                  me : megye,
+                  ir: iranyitoszam,
+                  te: telepules,
+                  ut:utca,
+                  ha:hazszam,
+                  pa:passw
+                },
+                dataType: "text",
+                success: function(data){  
+                  location.reload();
+                    },
+                  error : function(err){
+                      alert(Error);
+                  },
+
+                })
+
+            }}))});
+
+
+
+
+
+
+// $(document).ready(function(){
+//     $('#user').focusout(function(){
+//         var username = $('#user').val();
+//         $('#res1').html('');
+//         if (username.length >=3)
+//          {
+//         $.ajax({
+//             url: "registupdate.php",
+//             method: "post",
+//             data: {user: username},
+
+//             $veznev = trim($_POST["veznev"]);
+//     $keresztnev = trim($_POST["keresztnev"]);
+//     $user = trim($_POST["user"]);
+//     $mail = trim($_POST["mail"]);
+//     $phone = trim($_POST["phone"]);
+//     $megye = trim($_POST["megye"]);
+//     $iranyitoszam = trim($_POST["iranyitoszam"]);
+//     $telepules = trim($_POST["telepules"]);
+//     $utca = trim($_POST["utca"]);
+//     $hazszam = trim($_POST["hazszam"]);
+//     $pass = trim($_POST["pass"]);
+
+
+
+
+
+
+//             dataType: "text",
+//             success: function(data){
+//                 $('#res1').html("");
+//                 if (data != 0){
+//                     $('#user').focus();
+//                     $('#user').val('');
+//                     $('#res1').html(username + data);
+//                 } 
+//             },
+//             error : function(err){
+//                 alert(Error);
+//             }
+            
+//         });
+//      }
+//     });
+
+// });
 
 </script>
