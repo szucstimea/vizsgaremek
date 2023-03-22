@@ -24,6 +24,7 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
                 $output .='
                     <h5 style="color:green;"><i class="bi bi-box-arrow-in-right"></i> Sikeres bejelentkezés!</h5>
                 ';
+                $_SESSION["loggedin"] = true;
                 $_SESSION["username"] = $_POST["usern"];
                
             } else {
