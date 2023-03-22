@@ -120,7 +120,7 @@ $(document).ready(function(){
             success: function(data){
                 $('#result2').html("");
                 if (data != 0){
-                    location.reload();
+                    $(location).attr('href', 'index.php');
                 }else {
                     $('#password').focus();
                     $('#password').val('');
@@ -152,10 +152,6 @@ $(document).ready(function() {
     });
 });
 
-
-// $('#bovebben').click(function(){
-//     alert ("Amenyiben a 'Bejelentkezve maradok' opciót választja, 30 napig bejelentkezett státuszban marad ügyfélfiókjába. Az ön biztonsága érdekében 30 nap után automatikusan kijelentkeztetjük ügyfélfiókjából, amennyiben időközben nem jeletkezik ki. Kijelentkezés után felhasználóneve és jelszava megadásával ismét be kell jelentkeznie.");
-// })
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();

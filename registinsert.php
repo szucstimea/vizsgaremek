@@ -16,10 +16,6 @@ if (isset($_POST["ve"])){
     $pass = trim($_POST["pa"]);
     $pwhash = password_hash($pass,PASSWORD_DEFAULT);
 
-
-//   $login = trim($_POST["login"]);
-//   $pw = trim($_POST["pw"]);
-//   $username = trim($_POST["username"]) ;
     if (!empty($user)){
         try {
         $sql = "INSERT INTO lodinn.felhasznalok (felhNev,jelszo) VALUES (:felhNev,:jelszo) ";
@@ -42,7 +38,8 @@ if (isset($_POST["ve"])){
         $queryReg2->bindParam(":utca",$utca,PDO::PARAM_STR);
         $queryReg2->bindParam(":hazszam",$hazszam,PDO::PARAM_INT);
         $queryReg2->execute();
-
+        $_SESSION["loggedin"] = true;
+            
         } catch (PDOException $e){
         $error = "Adatbázis hiba: ".$e->getMessage();
         } catch (Exception $e) {

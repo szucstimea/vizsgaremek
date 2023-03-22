@@ -122,7 +122,9 @@
 
            <div class="row g-3 align-items-center" style="margin-top: 0.1%;" >
             <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-person-add"></i>  Regisztrálok</button>
-          </div>    
+          </div>  
+            <div class="col" id="visszajelzes"> 
+            </div>  
     </form>     
   </div>
       <!-- Modal footer -->
@@ -294,7 +296,6 @@ $(document).ready(function() {
         var utca = $('#utca').val();
         var hazszam = $('#hazszam').val();
         var passw = $('#pswd').val();
-        console.log(veznev,keresztnev,user,mail,phone,megye,iranyitoszam,telepules,utca,hazszam,passw);
         if((veznev !="")){
             $.ajax({
                 url:"registinsert.php",
@@ -313,8 +314,8 @@ $(document).ready(function() {
                   pa:passw
                 },
                 dataType: "text",
-                success: function(data){  
-                  location.reload();
+                success: function(data){
+                  $('#visszajelzes').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Sikeres regisztráció! Kérem jelentkezzen be a megadott adatokkal!</h5><a href='?modal=1' id='register4'><p><i class='bi bi-box-arrow-in-right'></i>Bejelentkezés </p></a>");
                     },
                   error : function(err){
                       alert(Error);
@@ -324,56 +325,8 @@ $(document).ready(function() {
 
             }}))});
 
-
-
-
-
-
-// $(document).ready(function(){
-//     $('#user').focusout(function(){
-//         var username = $('#user').val();
-//         $('#res1').html('');
-//         if (username.length >=3)
-//          {
-//         $.ajax({
-//             url: "registupdate.php",
-//             method: "post",
-//             data: {user: username},
-
-//             $veznev = trim($_POST["veznev"]);
-//     $keresztnev = trim($_POST["keresztnev"]);
-//     $user = trim($_POST["user"]);
-//     $mail = trim($_POST["mail"]);
-//     $phone = trim($_POST["phone"]);
-//     $megye = trim($_POST["megye"]);
-//     $iranyitoszam = trim($_POST["iranyitoszam"]);
-//     $telepules = trim($_POST["telepules"]);
-//     $utca = trim($_POST["utca"]);
-//     $hazszam = trim($_POST["hazszam"]);
-//     $pass = trim($_POST["pass"]);
-
-
-
-
-
-
-//             dataType: "text",
-//             success: function(data){
-//                 $('#res1').html("");
-//                 if (data != 0){
-//                     $('#user').focus();
-//                     $('#user').val('');
-//                     $('#res1').html(username + data);
-//                 } 
-//             },
-//             error : function(err){
-//                 alert(Error);
-//             }
-            
-//         });
-//      }
-//     });
-
-// });
-
+$('#register4').click(function(){
+    $('#registmodal').modal('toggle');
+    $('#myModal').modal('show');
+})
 </script>

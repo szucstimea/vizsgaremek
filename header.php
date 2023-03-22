@@ -27,9 +27,29 @@ require 'registmodal.php';
     </a>
     
     <ul class=" navbar-nav flex-row">
-
+            <!-- felhaszáló létezésének ellenőrzése adatbázisban arra az esetre ha sütiben tárolja az adatait, de közbe törlése kerülne az adatbázisból -->
             <?php
-            $username ="";
+            $username = "";
+            if(isset($_COOKIE ['username'])){
+                $usernamequery = $_COOKIE["username"];
+                try {
+                    $sql = "SELECT felhID,felhNev,jelszo FROM lodinn.felhasznalok WHERE felhNev=:felhNev";
+                    $queryLogin = $conn->prepare($sql);
+                    $queryLogin->bindParam(":felhNev",$usernamequery,PDO::PARAM_STR);
+                    $queryLogin->execute();
+                    if ($queryLogin->rowCount() != 1){
+                        echo "<script> window.location.href ='logout.php'</script>";     
+                    }
+                    }catch (PDOException $e){
+                        echo "Adatbázis hiba: " .$e->getMessage();    
+                    } catch (Exception $e){
+                        echo "Egyéb hiba: " .$e->getMessage();
+                        die();
+                    } 
+                    $usernamequery = "";
+                };
+
+            
             if(isset($_SESSION["username"]))
             {
                 $username = $_SESSION["username"];
@@ -156,3 +176,14 @@ $('.modal').on('shown.bs.modal', function() {
   $(this).find('[autofocus]').focus();
 });
 </script>
+<?php
+   
+    if(isset($_GET["modal"])){ ?>
+        <script>
+                 $(function(){                   
+                     $('#myModal').modal('show');
+                 });
+        </script>
+<?php         
+    }
+?>
