@@ -7,6 +7,9 @@ include 'bookingback.php';
 ?>
 </style>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
 <div class="container-fluid" id="booking">
     <div class="text-center">
         <h1 h1 style="padding:2%;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
@@ -76,29 +79,13 @@ include 'bookingback.php';
                     </li>
                     <li>
                         <span>Foglalás kezdő napja</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <div class='input-group date' id='datetimepicker1' required>
-                                    <input type='date' class="form-textbox" />
-                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                            <div class="col-md-3">  
+                                <input type="text" name="from_date" id="from_date" class="form-control form-textbox"/>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Foglalás vége</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <div class='input-group date' id='datetimepicker2' required>
-                                    <input type='date' class="form-textbox" />
-                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <span>Foglalás vége</span><br> 
+                            <div class="col-md-3">  
+                                <input type="text" name="to_date" id="to_date" class="form-control form-textbox"/>
+                            </div>                         
                     </li>
                     <li>
                         <span>Szállítást:</span>
@@ -228,7 +215,7 @@ include 'bookingback.php';
                 <li>
                         <div class="row">
                             <div class="col">
-                                <button type="button" id="addDog" class="btn btn-primary"><span class="bi bi-plus"></span> Még egy kutyának szeretnék foglalni</button>
+                                <button type="button" id="addDog" class="btn btn-primary"><span class="bi bi-plus"></span> Még egy kutyának foglalok</button>
                             </div>
                         </div>
                     </li>
@@ -256,12 +243,14 @@ include 'bookingback.php';
 
         <!-- jQuery -->
         <script>
-            $(document).ready(function(){
-                $(function () {
-                    $('#datetimepicker1').datetimepicker();
-                    $('#datetimepicker2').datetimepicker();
-                });
-            });
+            $(document).ready(function(){  
+           $.datepicker.setDefaults({  
+                dateFormat: 'yy-mm-dd'   
+           });  
+           $(function(){  
+                $("#from_date").datepicker();  
+                $("#to_date").datepicker();  
+           });});
 
             $("#addDog").click(function(){
                 var el = $("#kutya-adatai").get(0);   
