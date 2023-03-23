@@ -265,7 +265,9 @@ html,body{height:100%;}
   ::-webkit-input-placeholder {
     font-size: 12px!important;
  }
+
 }
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -443,7 +445,7 @@ html,body{height:100%;}
 
          }
          ::-webkit-input-placeholder {
-          font-size: 10px!important;
+          font-size: 0px!important;
        }
        
     }

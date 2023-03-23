@@ -116,13 +116,13 @@ require 'registmodal.php';
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end nav-background" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" >
+        <div class="offcanvas offcanvas-end nav-background" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header" style="margin-top: 5%;">
             <img src="assets/images/dog3.png" alt="Logo" id="logo2"><br>
             <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel"> LodInn kutyapanzió</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body position-relative">
+        <div class="offcanvas-body position-relative" >
             <ul class="navbar-nav position-absolute top-1 start-50 translate-middle-x">
                 <li class="nav-item" >
                     <a class="nav-link active text-dark hover-effect" aria-current="page" href="#"><i class="bi bi-house-heart"></i> Kezdőlap</a>
@@ -144,7 +144,7 @@ require 'registmodal.php';
                 </li>
             </ul>
             <div class="socialoffcanvas">
-                <a class="" id="login"><i class="bi bi-person"></i></a>
+                <a class="" href="?modal=1" id="login2"><i class="bi bi-person"></i></a>
                 <a class="" href="tel:+36301234567"><i class="bi bi-telephone"></i></a>
                 <a class=""><i class="bi bi-facebook"></i></a>
                 <a class=""><i class="bi bi-messenger"></i></a>
@@ -159,6 +159,10 @@ require 'registmodal.php';
 </nav>
 <script> 
 $('#login').click(function(){
+    $('#myModal').modal('show');
+})
+$('#login2').click(function(){
+    $('#offcanvasNavbar').toggle('slow');
     $('#myModal').modal('show');
 })
 $('#register').click(function(){
