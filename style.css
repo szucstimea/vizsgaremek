@@ -255,6 +255,14 @@ html,body{height:100%;}
     max-width: 350px; /* set this to your maximum fitting width */
     width: inherit; /* will take up least amount of space */ 
 }
+
+#lakcimnagy { display: inline-block; }
+#lakcimkicsi { display: none; }
+
+@media (max-width: 900px) { 
+  #lakcimnagy  { display: none; }
+  #lakcimkicsi { display: inline-block; }
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -591,7 +599,10 @@ html,body{height:100%;}
          
          #alcim{
              display: flex;
+         }
 
+         .col label{
+          font-size: 0.7rem;
          }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
