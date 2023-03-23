@@ -256,12 +256,15 @@ html,body{height:100%;}
     width: inherit; /* will take up least amount of space */ 
 }
 
-#lakcimnagy { display: inline-block; }
-#lakcimkicsi { display: none; }
 
-@media (max-width: 900px) { 
-  #lakcimnagy  { display: none; }
-  #lakcimkicsi { display: inline-block; }
+@media (max-width: 1000px) { 
+  .col label{
+    font-size: 0.7rem;
+    
+  }
+  ::-webkit-input-placeholder {
+    font-size: 12px!important;
+ }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
@@ -351,6 +354,7 @@ html,body{height:100%;}
              display: flex;
 
          }
+         
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Smartphones (portrait) ----------- */
@@ -438,6 +442,9 @@ html,body{height:100%;}
              display: flex;
 
          }
+         ::-webkit-input-placeholder {
+          font-size: 10px!important;
+       }
        
     }
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -523,6 +530,9 @@ html,body{height:100%;}
          
          #alcim{
              display: flex;
+         }
+         .col label{
+          font-size: 0.4rem;
          }
        
     }

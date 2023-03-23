@@ -52,7 +52,8 @@
           <div class="row g-3">
             <div class="col">
                   <label class="form-label fw-bold" for="phone"><i class="bi bi-telephone" style="color:#498ffc"></i> Telefonszám</label>
-                  <input type="text" class="form-control" id="phone" name="phone" required value="" placeholder="telefonszáma"><br>
+                  <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
+                  <input type="text" class="form-control" id="phone" name="phone" required value="" placeholder="telefonszáma" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" title="Formátum: +36(körzetszám)123-4567. Kérjük ügyeljen a zárójelekre és a kötőjelekre is!"><br>
               </div>
               <div class="col" id=""> 
               </div>
@@ -60,69 +61,37 @@
 
           <div class="separator">
            <b>LAKCÍM</b>
-          </div>
-          <div id="lakcimnagy">
-            <div class="row g-3">
-                  <div class="col col-4">
+          </div> 
+            <div class="row">
+                  <div class="col col-sm-5">
                       <label class="form-label fw-bold " for="megye"> Megye </label>
                       <input type="text" class="form-control large" id="megye" name="megye" required value="" placeholder="lakcím szerinti megye"><br>
                   </div>
 
-                  <div class="col col-2">
+                  <div class="col col-sm-2">
                       <label class="form-label fw-bold" for="iranyitoszam">Irányítószám </label>
                       <input type="number" class="form-control large" id="iranyitoszam" name="iranyitoszam" required value="" placeholder=""><br>
                   </div>
-                  <div class="col col-6">
+                  <div class="col col-sm-5">
                       <label class="form-label fw-bold" for="telepules">Település </label>
                       <input type="text" class="form-control large" id="telepules" name="telepules" required value="" placeholder="lakcím szerinti település"><br>
                   </div>      
             </div>
 
-            <div class="row g-3">
-                  <div class="col">
+            <div class="row">
+                  <div class="col col-sm-5">
                       <label class="form-label fw-bold" for="utca"> Utca </label>
                       <input type="text" class="form-control large" id="utca" name="utca" required value="" placeholder="utca megnevezése"><br>
                   </div>
 
-                  <div class="col col-3">
+                  <div class="col col-sm-2">
                       <label class="form-label fw-bold" for="hazszam"> Házszám </label>
                       <input type="number" class="form-control large" id="hazszam" name="hazszam" required value="" placeholder=""><br>
                   </div>
-            </div>
-          </div>
-          <div id="lakcimkicsi">
-            <div class="row">
-                  <div class="col">
-                      <label class="form-label fw-bold " for="megye" id="label"> Megye </label>
-                      <input type="text" class="form-control" id="megye" name="megye" required value="" placeholder="megye"><br>
-                  </div>
-
-                  <div class="col">
-                      <label class="form-label fw-bold" for="iranyitoszam" id="label">Irányítószám </label>
-                      <input type="number" class="form-control" id="iranyitoszam" name="iranyitoszam" required value="" placeholder="rányítószám"><br>
-                  </div>
-                  
-            </div>
-
-            <div class="row">
-                  <div class="col">
-                      <label class="form-label fw-bold " for="telepules" id="label">Település </label>
-                      <input type="text" class="form-control" id="telepules" name="telepules" required value="" placeholder="település"><br>
-                  </div>  
-                  <div class="col">    
-                      <label class="form-label fw-bold" for="utca" id="label"> Utca </label>
-                      <input type="text" class="form-control" id="utca" name="utca" required value="" placeholder="utca"><br>
-                  </div>
-              </div>
-            <div class="row">
-                  <div class="col">
-                      <label class="form-label fw-bold" for="hazszam" id="label"> Házszám </label>
-                      <input type="number" class="form-control" id="hazszam" name="hazszam" required value="" placeholder="házszám"><br>
-                  </div>
-                  <div class="col">
+                  <div class="col col-sm-5">
                   </div>
             </div>
-        </div>
+         
           <div class="separator">
            <b>JELSZÓ</b>
           </div>
@@ -360,8 +329,6 @@ $(document).ready(function() {
 
             }}))});
 
-$('#register4').click(function(){
-    $('#registmodal').modal('toggle');
-    $('#myModal').modal('show');
-})
+
+
 </script>
