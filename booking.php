@@ -4,6 +4,7 @@ session_start();
 include 'style.css';
 include 'bookingform.css';
 include 'bookingback.php';
+setcookie('loggedin', '2', time()-3600);
 ?>
 </style>
 
@@ -14,12 +15,12 @@ include 'bookingback.php';
     <div class="text-center">
         <h1 h1 style="padding:2%;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
-    <div id="booking-form-guest" class="booking-form-container" <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"]==true){echo "style=\"display:none\"";} ?>>
+    <div id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
         <form class="booking-form" action="" method="post">
-            <ul>
-                <li id="" class="form-header-group">
-                    <h2 id="header_2" class="form-header">Gazdi adatai</h2>
-                    <div id="subHeader_1" class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
+            <ul id="booking-list">
+                <li id="gazdi-adatai" class="form-header-group">
+                    <h2 id="gazdi_header" class="form-header">Gazdi adatai</h2>
+                    <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
                 </li>
                 <li>
                     <span>Név</span><br>
@@ -47,171 +48,172 @@ include 'bookingback.php';
                         </div>
                     </div>
                 </li>
-                <div id=kutya-adatai>
-                    <li class="form-header-group">
-                        <h2 id="header_2" class="form-header">Kutya adatai</h2>
-                        <div id="subHeader_1" class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
-                        <!-- <button type="button" id="removeDog" class="btn btn-warning"><span class="bi bi-dash-circle"></span> Neki mégsem szeretnék foglalni</button> -->
-                    </li>
-                    <li>
-                        <span>Kutya neve</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-textbox" type="text" id="kutyaneve" required><br>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Kutya fajtája</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-textbox" type="text" id="kutyafajtaja" class=""><br>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Hány hónapos?</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <input min="0" type="number" id="honapos" class="form-textbox" />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <span>Foglalás kezdő napja</span><br>
-                            <div class="col-md-3">  
-                                <input type="text" name="from_date" id="from_date" class="form-control form-textbox"/>
-                            </div>
-                        <span>Foglalás vége</span><br> 
-                            <div class="col-md-3">  
-                                <input type="text" name="to_date" id="to_date" class="form-control form-textbox"/>
-                            </div>                         
-                    </li>
-                    <li>
-                        <span>Szállítást:</span>
-                        <div class="szallitas">
-                            <div class="checkbox-wrapper-12 row checkbox-row ">
-                                <div class="cbx col label-col" >
-                                    <input onclick="showCim('szallitas1')" id="szallitas1" name="szallitas" type="radio"/>
-                                    <label for="szallitas1"></label>
+                <li id=kutya-adatai1 class="form-header-group">
+                    <ul>
+                        <li>
+                            <h2 id="kutya-header1" class="form-header">Kutya adatai</h2>
+                            <div class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
+                            <!-- <button type="button" id="removeDog" class="btn btn-warning"><span class="bi bi-dash-circle"></span> Neki mégsem szeretnék foglalni</button> -->
+                        </li>
+                        <li>
+                            <span>Kutya neve</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-textbox" type="text" id="kutyaneve1" required><br>
                                 </div>
-                                <div class="col category-col">Kérek</div>
                             </div>
-                            <div class="checkbox-wrapper-12 row checkbox-row">
-                                <div class="cbx col label-col">
-                                    <input onclick="showCim('szallitas2')" id="szallitas2" name="szallitas" type="radio"/>
-                                    <label for="szallitas2"></label>
+                        </li>
+                        <li>
+                            <span>Kutya fajtája</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-textbox" type="text" id="kutyafajtaja1"><br>
                                 </div>
-                                <div class="col category-col">Nem kérek</div>
                             </div>
-                        </div>
-                    </li>
-                    <li id="szallitas-li" style="display:none">
-                        <span>Adja meg a gazdi címét:</span>
-                        <div class="row">
-                            <div class="col irsz">
-                                <input class="form-textbox" type="number" name="iranyitoszam" placeholder="Irányítószám">
-                                <input class="form-textbox" type="text" name="telepules" placeholder="Település">
-                                <input class="form-textbox" type="text" name="utca" placeholder="Utca">
-                                <input class="form-textbox" type="text" name="hazszam" placeholder="Házszám">
+                        </li>
+                        <li>
+                            <span>Hány hónapos?</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input min="0" class="form-textbox" type="number" id="honapos1"  />
+                                </div>
                             </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <span>Jelölje be mely szolgáltatásokat kéri:</span>
-                        <div class="szolgaltatasok">
-                            <div class="checkbox-wrapper-12 row checkbox-row">
-                                <div class="cbx col label-col">
-                                    <input id="furdetes" type="checkbox"/>
-                                    <label for="furdetes"></label>                                                                                       
-                                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                        </li>
+                        <li>
+                            <span>Foglalás kezdő napja</span><br>
+                                <div class="col-md-3">  
+                                    <input type="text" id="from_date1" class="form-control form-textbox"/>
+                                </div>
+                            <span>Foglalás vége</span><br> 
+                                <div class="col-md-3">  
+                                    <input type="text" id="to_date1" class="form-control form-textbox"/>
+                                </div>                         
+                        </li>
+                        <li>
+                            <span>Szállítást:</span>
+                            <div class="szallitas">
+                                <div class="checkbox-wrapper-12 row checkbox-row ">
+                                    <div class="cbx col label-col" >
+                                        <input id="szallitas1" name="szallitas1" value='kerek' type="radio"/>
+                                        <label id="label-szallitas1" for="szallitas1"></label>
+                                    </div>
+                                    <div class="col category-col">Kérek</div>
+                                </div>
+                                <div class="checkbox-wrapper-12 row checkbox-row">
+                                    <div class="cbx col label-col">
+                                        <input id="szallitas2" name="szallitas1" value='nemkerek' type="radio"/>
+                                        <label id="label-szallitas2" for="szallitas2"></label>
+                                    </div>
+                                    <div class="col category-col">Nem kérek</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="szallitas-li">
+                            <span>Adja meg a gazdi címét:</span>
+                            <div class="row">
+                                <div class="col irsz">
+                                    <input class="form-textbox" type="number" name="iranyitoszam" placeholder="Irányítószám">
+                                    <input class="form-textbox" type="text" name="telepules" placeholder="Település">
+                                    <input class="form-textbox" type="text" name="utca" placeholder="Utca">
+                                    <input class="form-textbox" type="text" name="hazszam" placeholder="Házszám">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Jelölje be mely szolgáltatásokat kéri:</span>
+                            <div class="szolgaltatasok">
+                                <div class="checkbox-wrapper-12 row checkbox-row">
+                                    <div class="cbx col label-col">
+                                        <input id="furdetes" type="checkbox" name="szolgaltatas1[]"/>
+                                        <label for="furdetes"></label>                                                                                       
+                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                        </svg>
+                                    </div>
+                                    <!-- Gooey-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                        <filter id="goo-12">
+                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
+                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                                        </filter>
+                                        </defs>
                                     </svg>
+                                    <div class="col category-col">Fürdetés</div>
                                 </div>
-                                <!-- Gooey-->
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>
-                                    <filter id="goo-12">
-                                        <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                        <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                        <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                    </filter>
-                                    </defs>
-                                </svg>
-                                <div class="col category-col">Fürdetés</div>
-                            </div>
-                            <div class="checkbox-wrapper-12 row checkbox-row">
-                                <div class="cbx col label-col">
-                                    <input id="setaltatas" type="checkbox"/>
-                                    <label for="setaltatas"></label>                                                                                       
-                                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                <div class="checkbox-wrapper-12 row checkbox-row">
+                                    <div class="cbx col label-col">
+                                        <input id="setaltatas" type="checkbox" name="szolgaltatas1[]"/>
+                                        <label for="setaltatas"></label>                                                                                       
+                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                        </svg>
+                                    </div>
+                                    <!-- Gooey-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                        <filter id="goo-12">
+                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
+                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                                        </filter>
+                                        </defs>
                                     </svg>
+                                    <div class="col category-col">Sétáltatás</div>
                                 </div>
-                                <!-- Gooey-->
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>
-                                    <filter id="goo-12">
-                                        <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                        <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                        <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                    </filter>
-                                    </defs>
-                                </svg>
-                                <div class="col category-col">Sétáltatás</div>
-                            </div>
-                            <div class="checkbox-wrapper-12 row checkbox-row">
-                                <div class="cbx col label-col">
-                                    <input id="kozmetika" type="checkbox"/>
-                                    <label for="kozmetika"></label>                                                                                       
-                                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                <div class="checkbox-wrapper-12 row checkbox-row">
+                                    <div class="cbx col label-col">
+                                        <input id="kozmetika" type="checkbox" name="szolgaltatas1[]"/>
+                                        <label for="kozmetika"></label>                                                                                       
+                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                        </svg>
+                                    </div>
+                                    <!-- Gooey-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                        <filter id="goo-12">
+                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
+                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                                        </filter>
+                                        </defs>
                                     </svg>
+                                    <div class="col category-col">Kozmetika</div>
                                 </div>
-                                <!-- Gooey-->
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>
-                                    <filter id="goo-12">
-                                        <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                        <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                        <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                    </filter>
-                                    </defs>
-                                </svg>
-                                <div class="col category-col">Kozmetika</div>
-                            </div>
-                            <div class="checkbox-wrapper-12 row checkbox-row">
-                                <div class="cbx col label-col">
-                                    <input id="tanitas" type="checkbox"/>
-                                    <label for="tanitas"></label>                                                                                       
-                                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                <div class="checkbox-wrapper-12 row checkbox-row">
+                                    <div class="cbx col label-col">
+                                        <input id="tanitas" type="checkbox" name="szolgaltatas1[]"/>
+                                        <label for="tanitas"></label>                                                                                       
+                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                        </svg>
+                                    </div>
+                                    <!-- Gooey-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                        <filter id="goo-12">
+                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
+                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
+                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                                        </filter>
+                                        </defs>
                                     </svg>
+                                    <div class="col category-col">Tanítás</div>
                                 </div>
-                                <!-- Gooey-->
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>
-                                    <filter id="goo-12">
-                                        <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                        <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                        <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                    </filter>
-                                    </defs>
-                                </svg>
-                                <div class="col category-col">Tanítás</div>
+                            </div>                  
+                        </li>
+                        <li>
+                        <span>Egyéb speciális igényeit ide írhatja:</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" id="specigeny" class="form-textbox" />
+                                </div>
                             </div>
-                        </div>                  
-                    </li>
-                    <li>
-                    <span>Egyéb speciális igényeit ide írhatja:</span><br>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" id="specigeny" class="form-textbox" />
-                            </div>
-                        </div>
-                    </li>
-                </div><!--kutya adatai-->
+                        </li>
+                    </ul>
+                </li><!--kutya adatai-->
                 <li>
                         <div class="row">
                             <div class="col">
@@ -225,38 +227,66 @@ include 'bookingback.php';
                                 <button class="btn btn-primary" type="submit" name="submitbooking" id="submitbooking">Foglalás</button>
                             </div>
                         </div>
-                    </li>                
+                    </li>
+                </li>                
             </ul>
         </form>
 
-        <!-- Javascript -->
-        <script type="text/javascript">
-            function showCim(id) {
-                var x = document.getElementById("szallitas-li");
-                if(id=="szallitas1"){
-                    x.style.display = "block";
-                }else{
-                    x.style.display = "none";
-                };
-            }
-        </script>
-
         <!-- jQuery -->
         <script>
-            $(document).ready(function(){  
-           $.datepicker.setDefaults({  
-                dateFormat: 'yy-mm-dd'   
-           });  
-           $(function(){  
-                $("#from_date").datepicker();  
-                $("#to_date").datepicker();  
-           });});
+            $(document).ready(function(){ 
+                var count = 1;
 
-            $("#addDog").click(function(){
-                var el = $("#kutya-adatai").get(0);   
-                    var newEl = $(el).after(el.cloneNode(true));   
-            }).change();
+                $.datepicker.setDefaults({  
+                    dateFormat: 'yy-mm-dd'   
+                });  
                 
+                $(function(){  
+                    $("#from_date"+count).datepicker();  
+                    $("#to_date"+count).datepicker();  
+                });
+
+                $('#szallitas-li').hide();
+
+                $('#addDog').click(function(){
+                    count++;
+                    var el = $('#kutya-adatai'+(count-1)).get(0); 
+                    var original_radio = $(el).find(':radio:checked');  
+                    var newEl = $(el).clone().insertAfter('#kutya-adatai'+(count-1));
+                    $(newEl).find(':checkbox:checked').prop('checked', false);
+                    $(newEl).find(':radio:checked').prop('checked', false);
+                    $(newEl).find(':input').val('');
+                    $(newEl).attr('id','kutya-adatai'+(count))
+                    $(newEl).find("#kutya-header"+(count-1)).attr('id','kutya-header'+(count))
+                    $(newEl).find("#kutyaneve"+(count-1)).attr('id','kutyaneve'+(count))
+                    $(newEl).find("#kutyafajtaja"+(count-1)).attr('id','kutyafajtaja'+(count))
+                    $(newEl).find("#honapos"+(count-1)).attr('id','honapos'+(count))
+                    $(newEl).find('#from_date'+(count-1)).attr('id','from_date'+count).datepicker();
+                    $(newEl).find('#to_date'+(count-1)).attr('id','to_date'+count).datepicker();
+                    $(newEl).find('#szallitas'+((count-1)*2-1)).attr('id','szallitas'+(count*2-1)).attr('name','szallitas'+count);
+                    $(newEl).find('#szallitas'+(count-1)*2).attr('id','szallitas'+(count*2)).attr('name','szallitas'+count);
+                    $(newEl).find('#label-szallitas'+((count-1)*2-1)).attr('id','label-szallitas'+(count*2-1)).attr('for','szallitas'+(count*2-1));
+                    $(newEl).find('#label-szallitas'+(count-1)*2).attr('id','label-szallitas'+(count*2)).attr('for','szallitas'+(count*2));
+                    $(newEl).find(':checkbox').attr('name','szolgaltatas'+count+'[]');
+
+                    $(original_radio).prop('checked', true);
+
+                }).change();
+
+                $('#submitbooking').click(function(){
+                    alert($('#kutya-adatai'+(count)).find(':input').val());
+                });
+            });
+
+            $('#kutya-adatai1 #szallitas1').click(function(){
+                    $('#szallitas-li').show();
+                });
+                
+            $('#kutya-adatai1 #szallitas2').click(function(){
+                $('#szallitas-li').hide();
+            });
+            
+
         </script>
     </div>
 </div>
