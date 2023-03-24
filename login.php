@@ -36,6 +36,7 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
         if($_POST["rem"] == "yes"){   
             setcookie('username',  $username, time()+3600*24*7);
             setcookie('password',  $pass, time()+3600*24*7);
+            setcookie('loggedin',  '1', time()+3600*24*7);
             } else {
             setcookie('username', '', time()-3600);
             setcookie('password', '', time()-3600);
