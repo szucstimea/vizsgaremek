@@ -268,6 +268,70 @@ html,body{height:100%;}
 
 }
 
+.cookie-consent{
+position: fixed;
+bottom: 8px;
+left: 20px;
+width: 30%;
+padding: 15px 15px 15px 15px;
+height: auto;
+color: black;
+text-align: justify;
+
+line-height: 20px;
+font-size: 14px;
+background: white;
+z-index: 120;
+cursor: pointer;
+border-radius: 5px;
+}
+
+@keyframes fadeInUp {
+  from {
+      transform: translate3d(0,20px,0)
+  }
+
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 0.95
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+      transform: translate3d(0,100px,0)
+  }
+
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 0.95
+  }
+}
+
+.animated {
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+  opacity: 0
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+}
+.szoveg{
+  padding: 20px;
+}
+#cookieSettings{
+  display: none;
+  width: 90%;
+  z-index: 99999;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -356,11 +420,41 @@ html,body{height:100%;}
              display: flex;
 
          }
-         
+         .cookie-consent{
+          bottom: 2px;
+          left: 0px;
+          width: 100%;
+          padding: 2px 2px 2px 2px;
+          height: auto;
+          color: black;
+          text-align: justify;
+          
+          background: white;
+          z-index: 120;
+          cursor: pointer;
+          border-radius: 5px;
+          }
+          #accept,
+          #dismiss,
+          #settings{
+            font-size: 10px;
+          }
+          #cookieimage{
+            display: none;
+          }
+          #cookieSettings{
+            display: none;
+            width: 90%;
+            height: 90%;
+            z-index: 99999;
+            font-size: 10px;
+            overflow-y: auto;
+          }
+
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Smartphones (portrait) ----------- */
-@media only screen and (min-device-width : 319px) and (max-device-width : 567px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 567px) {
 	.offcanvas-body {
         background-image: url("assets/images/huskey2.jpg");
         background-size: 40%;
@@ -447,7 +541,34 @@ html,body{height:100%;}
          ::-webkit-input-placeholder {
           font-size: 0px!important;
        }
-       
+       .cookie-consent{
+        bottom: 2px;
+        left: 0px;
+        width: 100%;
+        padding: 2px 20px 2px 20px;
+        height: auto;
+        color: black;
+        text-align: justify;
+        
+        background: white;
+        z-index: 120;
+        cursor: pointer;
+        border-radius: 5px;
+        }
+        #accept,
+        #dismiss,
+        #settings{
+          font-size: 10px;
+        }
+        #cookieSettings{
+          display: none;
+          width: 90%;
+          height: 90%;
+          z-index: 99999;
+          font-size: 10px;
+          overflow-y: auto;
+        }
+
     }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Smartphones (landscape) ----------- */
@@ -536,6 +657,37 @@ html,body{height:100%;}
          .col label{
           font-size: 0.4rem;
          }
+
+         .cookie-consent{
+          bottom: 2px;
+          left: 0px;
+          width: 100%;
+          padding: 2px 20px 2px 20px;
+          height: auto;
+          color: black;
+          text-align: justify;
+          
+          background: white;
+          z-index: 120;
+          cursor: pointer;
+          border-radius: 5px;
+          }
+          #accept,
+          #dismiss,
+          #settings{
+            font-size: 10px;
+          }
+
+          #cookieSettings{
+            display: none;
+            width: 90%;
+            height: 90%;
+            z-index: 99999;
+            font-size: 10px;
+            overflow-y: auto;
+
+
+          }
        
     }
 
@@ -616,6 +768,35 @@ html,body{height:100%;}
          .col label{
           font-size: 0.7rem;
          }
+         .cookie-consent{
+          bottom: 2px;
+          left: 0px;
+          width: 100%;
+          padding: 2px 20px 2px 20px;
+          height: auto;
+          color: black;
+          text-align: justify;
+          
+          background: white;
+          z-index: 120;
+          cursor: pointer;
+          border-radius: 5px;
+          }
+          #accept,
+          #dismiss,
+          #settings{
+            font-size: 10px;
+          }
+          #cookieSettings{
+            display: none;
+            width: 90%;
+            height: 90%;
+            z-index: 99999;
+            font-size: 10px;
+            overflow-y: auto;
+
+
+          }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
@@ -683,8 +864,17 @@ and (min-width : 1024px) {
          #alcim{
              display: flex;
              font-family:cursive;
+        }
+        #cookieimage{
+          width: 100%;
+        }
+        #cookieSettings{
+          display: none;
+          width: 90%;
+          height: 50%;
+          z-index: 99999;
+          overflow-y: auto;
 
-       
         }
     }
 /* ------------------------------------------------------------------------------------------------------------ */
