@@ -1,4 +1,5 @@
 <?php
+
 include 'usernamesearch.php';
 include 'login.php';
 
@@ -15,6 +16,8 @@ include 'login.php';
             </div>
       <!-- Modal body -->
       <div class="modal-body">
+        <!-- Sütik elfogadásának vizsgálata -->
+             
         <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
             <div class="row g-3 align-items-center">
                 <label class="form-label fw-bold" for="username"><i class="bi bi-person" style="color:#498ffc"></i> Felhasználónév </label>
@@ -32,10 +35,17 @@ include 'login.php';
                 <label>
                     <div id="result2">
                     </div>
+                    <?php 
+                    $disabled ="";
+                        if(isset($_GET["cookie"])){
+                            $disabled = "disabled='disabled'";
+                            echo "<p style='color:red;'> <i class='bi bi-exclamation-circle'></i> A sütik használatának elutasítása esetén a 'Bejeletkezve maradok' funkció nem használható. Amennyiben  használni szeretné a funkciót, kérjük, hogy <a href='index.php'>kattintson ide az oldal újratöltéséhez</a>és fogadja el a sütik használatát.</p>";     
+                        }
+                    ?>
                 <label class="form-check-label" for="exampleCheck1" >Bejeletkezve maradok</label>
-                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember" <?php echo $disabled; ?>>
                     <input type="text" class="form-check-input" id="textbox1" name="textbox1" style="display:none";>
-                    <button type="button" class="btn" id="bovebben" data-toggle="tooltip" data-html="true" data-placement="top" title="Amenyiben a 'Bejelentkezve maradok' opciót választja, 30 napig bejelentkezett státuszban marad ügyfélfiókjába. Az ön biztonsága érdekében 30 nap után automatikusan kijelentkeztetjük, amennyiben időközben nem jeletkezik ki. Kijelentkezés után felhasználóneve és jelszava megadásával ismét be kell jelentkeznie."><i class="bi bi-question-circle"></i></button>
+                    <button type="button" class="btn" id="bovebben" data-toggle="tooltip" data-html="true" data-placement="top" title="Amenyiben a 'Bejelentkezve maradok' opciót választja, 7 napig bejelentkezett státuszban marad ügyfélfiókjába. Az ön biztonsága érdekében 7 nap után automatikusan kijelentkeztetjük, amennyiben időközben nem jeletkezik ki. Kijelentkezés után felhasználóneve és jelszava megadásával ismét be kell jelentkeznie."><i class="bi bi-question-circle"></i></button>
                     
                 </label>
                 <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-box-arrow-in-right"></i>  Bejelentkezés</button>

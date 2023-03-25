@@ -16,6 +16,7 @@
 <?php
 require 'loginmodal.php';
 require 'registmodal.php';
+
 ?>
 
 <nav class="nav navbar navbar-dark fixed-top" style="background-color: #498ffc;">
@@ -30,7 +31,7 @@ require 'registmodal.php';
             <!-- felhaszáló létezésének ellenőrzése adatbázisban arra az esetre ha sütiben tárolja az adatait, de közbe törlése kerülne az adatbázisból -->
             <?php
             $username = "";
-            if(isset($_COOKIE ['username'])){
+            if(isset($_COOKIE ['username']) && $_COOKIE ['cookieSet'] == "yes"){
                 $usernamequery = $_COOKIE["username"];
                 try {
                     $sql = "SELECT felhID,felhNev,jelszo FROM lodinn.felhasznalok WHERE felhNev=:felhNev";
@@ -55,7 +56,7 @@ require 'registmodal.php';
                 $username = $_SESSION["username"];
             }
 
-            if(isset($_COOKIE ['username']))
+            if(isset($_COOKIE ['username']) && $_COOKIE ['cookieSet'] == "yes")
             {
                 $username = $_COOKIE ['username'];
             }
@@ -125,7 +126,7 @@ require 'registmodal.php';
         <div class="offcanvas-body position-relative" >
             <ul class="navbar-nav position-absolute top-1 start-50 translate-middle-x">
                 <li class="nav-item" >
-                    <a class="nav-link active text-dark hover-effect" aria-current="page" href="#"><i class="bi bi-house-heart"></i> Kezdőlap</a>
+                    <a class="nav-link active text-dark hover-effect" aria-current="page" href="index.php"><i class="bi bi-house-heart"></i> Kezdőlap</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark hover-effect" href="#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
