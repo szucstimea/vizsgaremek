@@ -2,7 +2,7 @@
 
 include 'usernamesearch.php';
 include 'login.php';
-
+require 'cookieModal.php';
 ?>
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
 <!-- The Modal -->
@@ -37,9 +37,10 @@ include 'login.php';
                     </div>
                     <?php 
                     $disabled ="";
-                        if(isset($_GET["cookie"])){
+                    $_COOKIE["cookieSet"] ='';
+                        if(isset($_GET["cookie"]) || ($_COOKIE["cookieSet"]) =='no'){
                             $disabled = "disabled='disabled'";
-                            echo "<p style='color:red;'> <i class='bi bi-exclamation-circle'></i> A sütik használatának elutasítása esetén a 'Bejeletkezve maradok' funkció nem használható. Amennyiben  használni szeretné a funkciót, kérjük, hogy <a href='index.php'>kattintson ide az oldal újratöltéséhez</a>és fogadja el a sütik használatát.</p>";     
+                            echo "<p style='color:red;'> <i class='bi bi-exclamation-circle'></i> A sütik használatának elutasítása esetén a 'Bejeletkezve maradok' funkció nem használható. Amennyiben  használni szeretné a funkciót, kérjük, hogy <a href='index.php?cookiesettings=1'>kattintson ide az oldal újratöltéséhez</a>és fogadja el a sütik használatát.</p>";     
                         }
                     ?>
                 <label class="form-check-label" for="exampleCheck1" >Bejeletkezve maradok</label>

@@ -1,5 +1,7 @@
 <?php
+
 require 'header.php';
+require 'cookieModal.php';
 ?>
 <link rel="stylesheet" href="style.css">
 
@@ -105,6 +107,7 @@ require 'header.php';
         <p>Ha Ön nem akarja, hogy a honlapon tett látogatásáról adatokat gyűjtsük és elemezzük, a Süti beállításokban a sütiket bármikor letilthatja.
         A letiltás műszaki megvalósításaként egy cookieSet süti kerül majd beállításra "no" értékkel az Ön böngészőjében. Ennek a sütinek a célja egyedül az Ön döntésének a leképezése. Kérjük, vegye figyelembe, hogy műszaki okok miatt a süti csak arra a böngészőre használható, amelyre azt beállították. Ha Ön törli a sütiket, vagy más böngészőt vagy eszközt használ, akkor a sütibeállítást újra el kell végeznie.
         </p>
+        <button><a href='?cookiesettings=1' style="text-decoration:none;">Sütibeállítások</a></button>
 </div>
 </section>
 <?php

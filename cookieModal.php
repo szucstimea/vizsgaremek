@@ -1,9 +1,10 @@
+
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
 <!-- Modal -->
 <?php
-if(isset($_GET["cookie"])){
+if(isset($_GET["cookie"]) || isset($_COOKIE["cookieSet"])){
     ?>
     <style type="text/css">#cookieModal{
     display:none;
@@ -36,7 +37,17 @@ if(isset($_GET["cookie"])){
     </div>
 </div>
 
-
+<?php
+if(isset($_GET["cookiesettings"])){
+    ?>
+    <script>
+        $(document).ready(function() {
+        $('#cookieSettings').show();
+        });
+    </script>
+<?php
+}
+?>
 <div class="cookie-consent animated animatedFadeInUp fadeInUp" id="cookieSettings">
    <div class="row">
     <div class="col">
