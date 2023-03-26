@@ -1,7 +1,6 @@
 <?php
-session_start();
-require 'cookieModal.php';
 require 'header.php';
+require 'cookieModal.php';
 require 'carousel.php';
 require 'aboutus.php';
 require 'booking.php';
