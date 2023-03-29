@@ -129,13 +129,12 @@ $(document).ready(function(){
                   },
             dataType: "text",
             success: function(data){
-                $('#result2').html("");
-                if (data != 0){
+                $('#result2').html(data);
+                if (data == ""){
                     $(location).attr('href', 'index.php');
                 }else {
                     $('#password').focus();
                     $('#password').val('');
-                    $('#result2').html("<p style='color:red;'><i class='bi bi-exclamation-circle-fill'></i> Nem megfelelő felhasználónév vagy jelszó! Kérem próbálja meg újra!</p>");
                 }
             },
             error : function(err){

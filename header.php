@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hu">
 <head class="">
@@ -31,7 +32,7 @@ require 'registmodal.php';
             <!-- felhaszáló létezésének ellenőrzése adatbázisban arra az esetre ha sütiben tárolja az adatait, de közbe törlése kerülne az adatbázisból -->
             <?php
             $username = "";
-            if(isset($_COOKIE ['username']) && $_COOKIE ['cookieSet'] == "yes"){
+            if(isset($_COOKIE ['username'])){
                 $usernamequery = $_COOKIE["username"];
                 try {
                     $sql = "SELECT felhID,felhNev,jelszo FROM lodinn.felhasznalok WHERE felhNev=:felhNev";
@@ -56,7 +57,7 @@ require 'registmodal.php';
                 $username = $_SESSION["username"];
             }
 
-            if(isset($_COOKIE ['username']) && $_COOKIE ['cookieSet'] == "yes")
+            if(isset($_COOKIE ['username']))
             {
                 $username = $_COOKIE ['username'];
             }
@@ -70,7 +71,7 @@ require 'registmodal.php';
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu position-absolute dropdown-menu-right ">
-                        <li><a class="dropdown-item" href="login.php" id="login"><i class="bi bi-person"></i> Profilom</a></li>
+                        <li><a class="dropdown-item" href="profile.php" id="login"><i class="bi bi-person"></i> Profilom</a></li>
                         <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-calendar-check"></i> Foglalásaim</a></li>
                         <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-heart"></i> Kutyáim</a></li>
                         <li><a class="dropdown-item" href="logout.php" id="register"><i class="bi bi-box-arrow-left"></i> Kijelentkezés</a></li>
