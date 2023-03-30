@@ -1,12 +1,18 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 include 'dbconnect.php';
+require './vendor/autoload.php';
+
 
 if (isset($_POST["ve"])){
     var_dump($_POST["ve"]);
     $veznev = trim($_POST["ve"]);
     $keresztnev = trim($_POST["ke"]);
     $user = trim($_POST["us"]);
-    $mail = trim($_POST["ma"]);
+    $email = trim($_POST["ma"]);
     $phone = trim($_POST["ph"]);
     $megye = trim($_POST["me"]);
     $iranyitoszam = trim($_POST["ir"]);
@@ -30,7 +36,7 @@ if (isset($_POST["ve"])){
         $queryReg2->bindParam(":felh_ID",$lastId,PDO::PARAM_INT);    
         $queryReg2->bindParam(":vezNev",$veznev,PDO::PARAM_STR);
         $queryReg2->bindParam(":kerNev",$keresztnev,PDO::PARAM_STR);
-        $queryReg2->bindParam(":email",$mail,PDO::PARAM_STR);
+        $queryReg2->bindParam(":email",$email,PDO::PARAM_STR);
         $queryReg2->bindParam(":telszam",$phone,PDO::PARAM_STR);
         $queryReg2->bindParam(":megye",$megye,PDO::PARAM_STR);
         $queryReg2->bindParam(":iranyitoszam",$iranyitoszam,PDO::PARAM_INT);
@@ -39,6 +45,53 @@ if (isset($_POST["ve"])){
         $queryReg2->bindParam(":hazszam",$hazszam,PDO::PARAM_INT);
         $queryReg2->execute();
         $_SESSION["loggedin"] = true;
+
+        //email kiküldés a regisztrációról
+        $mail = new PHPMailer(true);
+        $mail->CharSet = "UTF-8";
+        $mail->IsSMTP();
+        $mail->Mailer = "smtp";
+        $mail->SMTPDebug  = 1;  
+        $mail->SMTPAuth   = TRUE;
+        $mail->SMTPSecure = "tls";
+        $mail->Port       = 587;
+        $mail->Host       = "smtp.gmail.com";
+        $mail->Username   = "lodinnkutyapanzio@gmail.com";
+        $mail->Password   = "hneulkcvhpjvynfi";
+        $mail->IsHTML(true);
+        $mail->AddAddress("$email", "$user");
+        $mail->AddEmbeddedImage('assets/images/dog3.png', 'logo_2u');
+        $mail->SetFrom("lodinnkutyapanzio@gmail.com", "Lodinn Kutyapanzió");
+        $mail->AddReplyTo("lodinnkutyapanzio@gmail.com", "Lodinn Kutyapanzió");
+        $mail->Subject = "Sikeres regisztráció!";
+        $content = "
+
+        <h4>Kedves $user!<br></h4>
+        
+        <b>Köszöjük, hogy regisztráltál a Lodinn Kutyapanzió rendszerébe!</b><br>
+        
+        <p style='text-align: justify;'>Örülünk, hogy ügyfeleink között köszönthetünk! Mi egy olyan kutyapanziót üzemeltetünk, ahol négylábú barátodnak otthonos és biztonságos környezetet biztosítunk. Nálunk nem csak egy szobában vagy ketrecben tölti az időt kedvenced, hanem szabadon játszhat és futkározhat a nagy kertünkben, ahol más kutyusokkal is megismerkedhet. Ne feledd, hogy az elhelyezés mellett különböző szolgálatásainkkal is meglepheted kutyusod.</p><br>
+        <p style='text-align: justify;'>Várjuk megkeresésed az alábbi elérhetőségeken:<br>
+        Cím: 6782 Mórahalom Dosztig köz 3.<br>
+        Email: lodinnkutyapanzio@gmail.com<br>
+        Telefon: +36(30)123-4567<br>
+        Web: www.lodinn.hu<br><br><br>
+        
+        kutyusa második otthona,<br>
+        <img src='cid:logo_2u'><br> <b>Lodinn Kutyapanzió</b>
+        
+        </p>
+        ";
+        
+        $mail->MsgHTML($content); 
+        if(!$mail->Send()) {
+        echo "Error while sending Email.";
+        var_dump($mail);
+        } else {
+        echo "Email sent successfully";
+        }
+
+
             
         } catch (PDOException $e){
         $error = "Adatbázis hiba: ".$e->getMessage();
@@ -50,4 +103,8 @@ if (isset($_POST["ve"])){
     }
 
 }
+
+
+
+
 ?>

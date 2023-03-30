@@ -22,7 +22,7 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
             
         } else {
   
-            echo'nem ok';
+            echo'nem megfelelő jelszó!';
         }  
 
      } catch (PDOException $e){

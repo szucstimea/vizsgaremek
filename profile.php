@@ -46,10 +46,10 @@ if(isset($_SESSION["username"])){
 ?>
 
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
-<section>
-<div class="container text-justify p-3" style="margin-top: 16%;" >
+<section id="sectionprofile">
+<div class="container text-justify p-3" >
         <div class="text-center">    
-        <h1><i class="bi bi-person"></i> Profilom</a></h1>
+        <h1 id="titleprofile"><i class="bi bi-person"></i> Profilom</a></h1>
         <p> A profilom menüpont lehetővé teszi a felhasználók számára, hogy megtekintsék vagy szerkesszék a regisztráció során megadott adataikat.</p><br>
         </div>
         <form id="form_profile" class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
@@ -137,13 +137,13 @@ if(isset($_SESSION["username"])){
                   <div class="col" id="resultpass"> 
                   </div>
                   <div class="input-group">
-                  <input type="password" class="form-control" id="pswdnew_profile" name="pswdnew_profile"  value="" placeholder="új jelszó" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="A jelszónak tartalmaznia kell legalább egy számot, egy nagybetűt, egy kisbetűt és minimum 8 karakter hosszúnak kell lennie!" aria-describedby="passHelp" style="margin-top:2%;">
+                  <input type="password" class="form-control" id="pswdnew_profile" name="pswdnew_profile"  value="" placeholder="új jelszó" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="A jelszónak tartalmaznia kell legalább egy számot, egy nagybetűt, egy kisbetűt és minimum 8 karakter hosszúnak kell lennie!" aria-describedby="passHelp" style="margin-top:2%; display:none;">
                   </div>             
                 </div>
                 <p id="passHelp" class="form-text">Az új jelszónak tartalmaznia kell legalább egy számot, egy nagybetűt, egy kisbetűt és minimum 8 karakter hosszúnak kell lennie!</p>
               
             <div class="col" id="pass1_profile">
-              <div id="message_profile">
+              <div id="message_profile" style="display:none;">
                 <h5>Jelszó segítség:</h5>
                 <p id="letter_profile" class="invalid">Egy <b>kisbetű</b></p>
                 <p id="capital_profile" class="invalid">Egy <b>nagybetű</b> </p>
@@ -154,7 +154,7 @@ if(isset($_SESSION["username"])){
  
 
 
-              <input type="password" class="form-control" id="password2_profile" name="password2_profile" value="" placeholder="új jelszó megerősítése" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="A jelszónak tartalmaznia kell legalább egy számot, egy nagybetűt, egy kisbetűt és minimum 8 karakter hosszúnak kell lennie!" aria-describedby="passHelp">
+              <input type="password" class="form-control" id="password2_profile" name="password2_profile" value="" placeholder="új jelszó megerősítése" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="A jelszónak tartalmaznia kell legalább egy számot, egy nagybetűt, egy kisbetűt és minimum 8 karakter hosszúnak kell lennie!" aria-describedby="passHelp" style="display:none;">
 
 
             <div class="col" id="ellenorzes_profile"> 
@@ -252,7 +252,7 @@ $(document).ready(function(){
 
 //régi jelszó ellenőrzése
 $(document).ready(function(){
-    $('#pswd_profile').focusout(function(){
+    $('#pswd_profile').keyup(function(){
         var passw = $('#pswd_profile').val();
         var username = $('#user_profile').val();
         $('#resultpass').html('');
@@ -270,10 +270,11 @@ $(document).ready(function(){
                 
                 if (data == ""){
                   $('#resultpass').html("<p style='color:green;'><i class='bi bi-check' style='color:green;'></i> A megadott jelszó helyes!</p>");
+                  $('#pswdnew_profile').show();
+                  $('#password2_profile').show();
                     ;
                 }else {
                     $('#pswd_profile').focus();
-                    $('#pswd_profile').val('');
                     $('#resultpass').html("<p style='color:red;'><i class='bi bi-exclamation-circle-fill'></i> Nem megfelelő a jelszó! Kérem próbálja meg újra!</p>");
                 }
             },

@@ -265,6 +265,10 @@ html,body{height:100%;}
   ::-webkit-input-placeholder {
     font-size: 12px!important;
  }
+  .form-control { 
+    font-size: 12px!important;
+  }
+
 
 }
 
@@ -331,6 +335,11 @@ border-radius: 5px;
   display: none;
   width: 90%;
   z-index: 99999;
+}
+
+#sectionprofile{
+  z-index: 999;
+  margin-top: 8%;
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
@@ -451,6 +460,11 @@ border-radius: 5px;
             overflow-y: auto;
           }
 
+          #sectionprofile{
+            z-index: 999;
+            margin-top: 80%;
+          }
+
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Smartphones (portrait) ----------- */
@@ -496,7 +510,8 @@ border-radius: 5px;
          #logo2{
             height: 70%;
             width: 9.5%;
-            padding-right: 1%;
+            padding-right: 0%;
+            margin-left: 5%;
         }
 
         .offcanvas-header{
@@ -568,6 +583,10 @@ border-radius: 5px;
           font-size: 10px;
           overflow-y: auto;
         }
+        #sectionprofile{
+          z-index: 999;
+          margin-top: 40%;
+        }
 
     }
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -610,9 +629,10 @@ border-radius: 5px;
 
          }
          #logo2{
-            height: 65%;
+            height: 75%;
             width: 9.5%;
-            padding-right: 1%;
+            padding-right: 0%;
+            margin-left: 5%;
         }
 
         .offcanvas-header{
@@ -688,6 +708,10 @@ border-radius: 5px;
 
 
           }
+          #sectionprofile{
+            z-index: 999;
+            margin-top: 20%;
+          }
        
     }
 
@@ -722,7 +746,8 @@ border-radius: 5px;
          #logo2{
             height: 85%;
             width: 11.5%;
-            padding-right: 1%;
+            padding-right: 0%;
+            margin-left: 5%;
         }
 
         .offcanvas-header{
@@ -796,6 +821,10 @@ border-radius: 5px;
             overflow-y: auto;
 
 
+          }
+          #sectionprofile{
+            z-index: 999;
+            margin-top: 20%;
           }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
