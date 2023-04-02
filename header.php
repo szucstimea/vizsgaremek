@@ -73,7 +73,7 @@ require 'registmodal.php';
                     <ul class="dropdown-menu position-absolute dropdown-menu-right ">
                         <li><a class="dropdown-item" href="profile.php" id="login"><i class="bi bi-person"></i> Profilom</a></li>
                         <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-calendar-check"></i> Foglalásaim</a></li>
-                        <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-heart"></i> Kutyáim</a></li>
+                        <li><a class="dropdown-item" href="mydogs.php" id="register"><i class="bi bi-heart"></i> Kutyáim</a></li>
                         <li><a class="dropdown-item" href="logout.php" id="register"><i class="bi bi-box-arrow-left"></i> Kijelentkezés</a></li>
                     </ul>
             </li>
