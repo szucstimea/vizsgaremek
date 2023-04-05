@@ -26,7 +26,7 @@ setcookie('loggedin', '2', time()-3600);
                     <span>Név</span><br>
                     <div class="row">
                         <div class="col">
-                            <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" autocomplete="off"required><br>
+                            <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" required><br>
                         </div>
                         <div class="col">
                             <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" required><br>
@@ -43,23 +43,22 @@ setcookie('loggedin', '2', time()-3600);
                     <span>Telefonszám</span><br>
                     <div class="row">
                         <div class="col">
-                            <input class="form-textbox" type="tel" size="20" name="telefonszam" id="telefonszam"  maxlength="20" placeholder="+36(99)123-456" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required><br>
+                            <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-456" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required><br>
                             <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
                         </div>
                     </div>
                 </li>
-                <li id=kutya-adatai1 class="form-header-group">
-                    <ul>
+                <li id="1kutya-adatai" class="form-header-group kutya-adatok">
+                    <ul class="kutya-ul">
                         <li>
-                            <h2 id="kutya-header1" class="form-header">Kutya adatai</h2>
+                            <h2 class="form-header">Kutya adatai</h2>
                             <div class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
-                            <!-- <button type="button" id="removeDog" class="btn btn-warning"><span class="bi bi-dash-circle"></span> Neki mégsem szeretnék foglalni</button> -->
                         </li>
                         <li>
                             <span>Kutya neve</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="kutyaneve1" required><br>
+                                    <input class="form-textbox kutyaneve variable" type="text" required><br>
                                 </div>
                             </div>
                         </li>
@@ -67,7 +66,7 @@ setcookie('loggedin', '2', time()-3600);
                             <span>Kutya fajtája</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="kutyafajtaja1"><br>
+                                    <input class="form-textbox kutyafajtaja variable" type="text"><br>
                                 </div>
                             </div>
                         </li>
@@ -75,34 +74,34 @@ setcookie('loggedin', '2', time()-3600);
                             <span>Hány hónapos?</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input min="0" class="form-textbox" type="number" id="honapos1"  />
+                                    <input min="0" class="form-textbox honapos variable" type="number"/>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <span>Foglalás kezdő napja</span><br>
                                 <div class="col-md-3">  
-                                    <input type="text" id="from_date1" class="form-control form-textbox"/>
+                                    <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable"/>
                                 </div>
                             <span>Foglalás vége</span><br> 
                                 <div class="col-md-3">  
-                                    <input type="text" id="to_date1" class="form-control form-textbox"/>
+                                    <input id='1to_date' type="text" name="to_date" class="form-control form-textbox to_date variable"/>
                                 </div>                         
                         </li>
                         <li>
                             <span>Szállítást:</span>
-                            <div class="szallitas">
+                            <div class="szallitasDiv">
                                 <div class="checkbox-wrapper-12 row checkbox-row ">
                                     <div class="cbx col label-col" >
-                                        <input id="szallitas1" name="szallitas1" value='kerek' type="radio"/>
-                                        <label id="label-szallitas1" for="szallitas1"></label>
+                                        <input class="szallitas1" name="1szallitas" value='kerek' type="radio"/>
+                                        <label></label>
                                     </div>
                                     <div class="col category-col">Kérek</div>
                                 </div>
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
-                                        <input id="szallitas2" name="szallitas1" value='nemkerek' type="radio"/>
-                                        <label id="label-szallitas2" for="szallitas2"></label>
+                                        <input class="szallitas2" name="1szallitas" value='nemkerek' type="radio"/>
+                                        <label for="szallitas2"></label>
                                     </div>
                                     <div class="col category-col">Nem kérek</div>
                                 </div>
@@ -111,11 +110,11 @@ setcookie('loggedin', '2', time()-3600);
                         <li id="szallitas-li">
                             <span>Adja meg a gazdi címét:</span>
                             <div class="row">
-                                <div class="col irsz">
-                                    <input class="form-textbox" type="number" name="iranyitoszam" placeholder="Irányítószám">
-                                    <input class="form-textbox" type="text" name="telepules" placeholder="Település">
-                                    <input class="form-textbox" type="text" name="utca" placeholder="Utca">
-                                    <input class="form-textbox" type="text" name="hazszam" placeholder="Házszám">
+                                <div class="col">
+                                    <input class="form-textbox irsz" type="number" name="iranyitoszam" placeholder="Irányítószám">
+                                    <input class="form-textbox telepules" type="text" name="telepules" placeholder="Település">
+                                    <input class="form-textbox utca" type="text" name="utca" placeholder="Utca">
+                                    <input class="form-textbox hazszam" type="text" name="hazszam" placeholder="Házszám">
                                 </div>
                             </div>
                         </li>
@@ -124,7 +123,7 @@ setcookie('loggedin', '2', time()-3600);
                             <div class="szolgaltatasok">
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
-                                        <input id="furdetes" type="checkbox" name="szolgaltatas1[]"/>
+                                        <input class="szolgaltatas" name="1szolgaltatas" value="furdetes" type="checkbox"/>
                                         <label for="furdetes"></label>                                                                                       
                                         <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                                         <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -144,7 +143,7 @@ setcookie('loggedin', '2', time()-3600);
                                 </div>
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
-                                        <input id="setaltatas" type="checkbox" name="szolgaltatas1[]"/>
+                                        <input class="szolgaltatas" name="1szolgaltatas" value="setaltatas" type="checkbox"/>
                                         <label for="setaltatas"></label>                                                                                       
                                         <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                                         <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -164,7 +163,7 @@ setcookie('loggedin', '2', time()-3600);
                                 </div>
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
-                                        <input id="kozmetika" type="checkbox" name="szolgaltatas1[]"/>
+                                        <input class="szolgaltatas" name="1szolgaltatas" type="checkbox" value="kozmetika"/>
                                         <label for="kozmetika"></label>                                                                                       
                                         <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                                         <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -184,7 +183,7 @@ setcookie('loggedin', '2', time()-3600);
                                 </div>
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
-                                        <input id="tanitas" type="checkbox" name="szolgaltatas1[]"/>
+                                        <input class="szolgaltatas" name="1szolgaltatas" type="checkbox" value="tanitas"/>
                                         <label for="tanitas"></label>                                                                                       
                                         <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
                                         <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -208,7 +207,7 @@ setcookie('loggedin', '2', time()-3600);
                         <span>Egyéb speciális igényeit ide írhatja:</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" id="specigeny" class="form-textbox" />
+                                    <input type="text" class="form-textbox specigeny variable" />
                                 </div>
                             </div>
                         </li>
@@ -230,62 +229,168 @@ setcookie('loggedin', '2', time()-3600);
                     </li>
                 </li>                
             </ul>
+
+            <div id="confirm" class="modal">
+                <span id='confClose' class="close" title="Close Modal">×</span>
+                <form class="modal-content">
+                    <div class="container">
+                    <h1>Mégsem foglalok</h1>
+                    <p>Biztos nem foglal ennek a kutyának?</p>                
+                    <div class="clearfix">
+                        <button type="button" class="cancelbtn">Mégsem</button>
+                        <button id="delDog" type="button" class="deletebtn">Törlés</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
         </form>
 
         <!-- jQuery -->
         <script>
             $(document).ready(function(){ 
-                var count = 1;
 
+                //Default datepicker formátum
                 $.datepicker.setDefaults({  
-                    dateFormat: 'yy-mm-dd'   
-                });  
+                    dateFormat: 'yy-mm-dd',
+                    altFormat: 'yy-mm-dd',
+                    minDate: 1   
+                }); 
                 
-                $(function(){  
-                    $("#from_date"+count).datepicker();  
-                    $("#to_date"+count).datepicker();  
-                });
 
+                //Alapértelmezetten nem kérjük a címét a gazdinak, csak ha szállítást is kér
                 $('#szallitas-li').hide();
 
+                //Foglalás új kutyának
                 $('#addDog').click(function(){
-                    count++;
-                    var el = $('#kutya-adatai'+(count-1)).get(0); 
-                    var original_radio = $(el).find(':radio:checked');  
-                    var newEl = $(el).clone().insertAfter('#kutya-adatai'+(count-1));
+                    var el = $('.kutya-adatok:last').get(0); 
+                    var original_radio = $(el).find(':radio:checked');
+                    var el_from_date = parseInt($(el).find('.from_date').attr('id').charAt(0)); 
+                    var el_to_date = parseInt($(el).find('.to_date').attr('id').charAt(0)); 
+                    var el_hanyadik_kutya = parseInt($(el).attr('id').charAt(0)); 
+                    var el_szallitas = parseInt($(el).find(':radio').attr('name').charAt(0)); 
+                    var el_szolgaltatas = parseInt($(el).find(':checkbox').attr('name').charAt(0));
+                    var newEl = $(el).clone().insertAfter('.kutya-adatok:last');
+                    $(newEl).attr('id',(el_hanyadik_kutya+1)+'kutya-adatai');
+                    $(newEl).find('.removeDog').remove();
+                    $(newEl).find('.form-subHeader').remove();
+                    $(newEl).find('#szallitas-li').remove();
                     $(newEl).find(':checkbox:checked').prop('checked', false);
                     $(newEl).find(':radio:checked').prop('checked', false);
-                    $(newEl).find(':input').val('');
-                    $(newEl).attr('id','kutya-adatai'+(count))
-                    $(newEl).find("#kutya-header"+(count-1)).attr('id','kutya-header'+(count))
-                    $(newEl).find("#kutyaneve"+(count-1)).attr('id','kutyaneve'+(count))
-                    $(newEl).find("#kutyafajtaja"+(count-1)).attr('id','kutyafajtaja'+(count))
-                    $(newEl).find("#honapos"+(count-1)).attr('id','honapos'+(count))
-                    $(newEl).find('#from_date'+(count-1)).attr('id','from_date'+count).datepicker();
-                    $(newEl).find('#to_date'+(count-1)).attr('id','to_date'+count).datepicker();
-                    $(newEl).find('#szallitas'+((count-1)*2-1)).attr('id','szallitas'+(count*2-1)).attr('name','szallitas'+count);
-                    $(newEl).find('#szallitas'+(count-1)*2).attr('id','szallitas'+(count*2)).attr('name','szallitas'+count);
-                    $(newEl).find('#label-szallitas'+((count-1)*2-1)).attr('id','label-szallitas'+(count*2-1)).attr('for','szallitas'+(count*2-1));
-                    $(newEl).find('#label-szallitas'+(count-1)*2).attr('id','label-szallitas'+(count*2)).attr('for','szallitas'+(count*2));
-                    $(newEl).find(':checkbox').attr('name','szolgaltatas'+count+'[]');
+                    $(newEl).find('.variable').val('');
+                    $(newEl).find(':radio').attr('name',(el_szallitas+1)+'szallitas');
+                    $(newEl).find(':checkbox').attr('name',(el_szolgaltatas+1)+'szolgaltatas');
+                    var removeButt = $('<button type=\"button\" class=\"btn btn-warning removeDog\"><span class=\"bi bi-dash-circle\"></span> Neki mégsem szeretnék foglalni</button>');
+                    $('#'+(el_hanyadik_kutya+1)+'kutya-adatai').prepend(removeButt);
+                    $(newEl).find('#'+el_from_date+'from_date').attr('id',(el_from_date+1)+'from_date');
+                    $(newEl).find('#'+el_to_date+'to_date').attr('id',(el_to_date+1)+'to_date');
+                    $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();
+                    $(newEl).find('#'+(el_from_date+1)+'from_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
+                        maxDate: '+2y',
+                        onSelect: function(date){
 
+                        var selectedDate = new Date(date);
+                        var msecsInADay = 86400000;
+                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
+
+                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
+                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' )
+                        }
+                    });
+                
                     $(original_radio).prop('checked', true);
-
-                }).change();
-
-                $('#submitbooking').click(function(){
-                    alert($('#kutya-adatai'+(count)).find(':input').val());
                 });
+
+                //Foglalás gomb
+                $('#submitbooking').click(function(e){
+                    e.preventDefault();
+                    var dogs = new Array();
+                    $('.kutya-adatok').each(function(){
+                        dogs.push(this); //this refers to current DOM node inside of each loop
+                    });
+
+                    //gazdi adatok
+                    var gazdiveznev = $('#gazdiveznev').val();
+                    var gazdikernev = $('#gazdikernev').val();
+                    var gazdiemail = $('#gazdiemail').val();
+                    var gazditel = $('#gazditel').val();
+
+                    //kutyák adatai
+                    $.each(dogs,function(){
+                        var kutyaneve = $(this).find('.kutyaneve').val();
+                        var kutyafajtaja = $(this).find('.kutyafajtaja').val();
+                        var honapos = $(this).find('.honapos').val();
+                        var start = $(this).find('.from_date').datepicker('getDate');
+                        var end = $(this).find('.to_date').datepicker('getDate');
+                        $(this).find(':radio:checked').each(function(){
+                            var szallitas = $(this).val();
+                            if (szallitas == "kerek"){
+                                var gazdiirsz = ('#szallitas-li .irsz').val();
+                                var gazditelepules = ('#szallitas-li .telepules').val();
+                                var gazdiutca = ('#szallitas-li .utca').val();
+                                var gazdihazszam = ('#szallitas-li .hazszam').val();
+                            }
+                        });
+                        var szolgaltatasok = new Array();
+                        $(this).find(':checkbox:checked').each(function(){
+                            szolgaltatasok.push($(this).val());
+                        });
+
+                        var specigeny = ($(this).find('.specigeny').val());
+                        // alert((end-start)/1000/60/60/24);
+                    });
+                });
+
+                //Kutya törlése
+                $(document).on('click', '.removeDog', function() {
+                    //$(this).parent().remove();
+                    var removable = $(this).parent();
+                    $('#confirm').show();
+                    $('#delDog').click(function(){
+                        removable.remove();
+                        $('#confirm').hide();
+                    })
+                });
+
+                //datepicker az első kutyára
+                $('#1from_date').datepicker({
+                    maxDate: '+2y', // 2 évre előre lehet foglalni
+                        onSelect: function(date){
+
+                        var selectedDate = new Date(date);
+                        var msecsInADay = 86400000;
+                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
+
+                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                        $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
+                        $("#1to_date").datepicker( "option", "maxDate", '+2y' )
+                        }
+                });
+
+                $("#1to_date").datepicker();
+
             });
 
-            $('#kutya-adatai1 #szallitas1').click(function(){
+            function convert(str) {
+                var date = new Date(str),
+                    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                    day = ("0" + date.getDate()).slice(-2);
+                return [date.getFullYear(), mnth, day].join("-");
+            }
+
+            //szállítás eseménykezelés
+            $('#1kutya-adatai .szallitas1').click(function(){
                     $('#szallitas-li').show();
                 });
                 
-            $('#kutya-adatai1 #szallitas2').click(function(){
+            $('#1kutya-adatai .szallitas2').click(function(){
                 $('#szallitas-li').hide();
             });
-            
+
+            //megerősítés eseménykezelés
+            $('#confClose, .cancelbtn').click(function(){
+                $('#confirm').hide();
+            })
 
         </script>
     </div>
