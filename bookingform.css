@@ -40,11 +40,6 @@
     color:rgb(255, 255, 255);
 }
 
-#booking #kutyakszama:focus{
-    background:transparent;
-    color: rgb(255, 255, 255)
-}
-
 #booking .input-group{
     color: #ccc !important;
 }
@@ -210,3 +205,105 @@
       box-shadow: 0 -36px 0 -10px transparent, 32px -16px 0 -10px transparent, 32px 16px 0 -10px transparent, 0 36px 0 -10px transparent, -32px 16px 0 -10px transparent, -32px -16px 0 -10px transparent;
     }
   }
+
+/*Confirm removedog*/
+#confirm button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 16px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+#confirm button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+#confirm .cancelbtn, .deletebtn {
+  float: left;
+  width: 20%;
+}
+
+/* Add a color to the cancel button */
+#confirm .cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+#confirm .deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+#confirm .container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+#confirm {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+.clearfix{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Content/Box */
+#confirm .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+#confirm hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+#confirm .close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+#confirm .close:hover,
+#confirm .close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+#confirm .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  #confirm .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
