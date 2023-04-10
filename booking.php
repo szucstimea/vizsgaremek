@@ -3,7 +3,7 @@
 session_start();
 include 'style.css';
 include 'bookingform.css';
-include 'bookingback.php';
+include 'insertbooking.php';
 setcookie('loggedin', '2', time()-3600);
 ?>
 </style>
@@ -16,38 +16,42 @@ setcookie('loggedin', '2', time()-3600);
         <h1 h1 style="padding:2%;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
     <div id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
-        <form class="booking-form" action="" method="post">
+        <form id="booking-form" class="booking-form" action="" method="post">
             <ul id="booking-list">
-                <li id="gazdi-adatai" class="form-header-group">
-                    <h2 id="gazdi_header" class="form-header">Gazdi adatai</h2>
-                    <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
-                </li>
-                <li>
-                    <span>Név</span><br>
-                    <div class="row">
-                        <div class="col">
-                            <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" required><br>
-                        </div>
-                        <div class="col">
-                            <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" required><br>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <span>E-mail</span><br>
-                    <div class="col">
-                        <input class="form-textbox" type="email" id="gazdiemail" placeholder="pelda@pelda.hu" pattern="^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$" required><br>
-                    </div>
-                </li>
-                <li>
-                    <span>Telefonszám</span><br>
-                    <div class="row">
-                        <div class="col">
-                            <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-456" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required><br>
-                            <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
-                        </div>
-                    </div>
-                </li>
+                <li id="gazdi-adatai" class="form-header-group gazdi-adatok">
+                    <ul class="gazdi-ul">
+                        <li class="form-header-group">
+                            <h2 id="gazdi_header" class="form-header">Gazdi adatai</h2>
+                            <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
+                        </li>
+                        <li>
+                            <span>Név</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" required /><br>
+                                </div>
+                                <div class="col">
+                                    <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" required /><br>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span>E-mail</span><br>
+                            <div class="col">
+                                <input class="form-textbox" type="email" id="gazdiemail" placeholder="pelda@pelda.hu" pattern="^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$" required /><br>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Telefonszám</span><br>
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-456" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required /><br>
+                                    <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>                
                 <li id="1kutya-adatai" class="form-header-group kutya-adatok">
                     <ul class="kutya-ul">
                         <li>
@@ -58,7 +62,7 @@ setcookie('loggedin', '2', time()-3600);
                             <span>Kutya neve</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox kutyaneve variable" type="text" required><br>
+                                    <input class="form-textbox kutyaneve variable" type="text" required /><br>
                                 </div>
                             </div>
                         </li>
@@ -81,11 +85,11 @@ setcookie('loggedin', '2', time()-3600);
                         <li>
                             <span>Foglalás kezdő napja</span><br>
                                 <div class="col-md-3">  
-                                    <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable"/>
+                                    <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable" readonly="true" />
                                 </div>
                             <span>Foglalás vége</span><br> 
                                 <div class="col-md-3">  
-                                    <input id='1to_date' type="text" name="to_date" class="form-control form-textbox to_date variable"/>
+                                    <input id='1to_date' type="text" name="to_date" class="form-control form-textbox to_date variable" readonly="true" />
                                 </div>                         
                         </li>
                         <li>
@@ -108,13 +112,14 @@ setcookie('loggedin', '2', time()-3600);
                             </div>
                         </li>
                         <li id="szallitas-li">
-                            <span>Adja meg a gazdi címét:</span>
+                            <span>Adja meg a gazdi címét! (Ha bármely kutyának kér szállítást, a mezők kitöltése kötelező!) </span>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox irsz" type="number" name="iranyitoszam" placeholder="Irányítószám">
-                                    <input class="form-textbox telepules" type="text" name="telepules" placeholder="Település">
-                                    <input class="form-textbox utca" type="text" name="utca" placeholder="Utca">
-                                    <input class="form-textbox hazszam" type="text" name="hazszam" placeholder="Házszám">
+                                    <input class="form-textbox irsz variable" type="number" name="iranyitoszam" placeholder="Irányítószám"/>
+                                    <input class="form-textbox megye variable" type="text" name="megye" placeholder="Megye"/>
+                                    <input class="form-textbox telepules variable" type="text" name="telepules" placeholder="Település"/>
+                                    <input class="form-textbox utca variable" type="text" name="utca" placeholder="Utca">
+                                    <input class="form-textbox hazszam variable" type="text" name="hazszam" placeholder="Házszám"/>
                                 </div>
                             </div>
                         </li>
@@ -250,15 +255,14 @@ setcookie('loggedin', '2', time()-3600);
             $(document).ready(function(){ 
 
                 //Default datepicker formátum
-                $.datepicker.setDefaults({  
+                $.datepicker.setDefaults({
                     dateFormat: 'yy-mm-dd',
                     altFormat: 'yy-mm-dd',
-                    minDate: 1   
-                }); 
-                
+                    minDate: 1,
+                });
 
                 //Alapértelmezetten nem kérjük a címét a gazdinak, csak ha szállítást is kér
-                $('#szallitas-li').hide();
+                // $('#szallitas-li').hide();
 
                 //Foglalás új kutyának
                 $('#addDog').click(function(){
@@ -283,7 +287,6 @@ setcookie('loggedin', '2', time()-3600);
                     $('#'+(el_hanyadik_kutya+1)+'kutya-adatai').prepend(removeButt);
                     $(newEl).find('#'+el_from_date+'from_date').attr('id',(el_from_date+1)+'from_date');
                     $(newEl).find('#'+el_to_date+'to_date').attr('id',(el_to_date+1)+'to_date');
-                    $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();
                     $(newEl).find('#'+(el_from_date+1)+'from_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
                         maxDate: '+2y',
                         onSelect: function(date){
@@ -294,16 +297,18 @@ setcookie('loggedin', '2', time()-3600);
 
                         //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
                         $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
-                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' )
+                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' );
                         }
                     });
+                    $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();
+
                 
                     $(original_radio).prop('checked', true);
                 });
 
                 //Foglalás gomb
-                $('#submitbooking').click(function(e){
-                    e.preventDefault();
+                $('#booking-form').submit(function(e){
+                    // e.preventDefault();
                     var dogs = new Array();
                     $('.kutya-adatok').each(function(){
                         dogs.push(this); //this refers to current DOM node inside of each loop
@@ -314,32 +319,121 @@ setcookie('loggedin', '2', time()-3600);
                     var gazdikernev = $('#gazdikernev').val();
                     var gazdiemail = $('#gazdiemail').val();
                     var gazditel = $('#gazditel').val();
+                    var gazdiirsz = $('#szallitas-li .irsz').val();
+                    var gazdimegye = $('#szallitas-li .megye').val();
+                    var gazditelepules = $('#szallitas-li .telepules').val();
+                    var gazdiutca = $('#szallitas-li .utca').val();
+                    var gazdihazszam = $('#szallitas-li .hazszam').val();
 
                     //kutyák adatai
+                    var kutyak = new Array();
+                    var van_idopont = true;
+                    var foglalhato = true;
+                    var kell_cim = false;
+                    var van_cim = true;
+
                     $.each(dogs,function(){
                         var kutyaneve = $(this).find('.kutyaneve').val();
                         var kutyafajtaja = $(this).find('.kutyafajtaja').val();
                         var honapos = $(this).find('.honapos').val();
-                        var start = $(this).find('.from_date').datepicker('getDate');
-                        var end = $(this).find('.to_date').datepicker('getDate');
-                        $(this).find(':radio:checked').each(function(){
-                            var szallitas = $(this).val();
-                            if (szallitas == "kerek"){
-                                var gazdiirsz = ('#szallitas-li .irsz').val();
-                                var gazditelepules = ('#szallitas-li .telepules').val();
-                                var gazdiutca = ('#szallitas-li .utca').val();
-                                var gazdihazszam = ('#szallitas-li .hazszam').val();
-                            }
-                        });
+                        var start = convert($(this).find('.from_date').datepicker('getDate'));
+                        var end = convert($(this).find('.to_date').datepicker('getDate'));
+                        var date = new Date();
+                        var today = date.getFullYear()+"-"+('0' + (date.getMonth()+1)).slice(-2)+"-"+('0' + date.getDate()).slice(-2);//ezzel megoldható, hogy ugynolyan formátuma legyen, mint a datepicker-es formátum
+
+                        if(start < today || end < today){ //Azért, hogy ne lehessen üresen hagyni (required nem működik együtt a readonly-val)
+                            van_idopont=false;
+                            foglalhato=false;
+                        }
+
+                        var szall = getSzall($(this).find(':radio:checked').val());
+                        function getSzall(szallitas){
+                                if (szallitas == "kerek"){
+                                    kell_cim = true;
+                                    return 1;
+                                }else{
+                                    return 2;
+                                }
+                        };
+
                         var szolgaltatasok = new Array();
                         $(this).find(':checkbox:checked').each(function(){
                             szolgaltatasok.push($(this).val());
                         });
 
                         var specigeny = ($(this).find('.specigeny').val());
-                        // alert((end-start)/1000/60/60/24);
+                        var kutya = {
+                            "nev" : kutyaneve,
+                            "fajta" : kutyafajtaja,
+                            "kor" : honapos,
+                            "kezdo" : start,
+                            "veg" : end,
+                            "szallitas" : szall,
+                            "szolg" : szolgaltatasok,
+                            "spec" : specigeny,
+                        }
+
+                        kutyak.push(kutya);                        
                     });
+                    //each dog vége
+
+                    //Kell-e szállítási cím?
+                    $('#szallitas-li input').each(function(){
+                        if($(this).val() == ''){
+                            van_cim = false;
+                        }
+                    });
+
+                    if(kell_cim && !van_cim){
+                        foglalhato = false;
+                    };
+
+                    //Foglalás mentése adatbázisba
+                    if(foglalhato){
+                        $.ajax({
+                            url:"insertbooking.php",
+                            method:"post",   
+                            data:{
+                                gazdivez: gazdiveznev,
+                                gazdiker: gazdikernev,
+                                gazdiemail: gazdiemail,
+                                gazditel: gazditel,
+                                gazdiirsz : gazdiirsz,
+                                gazditelepules : gazditelepules,
+                                gazdimegye : gazdimegye,
+                                gazdiutca : gazdiutca,
+                                gazdihazszam : gazdihazszam,
+                                kutyak : kutyak,
+                            },
+                            contentType: "application/x-www-form-urlencoded",
+                            success: function(response){
+                                $('#gazdi-adatai').find('input').each(function(){
+                                    $(this).val('');
+                                });
+                                $('#booking-list').find('.kutya-adatok').each(function(){
+                                    if($(this).attr('id') != '1kutya-adatai'){
+                                        $(this).remove();
+                                    }else{
+                                        $(this).find(':checkbox:checked').prop('checked', false);
+                                        $(this).find(':radio:checked').prop('checked', false);
+                                        $(this).find('.variable').val('');
+                                    };
+                                })
+                                alert(response);
+                            },
+                            error : function(err){
+                                alert(err);
+                            }
+                        });
+                    }else if(!van_idopont){
+                        alert("A foglaláshoz kötelező megadni a foglalási intervallumot!");
+                    }else{                        
+                        alert("Amennyiben szállítást kér bármely kutyának, a gazdi címét meg kell adni!");
+                    };
+
+                    return false;
                 });
+                //Foglalás vége
 
                 //Kutya törlése
                 $(document).on('click', '.removeDog', function() {
@@ -355,21 +449,38 @@ setcookie('loggedin', '2', time()-3600);
                 //datepicker az első kutyára
                 $('#1from_date').datepicker({
                     maxDate: '+2y', // 2 évre előre lehet foglalni
+                    minDate: 1,
                         onSelect: function(date){
 
-                        var selectedDate = new Date(date);
-                        var msecsInADay = 86400000;
-                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
+                            var selectedDate = new Date(date);
+                            var msecsInADay = 86400000;
+                            var endDate = new Date(selectedDate.getTime() + msecsInADay);
 
-                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-                        $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
-                        $("#1to_date").datepicker( "option", "maxDate", '+2y' )
+                            //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                            $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
+                            $("#1to_date").datepicker( "option", "maxDate", '+2y' )
+
+                            $.ajax({
+                                url:"checkcapacity.php",
+                                method:"post",   
+                                data:{
+                                    from_date: date,
+                                },
+                                contentType: "application/x-www-form-urlencoded",
+                                success: function(response){
+                                    alert//(response);
+                                },
+                                error : function(err){
+                                    alert(err);
+                                }
+                            });
                         }
                 });
 
                 $("#1to_date").datepicker();
 
             });
+            //document.ready vége
 
             function convert(str) {
                 var date = new Date(str),
@@ -379,13 +490,13 @@ setcookie('loggedin', '2', time()-3600);
             }
 
             //szállítás eseménykezelés
-            $('#1kutya-adatai .szallitas1').click(function(){
-                    $('#szallitas-li').show();
-                });
+            // $('#1kutya-adatai .szallitas1').click(function(){
+            //         $('#szallitas-li').show();
+            //     });
                 
-            $('#1kutya-adatai .szallitas2').click(function(){
-                $('#szallitas-li').hide();
-            });
+            // $('#1kutya-adatai .szallitas2').click(function(){
+            //     $('#szallitas-li').hide();
+            // });
 
             //megerősítés eseménykezelés
             $('#confClose, .cancelbtn').click(function(){
