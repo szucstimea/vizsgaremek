@@ -450,34 +450,47 @@ setcookie('loggedin', '2', time()-3600);
                 $('#1from_date').datepicker({
                     maxDate: '+2y', // 2 évre előre lehet foglalni
                     minDate: 1,
-                        onSelect: function(date){
+                    beforeShowDay: my_check(),
+                    onSelect: function(date){
 
-                            var selectedDate = new Date(date);
-                            var msecsInADay = 86400000;
-                            var endDate = new Date(selectedDate.getTime() + msecsInADay);
+                        var selectedDate = new Date(date);
+                        var msecsInADay = 86400000;
+                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
 
-                            //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-                            $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
-                            $("#1to_date").datepicker( "option", "maxDate", '+2y' )
-
-                            $.ajax({
-                                url:"checkcapacity.php",
-                                method:"post",   
-                                data:{
-                                    from_date: date,
-                                },
-                                contentType: "application/x-www-form-urlencoded",
-                                success: function(response){
-                                    alert//(response);
-                                },
-                                error : function(err){
-                                    alert(err);
-                                }
-                            });
-                        }
+                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                        $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
+                        $("#1to_date").datepicker( "option", "maxDate", '+2y' )
+                    }
                 });
 
                 $("#1to_date").datepicker();
+
+                function my_check(date){
+                    var napok;
+                    var string;               
+                    $.ajax({
+                        url:"checkcapacity.php",
+                        method:"get",   
+                        // data:{
+                        //      from_date: date,
+                        // },
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function(betelt){
+                            napok = JSON.parse(betelt);
+                            console.log(napok);
+                            // var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                            console.log(string);
+                            // return [napok.indexOf(string) == -1];
+                            // for (let i=0;i<napok.length;i++){
+                            //     alert(napok[i]);
+                            // }
+                        },
+                        error : function(err){
+                            alert(err);
+                        }
+                    });
+                    // return [napok.indexOf(string) == -1];
+                }
 
             });
             //document.ready vége
@@ -488,15 +501,6 @@ setcookie('loggedin', '2', time()-3600);
                     day = ("0" + date.getDate()).slice(-2);
                 return [date.getFullYear(), mnth, day].join("-");
             }
-
-            //szállítás eseménykezelés
-            // $('#1kutya-adatai .szallitas1').click(function(){
-            //         $('#szallitas-li').show();
-            //     });
-                
-            // $('#1kutya-adatai .szallitas2').click(function(){
-            //     $('#szallitas-li').hide();
-            // });
 
             //megerősítés eseménykezelés
             $('#confClose, .cancelbtn').click(function(){
