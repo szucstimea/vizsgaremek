@@ -28,6 +28,7 @@ require 'registmodal.php';
     <h2>LODINN KUTYAPANZIÓ</h2><br>
     </a>
     
+    
     <ul class=" navbar-nav flex-row">
             <!-- felhaszáló létezésének ellenőrzése adatbázisban arra az esetre ha sütiben tárolja az adatait, de közbe törlése kerülne az adatbázisból -->
             <?php
@@ -90,6 +91,7 @@ require 'registmodal.php';
                     <ul class="dropdown-menu position-absolute dropdown-menu-right">
                         <li><a class="dropdown-item" href="#" id="login"><i class="bi bi-box-arrow-in-right"></i> Bejelentkezés</a></li>
                         <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-person-add"></i> Regisztráció</a></li>
+                        <li><a class="dropdown-item" href="admin.php" id="admin"><i class="bi bi-person-vcard"></i> Bejelentkezés dolgozóként</a></li>
                     </ul>
             </li>
             <?php
@@ -112,7 +114,7 @@ require 'registmodal.php';
             <li class="nav-item-icons">
                  <a class="nav-link pr-2" id ="search" onclick="openSearch()"><i class="bi bi-search"></i></a>
             </li>
-            
+           
                 <div id="myOverlay" class="overlay">
                     <span class="closebtn" onclick="closeSearch()" title="Close Overlay">x</span>
                     <div class="overlay-content">
@@ -128,6 +130,7 @@ require 'registmodal.php';
                 </div>
                 
         </ul>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
         </button>

@@ -129,6 +129,11 @@ html,body{height:100%;}
 #username,
 #user,
 #veznev,
+#vez,
+#ker,
+#pass,
+#pas,
+#kernev,
 #keresztnev,
 #mail,
 #phone,
@@ -440,6 +445,7 @@ border-radius: 5px;
   color: #000000;
   z-index: 999;
 }
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
