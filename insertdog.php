@@ -7,17 +7,19 @@ if(isset($_POST['kutyanev'])){
          $kutyanev = $_POST["kutyanev"];
          $kutyakor = $_POST["kutyakor"];
          $kutyafajta = $_POST["kutyafajta"];
+         $timestamp = date("Y-m-d H:i:s");
 
          try{
 
 
             
-         $sql="INSERT INTO lodinn.kutyak (kutyaID,kutyaNev,kor,fajta,vendeg_ID) VALUES ('',:kutyanev,:kutyakor,:kutyafajta,:vendeg_ID)";
+         $sql="INSERT INTO lodinn.kutyak (kutyaID,kutyaNev,kor,fajta,vendeg_ID, rogzites) VALUES ('',:kutyanev,:kutyakor,:kutyafajta,:vendeg_ID, :rogzites)";
          $update1 = $conn->prepare($sql);
          $update1->bindParam(':kutyanev', $kutyanev, PDO::PARAM_STR);
          $update1->bindParam(':kutyakor', $kutyakor, PDO::PARAM_INT);
          $update1->bindParam(':kutyafajta', $kutyafajta, PDO::PARAM_STR);
          $update1->bindParam(':vendeg_ID', $vendegID, PDO::PARAM_INT);
+         $update1->bindParam(':rogzites', $timestamp, PDO::PARAM_STR);
          $update1->execute();
 
          $lastId = $conn->lastInsertId();

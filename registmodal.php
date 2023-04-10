@@ -2,6 +2,8 @@
 
 ?>
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
+
+
 <!-- The Modal -->
 <div class="modal fade" id="registmodal">
   <div class="modal-dialog modal-lg">
@@ -70,11 +72,13 @@
 
                   <div class="col col-sm-2">
                       <label class="form-label fw-bold" for="iranyitoszam">Irányítószám </label>
-                      <input type="number" class="form-control large" id="iranyitoszam" name="iranyitoszam" required value="" placeholder=""><br>
+                      <input type="number" class="form-control large" id="iranyitoszam" name="iranyitoszam" required value="" placeholder="" autocomplete="off"><br>
+                      <datalist id="iranyitoszamok"></datalist>
                   </div>
                   <div class="col col-sm-5">
                       <label class="form-label fw-bold" for="telepules">Település </label>
-                      <input type="text" class="form-control large" id="telepules" name="telepules" required value="" placeholder="lakcím szerinti település"><br>
+                      <input type="text" class="form-control large" id="telepules" name="telepules" required value="" placeholder="lakcím szerinti település" list="telepulesek" autocomplete="off"><br>
+                      <datalist id="telepulesek"></datalist>
                   </div>      
             </div>
 
@@ -127,6 +131,9 @@
            <div class="row g-3 align-items-center" style="margin-top: 0.1%;" >
             <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-person-add"></i>  Regisztrálok</button>
           </div>  
+            <div class="" id="loader" style="display:none;"> 
+              <img src="assets/images/dog.gif" id="gif">
+            </div>  
             <div class="col" id="visszajelzes"> 
             </div>  
     </form>     
@@ -181,6 +188,7 @@ function IsEmail(email) {
 $(document).ready(function(){
     $('#mail').focusout(function(){
         var email = $('#mail').val();
+        var username = $('#user').val();
         $('#res2').html('');
         if(email.length >=3 && IsEmail(email)== false){
           $('#res2').html("<p style='color:red;'> Kérem, hogy email címet adjon meg!pl. info@valami.hu</p>");
@@ -191,7 +199,10 @@ $(document).ready(function(){
         $.ajax({
             url: "regemailcheck.php",
             method: "post",
-            data: {mail: email},
+            data: {
+            mail: email,
+            user: username
+            },
             dataType: "text",
             success: function(data){   
                 if (data !=0){
@@ -318,6 +329,14 @@ $(document).ready(function() {
                   pa:passw
                 },
                 dataType: "text",
+
+                beforeSend: function(){
+                  $("#loader").show();
+                },
+                complete: function(){
+                  $("#loader").hide();
+                },
+
                 success: function(data){
                   $('#visszajelzes').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Sikeres regisztráció! Kérem jelentkezzen be a megadott adatokkal!</h5><a href='?modal=1' id='register4'><p><i class='bi bi-box-arrow-in-right'></i>Bejelentkezés </p></a>");
                     },
@@ -328,7 +347,6 @@ $(document).ready(function() {
                 })
 
             }}))});
-
 
 
 </script>

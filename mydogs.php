@@ -72,12 +72,22 @@ if(isset($_SESSION["username"])){
                         $db_kutyaId= $row['kutyaID']; 
                         $db_kutyaNev = $row['kutyaNev']; 
                         $db_kutyaKor= $row['kor'];   
-                        $db_kutyaFajta = $row['fajta'];    
-                        
+                        $db_kutyaFajta = $row['fajta'];
+                        $db_timeStamp =  $row['rogzites'];   
+                        $currenttime = date("Y-m-d H:i:s");
+                        $ts1 = strtotime($db_timeStamp);
+                        $ts2 = strtotime($currenttime);
+                        $year1 = date('Y', $ts1);
+                        $year2 = date('Y', $ts2);
+                        $month1 = date('m', $ts1);
+                        $month2 = date('m', $ts2);
+                        $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+                        $currentage = $db_kutyaKor + $diff;
+
                         echo "<tr id='kuyta$db_kutyaId'>";
 
                         echo "<td >$db_kutyaNev</td>";
-                        echo "<td>$db_kutyaKor</td>";
+                        echo "<td>$currentage</td>";
                         echo "<td>$db_kutyaFajta</td>";
                         echo "<td><a href='updatedog.php?id=$db_kutyaId' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Szerkesztés'><i class='bi bi-pen'></i></a></td>";
                         echo "<td><button onclick='deleteAjax($db_kutyaId)'type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Törlés'><i class='bi bi-trash3'></i></button></td>";

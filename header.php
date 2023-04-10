@@ -100,20 +100,33 @@ require 'registmodal.php';
             </li>
            
             <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-facebook"></i></a>
+                <a class="nav-link pr-2" href="https://www.facebook.com/profile.php?id=100091656457423" target="_blank"><i class="bi bi-facebook"></i></a>
             </li>
+            
             <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-messenger"></i></a>
-            </li>
-            <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-instagram"></i></a>
+                <a class="nav-link pr-2" href="https://www.instagram.com/lodinnkutyapanzio/" target="_blank"><i class="bi bi-instagram"></i></a>
             </li>
             <li class="nav-item-icons">
                 <a class="nav-link pr-2"  href="mailto:lodinn@lodinn.hu"><i class="bi bi-envelope"></i></a>
             </li>
             <li class="nav-item-icons">
-                 <a class="nav-link pr-2"><i class="bi bi-search"></i></a>
+                 <a class="nav-link pr-2" id ="search" onclick="openSearch()"><i class="bi bi-search"></i></a>
             </li>
+            
+                <div id="myOverlay" class="overlay">
+                    <span class="closebtn" onclick="closeSearch()" title="Close Overlay">x</span>
+                    <div class="overlay-content">
+                    
+                        <form method="" id="" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                            <input type="text" placeholder="Keresés.." name="keresmezo" id="keresmezo">
+                             <button id="keres" type="button" name="keres"><i class="bi bi-search"></i></button> 
+                               
+                        </form>  
+                        
+                    </div>
+                    <div class='overlay-content'id='ered' style="margin-top:65px; "></div> 
+                </div>
+                
         </ul>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -152,7 +165,6 @@ require 'registmodal.php';
                 <a class=""><i class="bi bi-messenger"></i></a>
                 <a class=""><i class="bi bi-instagram"></i></a>
                 <a class=""  href="mailto:lodinn@lodinn.hu"><i class="bi bi-envelope"></i></a>
-                <a class=""><i class="bi bi-search"></i></a>
             </div>
         </div>
     </div>
@@ -181,6 +193,44 @@ $('#register3').click(function(){
 $('.modal').on('shown.bs.modal', function() {
   $(this).find('[autofocus]').focus();
 });
+
+// Open the full screen search box
+function openSearch() {
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+// Close the full screen search box
+function closeSearch() {
+  document.getElementById("myOverlay").style.display = "none";
+}
+//Searching
+$(document).ready(function(){
+$('#keres').click(function(){
+    var search = $('#keresmezo').val();
+        $.ajax({
+            type:"POST",
+            url:"search.php",
+            data: {
+                sea: search
+            },
+            success: function(data){
+                if (data !=0){
+                    $('#ered').html(data);
+                    $('#keresmezo').focus();
+                }
+            } 
+        })
+        
+    })
+})
+var input = document.getElementById("keresmezo");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("keres").click();
+  }
+});
+
 </script>
 <?php
    
