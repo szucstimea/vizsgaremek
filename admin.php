@@ -14,17 +14,11 @@ require 'cookieModal.php';
     <div class="text-center">
         <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method ="post" autocomplete="off">
         <div class="form-group-row">
-                    <label class="form-label fw-bold" for="vez"><i class="bi bi-person" style="color:#498ffc"></i> Vezetéknév </label>
-                        <input type="text" class="form-control" id="vez" name="vez" required value="<?php if(isset($_COOKIE ['veznev'])){echo $_COOKIE ['veznev'];};?>" placeholder="Kérem adja meg vezetéknevét" autofocus><br>
+                    <label class="form-label fw-bold" for="felh"><i class="bi bi-person" style="color:#498ffc"></i> Felhasználónév </label>
+                        <input type="text" class="form-control" id="felh" name="felh" required value="<?php if(isset($_COOKIE ['veznev'])){echo $_COOKIE ['veznev'];};?>" placeholder="Kérem adja meg felhasználónevét" autofocus><br>
                     <div id="result">
                 </div>
             </div>
-            <div class="form-group-row">
-                <label class="form-label fw-bold" for="ker"><i class="bi bi-person" style="color:#498ffc"></i> Keresztnév </label>
-                        <input type="text" class="form-control" id="ker" name="ker" required value="<?php if(isset($_COOKIE ['kernev'])){echo $_COOKIE ['kernev'];};?>" placeholder="Kérem adja meg keresztnevét" autofocus><br>
-                        <div id="result">
-                    </div>
-                </div>
             <div class="form-group" style="margin-top: 5%;">
                 <label class="form-label fw-bold" for="pass"><i class="bi bi-person-lock" style="color:#498ffc"></i> Jelszó </label>
 
@@ -66,17 +60,15 @@ require 'cookieModal.php';
 $(document).ready(function(){
     $('#subm').click(function(e){
         e.preventDefault();
-        var vezeteknev = $('#vez').val();
-        var keresztnev = $('#ker').val();
+        var felh = $('#felh').val();
         var password = $('#pas').val();
         var remember = $('#rem').val();
         
-        $('#result2').html('');
+        $('#res').html('');
         $.ajax({
             url: "loginadmin.php",
             method: "post",
-            data: {vez: vezeteknev,
-                   ker: keresztnev,
+            data: {fel: felh,
                    pswrd: password,
                    rem: remember,
                   },
@@ -86,8 +78,8 @@ $(document).ready(function(){
                 if (data == ""){
                     $(location).attr('href', 'adminloggedin.php');
                 }else {
-                    $('#password').focus();
-                    $('#password').val('');
+                    $('#pas').focus();
+                    $('#pas').val('');
                 }
             },
             error : function(err){
