@@ -97,7 +97,7 @@ setcookie('loggedin', '2', time()-3600);
                             <div class="szallitasDiv">
                                 <div class="checkbox-wrapper-12 row checkbox-row ">
                                     <div class="cbx col label-col" >
-                                        <input class="szallitas1" name="1szallitas" value='kerek' type="radio"/>
+                                        <input class="szallitas1" name="1szallitas" value='kerek' type="radio" required/>
                                         <label></label>
                                     </div>
                                     <div class="col category-col">Kérek</div>
@@ -261,54 +261,159 @@ setcookie('loggedin', '2', time()-3600);
                     minDate: 1,
                 });
 
-                //Alapértelmezetten nem kérjük a címét a gazdinak, csak ha szállítást is kér
-                // $('#szallitas-li').hide();
+                //datepicker az első kutyára
+                var betelt = [];
+                var osszes_nap = [];
+                var string;
+                var kezdo;
+                var veg;
+                var minnap;
+                var maxnap;
+                var kapacitas;
+                var hanyadik = 0;
+                var akt_kezdo;
+
+                function getNapok(){
+                    $.ajax({
+                        url:"checkcapacity.php",
+                        method:"get",   
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function(response) {
+                            var respData = JSON.parse(response);
+                            kapacitas = respData.kapacitas;
+                            if(respData.napok.length != 0){
+                                osszes_nap = respData.napok;
+                                minnap = new Date(respData.minnap);
+                                maxnap = new Date(respData.maxnap);
+                                var nincs_kapacitas = new Date();                    
+                                for (let j=0;j<osszes_nap.length;j++){
+                                    if(osszes_nap[j]==0){
+                                        nincs_kapacitas.setDate(minnap.getDate() + j);
+                                        betelt.push(convert(nincs_kapacitas));
+                                    }
+                                }
+                            }
+                        },
+                        error : function(err){
+                            alert(err);
+                        }
+                    });
+                }
+
+                $('#1from_date').datepicker({
+                    maxDate: '+2y', // 2 évre előre lehet foglalni
+                    minDate: 1, //a foglalás napjáramár nem lehet foglalni
+                    beforeShow: getNapok(),
+                    beforeShowDay: function (date){ 
+                        string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        if(betelt.length>0){
+                            return [betelt.indexOf(string) == -1];
+                        }else{
+                            return[string];
+                        }
+                    },
+                    onSelect: function(date){
+                        kezdo = new Date(date);
+                        var msecsInADay = 86400000;
+                        var endDate = new Date(kezdo.getTime() + msecsInADay);
+                        if(betelt.length>0){
+                            for (let i=0;i<betelt.length;i++){
+                                if(betelt[i]>date){
+                                    maxDate = betelt[i];
+                                }else{
+                                    maxDate='+2y'
+                                };
+                            };
+                        }else{
+                            maxDate='+2y'
+                        }
+
+                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                        $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
+                        $("#1to_date").datepicker( "option", "maxDate", maxDate );
+                    }
+                });
+
+                $("#1to_date").datepicker();
 
                 //Foglalás új kutyának
                 $('#addDog').click(function(){
-                    var el = $('.kutya-adatok:last').get(0); 
-                    var original_radio = $(el).find(':radio:checked');
-                    var el_from_date = parseInt($(el).find('.from_date').attr('id').charAt(0)); 
-                    var el_to_date = parseInt($(el).find('.to_date').attr('id').charAt(0)); 
-                    var el_hanyadik_kutya = parseInt($(el).attr('id').charAt(0)); 
-                    var el_szallitas = parseInt($(el).find(':radio').attr('name').charAt(0)); 
-                    var el_szolgaltatas = parseInt($(el).find(':checkbox').attr('name').charAt(0));
-                    var newEl = $(el).clone().insertAfter('.kutya-adatok:last');
-                    $(newEl).attr('id',(el_hanyadik_kutya+1)+'kutya-adatai');
-                    $(newEl).find('.removeDog').remove();
-                    $(newEl).find('.form-subHeader').remove();
-                    $(newEl).find('#szallitas-li').remove();
-                    $(newEl).find(':checkbox:checked').prop('checked', false);
-                    $(newEl).find(':radio:checked').prop('checked', false);
-                    $(newEl).find('.variable').val('');
-                    $(newEl).find(':radio').attr('name',(el_szallitas+1)+'szallitas');
-                    $(newEl).find(':checkbox').attr('name',(el_szolgaltatas+1)+'szolgaltatas');
-                    var removeButt = $('<button type=\"button\" class=\"btn btn-warning removeDog\"><span class=\"bi bi-dash-circle\"></span> Neki mégsem szeretnék foglalni</button>');
-                    $('#'+(el_hanyadik_kutya+1)+'kutya-adatai').prepend(removeButt);
-                    $(newEl).find('#'+el_from_date+'from_date').attr('id',(el_from_date+1)+'from_date');
-                    $(newEl).find('#'+el_to_date+'to_date').attr('id',(el_to_date+1)+'to_date');
-                    $(newEl).find('#'+(el_from_date+1)+'from_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
-                        maxDate: '+2y',
-                        onSelect: function(date){
+                    countDog = $('.kutya-adatok').length;
+                    if(countDog<kapacitas){ //max annyi kutyának lehet egyszerre foglalni, amennyi a kapacitása a pnaziónak
+                        var el = $('.kutya-adatok:last').get(0); 
+                        var original_radio = $(el).find(':radio:checked');
+                        var el_from_date = parseInt($(el).find('.from_date').attr('id').charAt(0)); 
+                        var el_to_date = parseInt($(el).find('.to_date').attr('id').charAt(0)); 
+                        var el_hanyadik_kutya = parseInt($(el).attr('id').charAt(0)); 
+                        var el_szallitas = parseInt($(el).find(':radio').attr('name').charAt(0)); 
+                        var el_szolgaltatas = parseInt($(el).find(':checkbox').attr('name').charAt(0));
+                        var newEl = $(el).clone().insertAfter('.kutya-adatok:last');
+                        $(newEl).attr('id',(el_hanyadik_kutya+1)+'kutya-adatai');
+                        $(newEl).find('.removeDog').remove();
+                        $(newEl).find('.form-subHeader').remove();
+                        $(newEl).find('#szallitas-li').remove();
+                        $(newEl).find(':checkbox:checked').prop('checked', false);
+                        $(newEl).find(':radio:checked').prop('checked', false);
+                        $(newEl).find('.variable').val('');
+                        $(newEl).find(':radio').attr('name',(el_szallitas+1)+'szallitas');
+                        $(newEl).find(':checkbox').attr('name',(el_szolgaltatas+1)+'szolgaltatas');
+                        var removeButt = $('<button type=\"button\" class=\"btn btn-warning removeDog\"><span class=\"bi bi-dash-circle\"></span> Neki mégsem szeretnék foglalni</button>');
+                        $('#'+(el_hanyadik_kutya+1)+'kutya-adatai').prepend(removeButt);
+                        $(newEl).find('#'+el_from_date+'from_date').attr('id',(el_from_date+1)+'from_date');
+                        $(newEl).find('#'+el_to_date+'to_date').attr('id',(el_to_date+1)+'to_date');
+                        $(newEl).find('#'+(el_from_date+1)+'from_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
+                            maxDate: '+2y', // 2 évre előre lehet foglalni
+                            minDate: 1, //a foglalás napjáramár nem lehet foglalni
+                            beforeShow: getNapok(),
+                            beforeShowDay: function (date){ 
+                                string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                                if(betelt.length>0){
+                                    return [betelt.indexOf(string) == -1];
+                                }else{
+                                    return[string];
+                                }
+                            },
+                            onSelect: function(date){
+                                kezdo = new Date(date);
+                                var msecsInADay = 86400000;
+                                var endDate = new Date(kezdo.getTime() + msecsInADay);
+                                if(betelt.length>0){
+                                    for (let i=0;i<betelt.length;i++){
+                                        if(betelt[i]>date){
+                                            maxDate = betelt[i];
+                                        }else{
+                                            maxDate='+2y'
+                                        };
+                                    };
+                                }else{
+                                    maxDate='+2y'
+                                }
 
-                        var selectedDate = new Date(date);
-                        var msecsInADay = 86400000;
-                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
-
-                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
-                        $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' );
-                        }
-                    });
-                    $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();
-
-                
-                    $(original_radio).prop('checked', true);
+                                //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+                                $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
+                                $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' );
+                            }
+                        });
+                        $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();              
+                        $(original_radio).prop('checked', true);
+                        countDog++;
+                    }else{
+                        alert("Sajnos egy alkalommal csak "+kapacitas+" kutyának lehet foglalni.")
+                        return false;
+                    }
                 });
+                //kutya hozzáadása vége
+
 
                 //Foglalás gomb
-                $('#booking-form').submit(function(e){
-                    // e.preventDefault();
+                $('#booking-form').submit(function(e){   
+                    var osszes = [];
+                    for(let m = 0; m < osszes_nap.length; m++){ //azért, hogy ha nem helyes a foglalás, újra töltse be a számokat, ne a csökkentettel számoljon
+                        osszes.push(osszes_nap[m]);
+                    }
+    
+                    console.log("Összes nap foglalás előtt: "+osszes_nap);             
+                    console.log("Összes foglalás előtt: "+osszes);             
                     var dogs = new Array();
                     $('.kutya-adatok').each(function(){
                         dogs.push(this); //this refers to current DOM node inside of each loop
@@ -336,10 +441,59 @@ setcookie('loggedin', '2', time()-3600);
                         var kutyaneve = $(this).find('.kutyaneve').val();
                         var kutyafajtaja = $(this).find('.kutyafajtaja').val();
                         var honapos = $(this).find('.honapos').val();
-                        var start = convert($(this).find('.from_date').datepicker('getDate'));
-                        var end = convert($(this).find('.to_date').datepicker('getDate'));
+                        var start = convert($(this).find('.from_date').datepicker('getDate')); //string
+                        var end = convert($(this).find('.to_date').datepicker('getDate')); //string
                         var date = new Date();
                         var today = date.getFullYear()+"-"+('0' + (date.getMonth()+1)).slice(-2)+"-"+('0' + date.getDate()).slice(-2);//ezzel megoldható, hogy ugynolyan formátuma legyen, mint a datepicker-es formátum
+
+                        //kapacitás csökkentése
+                        var kezdo = new Date($(this).find('.from_date').datepicker('getDate')); //date
+                        var veg = new Date($(this).find('.to_date').datepicker('getDate')); //date
+                        kezdo.setHours(kezdo.getHours() + 2);
+                        veg.setHours(veg.getHours() + 2);
+                        if(osszes.length>0){ //már van az adatbázisban foglalás
+                            if(kezdo<maxnap && veg>minnap){   //ütközés
+                                if(kezdo>minnap){
+                                    if(veg<maxnap){ //közép
+                                        var kezdoindex = (kezdo-minnap)/1000/(60*60)/24;
+                                        var vegindex = (veg-minnap)/1000/(60*60)/24;
+                                        for(let k=kezdoindex;k<vegindex;k++){
+                                            osszes[k]--;
+                                            if(osszes[k]<0){
+                                                foglalhato = false;
+                                                var melyik = new Date(minnap);
+                                                melyik.setDate(melyik.getDate()+k);
+                                                alert("Sajnos "+(convert(melyik))+" -ára(ére) csak "+osszes_nap[k]+" szabad hely áll rendelkezésre.");
+                                            }
+                                        }
+                                    }else{ //jobb
+                                        console.log("jobb");
+                                        var kezdoindex = (kezdo-minnap)/1000/(60*60)/24;
+                                        for(let k = kezdoindex ; k < (osszes.length) ; k++){
+                                            console.log("k: "+k);
+                                            osszes[k]--;
+                                            if(osszes[k]<0){
+                                                foglalhato = false;
+                                                var melyik = new Date(minnap);
+                                                melyik.setDate(melyik.getDate()+k);
+                                                alert("Sajnos "+(convert(melyik))+" -ára(ére) csak "+osszes_nap[k]+" szabad hely áll rendelkezésre.");
+                                            }
+                                        }
+                                    }
+                                }else{ //bal
+                                    console.log("bal");
+                                    var vegindex = (veg-minnap)/1000/(60*60)/24;
+                                    for(let k = 0 ; k < vegindex; k++){
+                                        osszes[k]--;
+                                        if(osszes[k]<0){
+                                            foglalhato = false;
+                                            alert("Sajnos "+(minnap.getDate()+k)+" -ára(ére) csak "+osszes_nap[k]+" szabad hely áll rendelkezésre.");
+                                        }
+                                    }
+                                } 
+                            }
+                        }
+                        //kapacitás csökkentése vége
 
                         if(start < today || end < today){ //Azért, hogy ne lehessen üresen hagyni (required nem működik együtt a readonly-val)
                             van_idopont=false;
@@ -376,6 +530,9 @@ setcookie('loggedin', '2', time()-3600);
                         kutyak.push(kutya);                        
                     });
                     //each dog vége
+
+                    console.log("osszes_nap Each dog után: "+osszes_nap);
+                    console.log("osszes Each dog után: "+osszes);
 
                     //Kell-e szállítási cím?
                     $('#szallitas-li input').each(function(){
@@ -420,6 +577,7 @@ setcookie('loggedin', '2', time()-3600);
                                     };
                                 })
                                 alert(response);
+                                $(location).attr('href', 'index.php');
                             },
                             error : function(err){
                                 alert(err);
@@ -427,7 +585,7 @@ setcookie('loggedin', '2', time()-3600);
                         });
                     }else if(!van_idopont){
                         alert("A foglaláshoz kötelező megadni a foglalási intervallumot!");
-                    }else{                        
+                    }else if (kell_cim){                        
                         alert("Amennyiben szállítást kér bármely kutyának, a gazdi címét meg kell adni!");
                     };
 
@@ -445,53 +603,6 @@ setcookie('loggedin', '2', time()-3600);
                         $('#confirm').hide();
                     })
                 });
-
-                //datepicker az első kutyára
-                $('#1from_date').datepicker({
-                    maxDate: '+2y', // 2 évre előre lehet foglalni
-                    minDate: 1,
-                    beforeShowDay: my_check(),
-                    onSelect: function(date){
-
-                        var selectedDate = new Date(date);
-                        var msecsInADay = 86400000;
-                        var endDate = new Date(selectedDate.getTime() + msecsInADay);
-
-                        //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-                        $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
-                        $("#1to_date").datepicker( "option", "maxDate", '+2y' )
-                    }
-                });
-
-                $("#1to_date").datepicker();
-
-                function my_check(date){
-                    var napok;
-                    var string;               
-                    $.ajax({
-                        url:"checkcapacity.php",
-                        method:"get",   
-                        // data:{
-                        //      from_date: date,
-                        // },
-                        contentType: "application/x-www-form-urlencoded",
-                        success: function(betelt){
-                            napok = JSON.parse(betelt);
-                            console.log(napok);
-                            // var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                            console.log(string);
-                            // return [napok.indexOf(string) == -1];
-                            // for (let i=0;i<napok.length;i++){
-                            //     alert(napok[i]);
-                            // }
-                        },
-                        error : function(err){
-                            alert(err);
-                        }
-                    });
-                    // return [napok.indexOf(string) == -1];
-                }
-
             });
             //document.ready vége
 

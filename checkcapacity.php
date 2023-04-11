@@ -41,18 +41,7 @@ foreach($foglalt as $foglalas){
     }
 }
 
-$i=0;
-$betelt = array();
-while($i < count($napok))
-{
-    if($napok[$i]==0){
-        array_push($betelt,date('Y-m-d', strtotime($minDate. ' + '.$i.' days')));
-    }
-	$i++;
-}
-$response = json_encode($betelt);
+$response = json_encode(array("napok"=>$napok,"minnap"=>$minDate,"maxnap"=>$maxDate,"kapacitas"=>$kapacitas));
 echo $response;
-// foreach($betelt as $nap){
-//     echo $nap;
-// }
+
 ?>
