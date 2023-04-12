@@ -4,6 +4,7 @@ session_start();
 include 'style.css';
 include 'bookingform.css';
 include 'insertbooking.php';
+require_once ("inndata.php");
 setcookie('loggedin', '2', time()-3600);
 ?>
 </style>
@@ -126,86 +127,28 @@ setcookie('loggedin', '2', time()-3600);
                         <li>
                             <span>Jelölje be mely szolgáltatásokat kéri:</span>
                             <div class="szolgaltatasok">
-                                <div class="checkbox-wrapper-12 row checkbox-row">
-                                    <div class="cbx col label-col">
-                                        <input class="szolgaltatas" name="1szolgaltatas" value="furdetes" type="checkbox"/>
-                                        <label for="furdetes"></label>                                                                                       
-                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                                        </svg>
-                                    </div>
-                                    <!-- Gooey-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                        <defs>
-                                        <filter id="goo-12">
-                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                        </filter>
-                                        </defs>
-                                    </svg>
-                                    <div class="col category-col">Fürdetés</div>
-                                </div>
-                                <div class="checkbox-wrapper-12 row checkbox-row">
-                                    <div class="cbx col label-col">
-                                        <input class="szolgaltatas" name="1szolgaltatas" value="setaltatas" type="checkbox"/>
-                                        <label for="setaltatas"></label>                                                                                       
-                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                                        </svg>
-                                    </div>
-                                    <!-- Gooey-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                        <defs>
-                                        <filter id="goo-12">
-                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                        </filter>
-                                        </defs>
-                                    </svg>
-                                    <div class="col category-col">Sétáltatás</div>
-                                </div>
-                                <div class="checkbox-wrapper-12 row checkbox-row">
-                                    <div class="cbx col label-col">
-                                        <input class="szolgaltatas" name="1szolgaltatas" type="checkbox" value="kozmetika"/>
-                                        <label for="kozmetika"></label>                                                                                       
-                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                                        </svg>
-                                    </div>
-                                    <!-- Gooey-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                        <defs>
-                                        <filter id="goo-12">
-                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                        </filter>
-                                        </defs>
-                                    </svg>
-                                    <div class="col category-col">Kozmetika</div>
-                                </div>
-                                <div class="checkbox-wrapper-12 row checkbox-row">
-                                    <div class="cbx col label-col">
-                                        <input class="szolgaltatas" name="1szolgaltatas" type="checkbox" value="tanitas"/>
-                                        <label for="tanitas"></label>                                                                                       
-                                        <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
-                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                                        </svg>
-                                    </div>
-                                    <!-- Gooey-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                        <defs>
-                                        <filter id="goo-12">
-                                            <fegaussianblur in="SourceGraphic" stddeviation="4" result="blur"></fegaussianblur>
-                                            <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" result="goo-12"></fecolormatrix>
-                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
-                                        </filter>
-                                        </defs>
-                                    </svg>
-                                    <div class="col category-col">Tanítás</div>
-                                </div>
+                                <?php foreach ($szolgaltatas as $szolg){
+                                        echo "<div class=\"checkbox-wrapper-12 row checkbox-row\">
+                                            <div class=\"cbx col label-col\">
+                                                <input class=\"szolgaltatas\"name=\"1szolgaltatas\" value=\"".$szolg["kategoriak"]."\" type=\"checkbox\"/>
+                                                <label for=\"".$szolg["kategoriak"]."\"></label>                                                                                       
+                                                <svg width=\"15\" height=\"14\" viewbox=\"0 0 15 14\" fill=\"none\">
+                                                    <path d=\"M2 8.36364L6.23077 12L13 2\"></path>
+                                                </svg>
+                                            </div>
+                                            <!-- Gooey-->
+                                            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">
+                                                <defs>
+                                                <filter id=\"goo-12\">
+                                                    <fegaussianblur in=\"SourceGraphic\" stddeviation=\"4\" result=\"blur\"></fegaussianblur>
+                                                    <fecolormatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7\" result=\"goo-12\"></fecolormatrix>
+                                                    <feblend in=\"SourceGraphic\" in2=\"goo-12\"></feblend>
+                                                </filter>
+                                                </defs>
+                                            </svg>
+                                            <div class=\"col category-col\">".$szolg["kategoriak"]."</div>
+                                        </div>"
+                                ;}?>
                             </div>                  
                         </li>
                         <li>
@@ -411,9 +354,7 @@ setcookie('loggedin', '2', time()-3600);
                     for(let m = 0; m < osszes_nap.length; m++){ //azért, hogy ha nem helyes a foglalás, újra töltse be a számokat, ne a csökkentettel számoljon
                         osszes.push(osszes_nap[m]);
                     }
-    
-                    console.log("Összes nap foglalás előtt: "+osszes_nap);             
-                    console.log("Összes foglalás előtt: "+osszes);             
+             
                     var dogs = new Array();
                     $('.kutya-adatok').each(function(){
                         dogs.push(this); //this refers to current DOM node inside of each loop
@@ -467,10 +408,8 @@ setcookie('loggedin', '2', time()-3600);
                                             }
                                         }
                                     }else{ //jobb
-                                        console.log("jobb");
                                         var kezdoindex = (kezdo-minnap)/1000/(60*60)/24;
                                         for(let k = kezdoindex ; k < (osszes.length) ; k++){
-                                            console.log("k: "+k);
                                             osszes[k]--;
                                             if(osszes[k]<0){
                                                 foglalhato = false;
@@ -481,7 +420,6 @@ setcookie('loggedin', '2', time()-3600);
                                         }
                                     }
                                 }else{ //bal
-                                    console.log("bal");
                                     var vegindex = (veg-minnap)/1000/(60*60)/24;
                                     for(let k = 0 ; k < vegindex; k++){
                                         osszes[k]--;
@@ -500,7 +438,7 @@ setcookie('loggedin', '2', time()-3600);
                             foglalhato=false;
                         }
 
-                        var szall = getSzall($(this).find(':radio:checked').val());
+                        var szall = getSzall($(this).find(':radio:checked').val()); //ha bármely kutyánál kér szállítást,kötelező a gazdi címét megadni
                         function getSzall(szallitas){
                                 if (szallitas == "kerek"){
                                     kell_cim = true;
@@ -530,9 +468,6 @@ setcookie('loggedin', '2', time()-3600);
                         kutyak.push(kutya);                        
                     });
                     //each dog vége
-
-                    console.log("osszes_nap Each dog után: "+osszes_nap);
-                    console.log("osszes Each dog után: "+osszes);
 
                     //Kell-e szállítási cím?
                     $('#szallitas-li input').each(function(){

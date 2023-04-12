@@ -18,5 +18,13 @@ $panzioadatok -> bindColumn("adoszam",$panzioadoszam);
 $panzioadatok -> bindColumn("cegjegyzek",$panziocegjegyzek);
 $panzioadatok -> bindColumn("engedely",$panzioengedely);
 $panzioadatok -> bindColumn("bemutatkozas",$panziobemutatkozas);
-$panzioadatok -> fetch(PDO::FETCH_ASSOC)
+$panzioadatok -> fetch(PDO::FETCH_ASSOC);
+
+$szolgaltatasok_sql = "SELECT Arak.kategoriaNev AS kategoriak, Arai.ar AS arak FROM Arak INNER JOIN Arai ON kategoria_ID=kategoriaID WHERE panzio_ID=1";
+$szolgaltatasok = $conn->prepare($szolgaltatasok_sql);
+$szolgaltatasok->execute();
+$szolgaltatasok -> bindColumn("kategoriak",$kategoria);
+$szolgaltatasok -> bindColumn("arak",$ar);
+$szolgaltatas = $szolgaltatasok->fetchAll(PDO::FETCH_ASSOC);
+
 ?>

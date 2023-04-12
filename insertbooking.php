@@ -1,5 +1,5 @@
 <?php
-require 'dbconnect.php';
+require_once 'dbconnect.php';
 
 //Vendég beszúrása
 if(!empty($_POST['gazdivez'])){ //
@@ -73,6 +73,7 @@ if(!empty($_POST['gazdivez'])){ //
             $utolsonap = $kutyak[$i]["veg"];
             $specigeny = $kutyak[$i]["spec"];
             $szallitas = $kutyak[$i]["szallitas"];
+            $szolgaltatasok = $kutyak[$i]["szolg"];
         
             $sql6 = "SELECT * FROM lodinn.kutyak";
             $kutya_sql = $conn->prepare($sql6);
@@ -115,9 +116,20 @@ if(!empty($_POST['gazdivez'])){ //
             $sql8 = "INSERT INTO lodinn.tartozik(kezdoDatum,vegDatum,szallitas,specialisIgenyek,kutya_ID,fogl_ID) VALUES ('$elsonap','$utolsonap','$szallitas','$specigeny','$kutyaid','$foglalasid')";
             $insertTartozik = $conn->prepare($sql8);
             $insertTartozik->execute();
-            // for($j = 0; $j < count($kutyak[$i]["szolg"]); $j++){
-            //     $kutyak[$i]["szolg"][$j];
-            // }
+
+            //Ar táblába szúrás
+            for($m=0 ; $m < count($szolgaltatasok) ; $m++){
+                $szolg_nev = $szolgaltatasok[$m];
+                $sql9 = "SELECT kategoriaID FROM Arak WHERE kategoriaNev='$szolg_nev'";
+                $kategoria_ID = $conn->prepare($sql9);
+                $kategoria_ID -> bindColumn("kategoriaID",$kategoriaID);
+                $kategoria_ID -> execute();
+                $kategoria_ID->fetch(PDO::FETCH_BOUND);
+
+                $sql10 = "INSERT INTO lodinn.ar(kategoriaAr_ID,foglAr_ID,kutyaAr_ID) VALUES('$kategoriaID','$foglalasid','$kutyaid')";
+                $insertAr = $conn->prepare($sql10);
+                $insertAr->execute();
+            }
         }
 
     }catch(Exception $e){

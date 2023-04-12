@@ -1,5 +1,5 @@
 <?php
-require 'dbconnect.php';
+require_once 'dbconnect.php';
 
 // $kezdo = $_POST["from_date"];
 $sql1 = "SELECT kapacitas FROM lodinn.panziok WHERE nev='LodInn'";
