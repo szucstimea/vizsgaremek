@@ -10,7 +10,8 @@ setcookie('loggedin', '2', time()-3600);
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+<script src='./jQuery/datepicker-hu.js' type='text/javascript'></script> 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
 <div class="container-fluid" id="booking">
     <div class="text-center">
@@ -29,10 +30,10 @@ setcookie('loggedin', '2', time()-3600);
                             <span>Név</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" required /><br>
+                                    <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" pattern="^[\p{L}]{2,}" required /><br>
                                 </div>
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" required /><br>
+                                    <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" pattern="^[\p{L}]{2,}" required /><br>
                                 </div>
                             </div>
                         </li>
@@ -46,7 +47,7 @@ setcookie('loggedin', '2', time()-3600);
                             <span>Telefonszám</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-456" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required /><br>
+                                    <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-4567" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required /><br>
                                     <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
                                 </div>
                             </div>
@@ -83,7 +84,7 @@ setcookie('loggedin', '2', time()-3600);
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <li class="idopontok">
                             <span>Foglalás kezdő napja</span><br>
                                 <div class="col-md-3">  
                                     <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable" readonly="true" />
@@ -124,33 +125,38 @@ setcookie('loggedin', '2', time()-3600);
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <?php if ($szolgaltatas != "nincs"){
+                            echo "<li>
                             <span>Jelölje be mely szolgáltatásokat kéri:</span>
-                            <div class="szolgaltatasok">
-                                <?php foreach ($szolgaltatas as $szolg){
-                                        echo "<div class=\"checkbox-wrapper-12 row checkbox-row\">
-                                            <div class=\"cbx col label-col\">
-                                                <input class=\"szolgaltatas\"name=\"1szolgaltatas\" value=\"".$szolg["kategoriak"]."\" type=\"checkbox\"/>
-                                                <label for=\"".$szolg["kategoriak"]."\"></label>                                                                                       
-                                                <svg width=\"15\" height=\"14\" viewbox=\"0 0 15 14\" fill=\"none\">
-                                                    <path d=\"M2 8.36364L6.23077 12L13 2\"></path>
-                                                </svg>
-                                            </div>
-                                            <!-- Gooey-->
-                                            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">
-                                                <defs>
-                                                <filter id=\"goo-12\">
-                                                    <fegaussianblur in=\"SourceGraphic\" stddeviation=\"4\" result=\"blur\"></fegaussianblur>
-                                                    <fecolormatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7\" result=\"goo-12\"></fecolormatrix>
-                                                    <feblend in=\"SourceGraphic\" in2=\"goo-12\"></feblend>
-                                                </filter>
-                                                </defs>
+                            <div class=\"szolgaltatasok\">";
+                            foreach ($szolgaltatas as $szolg)
+                            { if($szolg["kategoriak"] != "alapár"){
+                                echo                                                                
+                                    "<div class=\"checkbox-wrapper-12 row checkbox-row\">
+                                        <div class=\"cbx col label-col\">
+                                            <input class=\"szolgaltatas\"name=\"1szolgaltatas\" value=\"".$szolg["kategoriak"]."\" type=\"checkbox\"/>
+                                            <label for=\"".$szolg["kategoriak"]."\"></label>                                                                                       
+                                            <svg width=\"15\" height=\"14\" viewbox=\"0 0 15 14\" fill=\"none\">
+                                                <path d=\"M2 8.36364L6.23077 12L13 2\"></path>
                                             </svg>
-                                            <div class=\"col category-col\">".$szolg["kategoriak"]."</div>
-                                        </div>"
-                                ;}?>
-                            </div>                  
-                        </li>
+                                        </div>
+                                        <!-- Gooey-->
+                                        <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">
+                                            <defs>
+                                            <filter id=\"goo-12\">
+                                                <fegaussianblur in=\"SourceGraphic\" stddeviation=\"4\" result=\"blur\"></fegaussianblur>
+                                                <fecolormatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7\" result=\"goo-12\"></fecolormatrix>
+                                                <feblend in=\"SourceGraphic\" in2=\"goo-12\"></feblend>
+                                            </filter>
+                                            </defs>
+                                        </svg>
+                                        <div class=\"col category-col\">".$szolg["kategoriak"]."</div>
+                                    </div>";
+                                }
+                            }
+                            echo "</div>                  
+                            </li>"
+                        ;}?>
                         <li>
                         <span>Egyéb speciális igényeit ide írhatja:</span><br>
                             <div class="row">
@@ -162,6 +168,7 @@ setcookie('loggedin', '2', time()-3600);
                     </ul>
                 </li><!--kutya adatai-->
                 <li>
+                    <li>
                         <div class="row">
                             <div class="col">
                                 <button type="button" id="addDog" class="btn btn-primary"><span class="bi bi-plus"></span> Még egy kutyának foglalok</button>
@@ -169,9 +176,12 @@ setcookie('loggedin', '2', time()-3600);
                         </div>
                     </li>
                     <li>
-                        <div class="row">
+                        <div class="row gombok">
                             <div class="col">
                                 <button class="btn btn-primary" type="submit" name="submitbooking" id="submitbooking">Foglalás</button>
+                            </div>
+                            <div class="col">
+                                <p id="vegosszeg"></p>
                             </div>
                         </div>
                     </li>
@@ -198,11 +208,12 @@ setcookie('loggedin', '2', time()-3600);
             $(document).ready(function(){ 
 
                 //Default datepicker formátum
+                // $.datepicker.setDefaults($.datepicker.regional['de']);
                 $.datepicker.setDefaults({
                     dateFormat: 'yy-mm-dd',
                     altFormat: 'yy-mm-dd',
-                    minDate: 1,
-                });
+                    minDate: 1,},
+                    $.datepicker.regional['hu']);
 
                 //datepicker az első kutyára
                 var betelt = [];
@@ -244,7 +255,6 @@ setcookie('loggedin', '2', time()-3600);
                 }
 
                 $('#1from_date').datepicker({
-                    maxDate: '+2y', // 2 évre előre lehet foglalni
                     minDate: 1, //a foglalás napjáramár nem lehet foglalni
                     beforeShow: getNapok(),
                     beforeShowDay: function (date){ 
@@ -263,6 +273,7 @@ setcookie('loggedin', '2', time()-3600);
                             for (let i=0;i<betelt.length;i++){
                                 if(betelt[i]>date){
                                     maxDate = betelt[i];
+                                    break;
                                 }else{
                                     maxDate='+2y'
                                 };
@@ -274,14 +285,28 @@ setcookie('loggedin', '2', time()-3600);
                         //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
                         $("#1to_date").datepicker( "option", "minDate", endDate ); //vége időpont csak kezdő után egy nappal (min. 1 napra lehet foglalni)
                         $("#1to_date").datepicker( "option", "maxDate", maxDate );
+                        
+                        //végösszeghez
+                        var to = $('#1to_date').datepicker( "getDate" );
+                        if(to != null){
+                            VegCalc(0,"napok");
+                        }
                     }
                 });
 
-                $("#1to_date").datepicker();
+                $("#1to_date").datepicker({
+                    onSelect: function(date){
+                        //végösszeghez
+                        var from = $('#1from_date').datepicker( "getDate" );
+                        if(from != null){
+                            VegCalc(0,"napok");
+                        }
+                    }
+                });
 
                 //Foglalás új kutyának
                 $('#addDog').click(function(){
-                    countDog = $('.kutya-adatok').length;
+                    var countDog = $('.kutya-adatok').length;
                     if(countDog<kapacitas){ //max annyi kutyának lehet egyszerre foglalni, amennyi a kapacitása a pnaziónak
                         var el = $('.kutya-adatok:last').get(0); 
                         var original_radio = $(el).find(':radio:checked');
@@ -335,9 +360,21 @@ setcookie('loggedin', '2', time()-3600);
                                 //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
                                 $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
                                 $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' );
+
+                                var to = $('#'+(el_to_date+1)+'to_date').datepicker( "getDate" );
+                                if(to != null){
+                                    VegCalc(0,"napok");
+                                }
                             }
                         });
-                        $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker();              
+                        $(newEl).find('#'+(el_to_date+1)+'to_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
+                            onSelect: function(date){
+                                var from = $('#'+(el_from_date+1)+'from_date').datepicker( "getDate" );
+                                if(from != null){
+                                    VegCalc(0,"napok");
+                                }
+                            }
+                        });              
                         $(original_radio).prop('checked', true);
                         countDog++;
                     }else{
@@ -347,6 +384,97 @@ setcookie('loggedin', '2', time()-3600);
                 });
                 //kutya hozzáadása vége
 
+                //Árkalkulátor  
+                //Alapár lekérdezése
+                var alapar = 0;
+                var napok_ara = 0;
+                var szolg_ara = 0;
+                var vegosszeg = 0;
+
+                $.ajax({
+                    url:"getprice.php",
+                    method:"post",   
+                    contentType: "application/x-www-form-urlencoded",
+                    data:{neve: "alapár"},
+                    success: function(ar) {
+                        VegCalc(ar,"alapar");
+                    },
+                    error : function(err){
+                        alert(err);
+                    }
+                });
+                
+                function VegCalc(data,eset){
+                    vegosszeg = 0;
+                    switch(eset){
+                        case "napok":
+                            var napszam = 0;
+                            napok_ara = 0;
+                            $('.kutya-adatok').find('.idopontok').each(function(){
+                                from = $(this).find('.from_date').datepicker('getDate');
+                                to = $(this).find('.to_date').datepicker('getDate');
+                                napszam = napszam + ((to-from)/1000/(60*60)/24);
+                            });
+                            if(napszam>0){                            
+                            napok_ara = (alapar*napszam);
+                            }else{
+                                napok_ara = 0;
+                            }
+                            break;
+                        case "alapar":
+                            alapar = data;
+                            break;
+                        case "remove":
+                            eleje = data.find('.from_date').datepicker('getDate');
+                            vege = data.find('.to_date').datepicker('getDate');
+                            del_nap = ((vege-eleje)/1000/(60*60)/24);
+                            napok_ara = napok_ara - (alapar*del_nap);
+                            szolg = data.find('.szolgaltatas:checked').each(function(){
+                                szolg_ara = szolg_ara - parseInt((kategoriak[$(this).val()]));
+                            });
+                            break;
+                        case "szolgaltatas":
+                            szolg_ara = szolg_ara + parseInt(data);
+                            break;
+                        default: console.log("switch");
+                    }
+                    vegosszeg = napok_ara + szolg_ara;
+                    $('#vegosszeg').text("Végösszeg: "+vegosszeg+"Ft");
+                }
+                
+                var kategoriak = {};
+                $(document).on("click", ".szolgaltatas", function () {
+                    kategoria = $(this);
+                    neve = kategoria.val();
+                    if((neve in kategoriak)){
+                        if(kategoria.prop('checked')==true){
+                            VegCalc(kategoriak[neve],"szolgaltatas");
+                        }else{
+                            VegCalc(-kategoriak[neve],"szolgaltatas");
+                        }
+                    }else{
+                        $.ajax({
+                            url:"getprice.php",
+                            method:"post",   
+                            contentType: "application/x-www-form-urlencoded",
+                            data:{neve: neve},
+                            success: function(ar) {
+                                if(kategoria.prop('checked')==true){
+                                    VegCalc(ar,"szolgaltatas");
+                                }else{
+                                    VegCalc(-ar,"szolgaltatas");
+                                }
+                                addToDict(neve,ar);
+                            },
+                            error : function(err){
+                                alert(err);
+                            }
+                        });
+                    }
+                    function addToDict(nev,ertek){
+                        kategoriak[nev] = ertek;
+                    }
+                });
 
                 //Foglalás gomb
                 $('#booking-form').submit(function(e){   
@@ -496,6 +624,7 @@ setcookie('loggedin', '2', time()-3600);
                                 gazdiutca : gazdiutca,
                                 gazdihazszam : gazdihazszam,
                                 kutyak : kutyak,
+                                vegosszeg : vegosszeg
                             },
                             contentType: "application/x-www-form-urlencoded",
                             success: function(response){
@@ -520,7 +649,7 @@ setcookie('loggedin', '2', time()-3600);
                         });
                     }else if(!van_idopont){
                         alert("A foglaláshoz kötelező megadni a foglalási intervallumot!");
-                    }else if (kell_cim){                        
+                    }else if (kell_cim && !van_cim){                        
                         alert("Amennyiben szállítást kér bármely kutyának, a gazdi címét meg kell adni!");
                     };
 
@@ -529,14 +658,19 @@ setcookie('loggedin', '2', time()-3600);
                 //Foglalás vége
 
                 //Kutya törlése
+                var removable;
                 $(document).on('click', '.removeDog', function() {
                     //$(this).parent().remove();
-                    var removable = $(this).parent();
+                    removable = $(this).parent();
                     $('#confirm').show();
                     $('#delDog').click(function(){
                         removable.remove();
                         $('#confirm').hide();
                     })
+                });
+
+                $('#delDog').click(function(){
+                    VegCalc(removable,"remove");
                 });
             });
             //document.ready vége
@@ -546,12 +680,14 @@ setcookie('loggedin', '2', time()-3600);
                     mnth = ("0" + (date.getMonth() + 1)).slice(-2),
                     day = ("0" + date.getDate()).slice(-2);
                 return [date.getFullYear(), mnth, day].join("-");
-            }
+            };
 
             //megerősítés eseménykezelés
             $('#confClose, .cancelbtn').click(function(){
                 $('#confirm').hide();
-            })
+            });
+
+                       
 
         </script>
     </div>

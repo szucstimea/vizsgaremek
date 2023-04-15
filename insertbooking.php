@@ -12,7 +12,10 @@ if(!empty($_POST['gazdivez'])){ //
     $telepules = $_POST["gazditelepules"];
     $utca = $_POST["gazdiutca"];
     $hazszam= $_POST["gazdihazszam"];
-    $kutyak = $_POST["kutyak"];          
+    $kutyak = $_POST["kutyak"];
+    $vegosszeg = $_POST["vegosszeg"];
+    $timestamp = date("Y-m-d H:i:s");
+    echo $vegosszeg;         
   
     try{
         $sql = "SELECT * FROM lodinn.vendegek";
@@ -64,6 +67,13 @@ if(!empty($_POST['gazdivez'])){ //
         $insertBooking->execute();
         $foglalasid = $conn->lastInsertId();
 
+        //Alapár lekérése
+        $sql9 = "SELECT ar FROM Arai INNER JOIN Arak ON kategoriaID=kategoria_ID WHERE kategoriaNev='alapár' AND panzio_ID=1";
+        $alapar = $conn->prepare($sql9);
+        $alapar -> bindColumn("ar",$alap);
+        $alapar -> execute();
+        $alapar->fetch(PDO::FETCH_BOUND);
+
         //Kutyák beszúrása
         for ($i = 0; $i < count($kutyak); $i++) {
             $kutyaneve = $kutyak[$i]["nev"];
@@ -94,7 +104,7 @@ if(!empty($_POST['gazdivez'])){ //
                     if(strtolower($kutyaNev) == strtolower($kutyaneve) && $vendeg_ID == $gazdiid){
                         $uj_kutya = false;
                         $kutyaid = $kutyaID;
-                        echo "Köszönjük, hogy újra foglalt {$kutyaneve} kutyusának!";
+                        echo "Köszönjük, hogy újra foglalt {$kutyaneve} kutyusának! A megadott e-mail címre értesítést küldtünk a foglalás részleteiről.";
                         break;
                     }else{
                         $uj_kutya = true;
@@ -105,11 +115,11 @@ if(!empty($_POST['gazdivez'])){ //
             }
 
             if($uj_kutya){
-                $sql8 = "INSERT INTO lodinn.kutyak(kutyaNev,kor,fajta,vendeg_ID) VALUES('$kutyaneve','$kutyakor','$fajta','$gazdiid')";
+                $sql8 = "INSERT INTO lodinn.kutyak(kutyaNev,kor,fajta,vendeg_ID,rogzites) VALUES('$kutyaneve','$kutyakor','$fajta','$gazdiid','$timestamp')";
                 $insertDog = $conn->prepare($sql8);
                 $insertDog->execute();
                 $kutyaid = $conn->lastInsertId();
-                echo "új kutya rögzítve";
+                echo "Köszönjük, a foglalását, a ";
             }
 
             //Tartozik táblába szúrás
@@ -117,20 +127,32 @@ if(!empty($_POST['gazdivez'])){ //
             $insertTartozik = $conn->prepare($sql8);
             $insertTartozik->execute();
 
-            //Ar táblába szúrás
-            for($m=0 ; $m < count($szolgaltatasok) ; $m++){
-                $szolg_nev = $szolgaltatasok[$m];
-                $sql9 = "SELECT kategoriaID FROM Arak WHERE kategoriaNev='$szolg_nev'";
-                $kategoria_ID = $conn->prepare($sql9);
-                $kategoria_ID -> bindColumn("kategoriaID",$kategoriaID);
-                $kategoria_ID -> execute();
-                $kategoria_ID->fetch(PDO::FETCH_BOUND);
+            // //Ar táblába szúrás
+            // $fizetendo = $alap;
+            // if(!empty($szolgaltatasok)){
+            //     for($m=0 ; $m < count($szolgaltatasok) ; $m++){
+            //         $szolg_nev = $szolgaltatasok[$m];
+            //         $sql10 = "SELECT kategoriaID FROM Arak WHERE kategoriaNev='$szolg_nev'";
+            //         $kategoria_ID = $conn->prepare($sql10);
+            //         $kategoria_ID -> bindColumn("kategoriaID",$kategoriaID);
+            //         $kategoria_ID -> execute();
+            //         $kategoria_ID->fetch(PDO::FETCH_BOUND);
 
-                $sql10 = "INSERT INTO lodinn.ar(kategoriaAr_ID,foglAr_ID,kutyaAr_ID) VALUES('$kategoriaID','$foglalasid','$kutyaid')";
-                $insertAr = $conn->prepare($sql10);
-                $insertAr->execute();
-            }
-        }
+            //         $sql11 = "INSERT INTO lodinn.ar(kategoriaAr_ID,foglAr_ID,kutyaAr_ID) VALUES('$kategoriaID','$foglalasid','$kutyaid')";
+            //         $insertAr = $conn->prepare($sql11);
+            //         $insertAr->execute();
+
+            //         $sql12 = "SELECT ar FROM Arai WHERE kategoria_ID='$kategoriaID' AND panzio_ID = 1";
+            //         $ar = $conn->prepare($sql12);
+            //         $ar -> bindColumn("ar",$osszeg);
+            //         $ar -> execute();
+            //         $ar -> fetch(PDO::FETCH_BOUND);
+
+            //         $fizetendo = $fizetendo + $osszeg;
+            //     }
+            // }
+            // $vegosszeg = $vegosszeg + $fizetendo;
+        }//kutyák beszúrása-vége
 
     }catch(Exception $e){
         echo $e;

@@ -307,3 +307,12 @@
      width: 100%;
   }
 }
+
+.gombok{
+  display: flex;
+  width: 100% !important;
+}
+
+.gombok .col{
+  flex: 33.33%;
+}
