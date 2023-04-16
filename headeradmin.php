@@ -73,9 +73,8 @@ session_start();
                 <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu position-absolute dropdown-menu-right ">
                         <li><a class="dropdown-item" href="adminloggedin.php#adatok" id=""><i class="bi bi-person"></i> Panzió adatai</a></li>
-                        <li><a class="dropdown-item" href="adminloggedin.php#" id=""><i class="bi bi-tag"></i> Árak</a></li>
-                        <li><a class="dropdown-item" href="adminloggedin.php#" id=""><i class="bi bi-heart"></i> Foglalások</a></li>
-                        <li><a class="dropdown-item" href="adminloggedin.php#" id=""><i class="bi bi-newspaper"></i> Hírek</a></li>
+                        <li><a class="dropdown-item" href="adminloggedin.php#arak" id=""><i class="bi bi-tag"></i> Árak</a></li>
+                        <li><a class="dropdown-item" href="adminloggedin.php#foglal" id=""><i class="bi bi-heart"></i> Foglalások</a></li>
                         <li><a class="dropdown-item" href="logout.php" id=""><i class="bi bi-box-arrow-left"></i> Kijelentkezés</a></li>
                     </ul>
             </li>

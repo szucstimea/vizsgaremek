@@ -1,4 +1,5 @@
-html,body{height:100%;}
+html,body{min-height: 100vh;}
+
 
 .navbar{
     padding-bottom: 40px; 
@@ -352,7 +353,7 @@ border-radius: 5px;
 
 #sectionprofile{
   z-index: 999;
-  margin-top: 8%;
+  margin-top: 10%;
 }
 #gif{
   margin-top:10px;
@@ -364,12 +365,15 @@ border-radius: 5px;
 }
 #datatable{
   border-collapse: collapse;
+ 
 
 }
 #toroluzenet,
 #hozzaaduzenet{
-  margin-top: 120px;
+  /* margin-top: 120px; */
   z-index: 999;
+  overflow: visible !important; 
+  position: relative;
 }
 
 .overlay {
@@ -446,7 +450,30 @@ border-radius: 5px;
   color: #000000;
   z-index: 999;
 }
-
+.modal-open {
+  overflow: visible !important; 
+  position: relative;
+  
+}
+#adatok{
+  width: 100%;
+}
+#panzio{
+  width: 100%;
+  margin-top: 30%;
+  
+}
+#sectionprofile2{
+  background-image: url("assets/images/pngfind.com-dog-paw-png-337026.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  opacity: 0.5;
+}
+#updateservice{
+  margin-top: 100%;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -1021,6 +1048,10 @@ and (min-width : 1024px) {
           z-index: 99999;
           overflow-y: auto;
 
+        }
+        #sectionprofile{
+          z-index: 999;
+          margin-top: 10%;
         }
     }
 /* ------------------------------------------------------------------------------------------------------------ */
