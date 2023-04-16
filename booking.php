@@ -330,7 +330,6 @@ setcookie('loggedin', '2', time()-3600);
                         $(newEl).find('#'+el_from_date+'from_date').attr('id',(el_from_date+1)+'from_date');
                         $(newEl).find('#'+el_to_date+'to_date').attr('id',(el_to_date+1)+'to_date');
                         $(newEl).find('#'+(el_from_date+1)+'from_date').removeClass('hasDatepicker').removeData('datepicker').datepicker({
-                            maxDate: '+2y', // 2 évre előre lehet foglalni
                             minDate: 1, //a foglalás napjáramár nem lehet foglalni
                             beforeShow: getNapok(),
                             beforeShowDay: function (date){ 
@@ -349,6 +348,7 @@ setcookie('loggedin', '2', time()-3600);
                                     for (let i=0;i<betelt.length;i++){
                                         if(betelt[i]>date){
                                             maxDate = betelt[i];
+                                            break;
                                         }else{
                                             maxDate='+2y'
                                         };
@@ -359,7 +359,7 @@ setcookie('loggedin', '2', time()-3600);
 
                                 //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
                                 $('#'+(el_to_date+1)+'to_date').datepicker( "option", "minDate", endDate );
-                                $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", '+2y' );
+                                $('#'+(el_to_date+1)+'to_date').datepicker( "option", "maxDate", maxDate );
 
                                 var to = $('#'+(el_to_date+1)+'to_date').datepicker( "getDate" );
                                 if(to != null){
@@ -390,6 +390,7 @@ setcookie('loggedin', '2', time()-3600);
                 var napok_ara = 0;
                 var szolg_ara = 0;
                 var vegosszeg = 0;
+                var call = 0;
 
                 $.ajax({
                     url:"getprice.php",
@@ -406,6 +407,7 @@ setcookie('loggedin', '2', time()-3600);
                 
                 function VegCalc(data,eset){
                     vegosszeg = 0;
+                    call++;
                     switch(eset){
                         case "napok":
                             var napszam = 0;
@@ -438,8 +440,11 @@ setcookie('loggedin', '2', time()-3600);
                             break;
                         default: console.log("switch");
                     }
+                    if(call==2){
+                        $('#vegosszeg').css('display','block'); //amikor valamelyik esetet beklikkeli, akkor jelenik meg először
+                    }
                     vegosszeg = napok_ara + szolg_ara;
-                    $('#vegosszeg').text("Végösszeg: "+vegosszeg+"Ft");
+                    $('#vegosszeg').text("Végösszeg: "+vegosszeg+" Ft");
                 }
                 
                 var kategoriak = {};

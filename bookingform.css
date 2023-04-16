@@ -314,5 +314,17 @@
 }
 
 .gombok .col{
-  flex: 33.33%;
+  display: flex;
+  flex: 50%;
+  align-items: center;
 }
+
+#vegosszeg{
+  display: none;
+  padding: 6px 12px 6px 12px;
+  margin-bottom: 0;
+  background-color: #7bf1c4;
+  border-radius: 0.375rem;
+  color: #212529;
+}
+
