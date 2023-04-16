@@ -1,7 +1,6 @@
 <?php
 require 'dbconnect.php';
 require 'headeradmin.php';
-require 'reservationmodal.php';
 ?>
 <div class="position-fixed top-50 start-50">
 <div class="alert alert-success alert-dismissible fade show" role="alert" id="toroluzenet" style="display: none;">
@@ -596,13 +595,4 @@ $("#hozzaaduzenet").fadeOut('slow');
 </script>
 <?php 
 require 'footer.php';
-
-//     if(isset($_GET["id"])){ ?>
-//         <script>
-//                  $(function(){                   
-//                      $('#reservationmodal').modal('show');
-//                  });
-//         </script>
-// <?php         
-//     }
 ?>
