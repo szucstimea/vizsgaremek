@@ -1,13 +1,7 @@
-<style>
 <?php
-session_start();
-include 'style.css';
-include 'bookingform.css';
 include 'insertbooking.php';
 require_once ("inndata.php");
-setcookie('loggedin', '2', time()-3600);
 ?>
-</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
@@ -645,8 +639,8 @@ setcookie('loggedin', '2', time()-3600);
                                         $(this).find('.variable').val('');
                                     };
                                 })
-                                alert(response);
-                                $(location).attr('href', 'index.php');
+
+                                $(location).attr('href', 'confirmbooking.php');
                             },
                             error : function(err){
                                 alert(err);
