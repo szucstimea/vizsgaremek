@@ -1,0 +1,41 @@
+#prices{
+    background-color: #d4e1f5;
+}
+
+#prices .szolg{
+    background-color: white;
+    margin: 1.5rem;
+    transform: scale(1.1);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+    font-family: 'Futara';
+    border-radius: 0.8rem;
+    padding: 0px !important;
+}
+
+#prices .leiras{
+    font-size: small;
+    text-align: justify;
+    padding: 1rem 1rem 0rem 1rem;
+}
+
+#prices .szolg h5{
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
+    color: white;
+}
+
+#alapar{
+    background-color:#0d6efd;
+}
+
+.ar{
+    margin: 0px;
+    font-family: Book Antiqua;
+    color: #7bf1c4;
+    font-weight: bolder;
+}
+
+b{
+    font-size: 15px;
+}

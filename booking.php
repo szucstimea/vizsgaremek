@@ -124,12 +124,12 @@ require_once ("inndata.php");
                             <span>Jelölje be mely szolgáltatásokat kéri:</span>
                             <div class=\"szolgaltatasok\">";
                             foreach ($szolgaltatas as $szolg)
-                            { if($szolg["kategoriak"] != "alapár"){
+                            { if($szolg["kategoria"] != "alapár"){
                                 echo                                                                
                                     "<div class=\"checkbox-wrapper-12 row checkbox-row\">
                                         <div class=\"cbx col label-col\">
-                                            <input class=\"szolgaltatas\"name=\"1szolgaltatas\" value=\"".$szolg["kategoriak"]."\" type=\"checkbox\"/>
-                                            <label for=\"".$szolg["kategoriak"]."\"></label>                                                                                       
+                                            <input class=\"szolgaltatas\"name=\"1szolgaltatas\" value=\"".$szolg["kategoria"]."\" type=\"checkbox\"/>
+                                            <label for=\"".$szolg["kategoria"]."\"></label>                                                                                       
                                             <svg width=\"15\" height=\"14\" viewbox=\"0 0 15 14\" fill=\"none\">
                                                 <path d=\"M2 8.36364L6.23077 12L13 2\"></path>
                                             </svg>
@@ -144,7 +144,7 @@ require_once ("inndata.php");
                                             </filter>
                                             </defs>
                                         </svg>
-                                        <div class=\"col category-col\">".$szolg["kategoriak"]."</div>
+                                        <div class=\"col category-col\">".$szolg["kategoria"]."</div>
                                     </div>";
                                 }
                             }

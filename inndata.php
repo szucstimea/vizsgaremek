@@ -20,14 +20,13 @@ $panzioadatok -> bindColumn("engedely",$panzioengedely);
 $panzioadatok -> bindColumn("bemutatkozas",$panziobemutatkozas);
 $panzioadatok -> fetch(PDO::FETCH_ASSOC);
 
-$szolgaltatasok_sql = "SELECT Arak.kategoriaNev AS kategoriak FROM Arak INNER JOIN Arai ON kategoria_ID=kategoriaID WHERE panzio_ID=1";
+$szolgaltatasok_sql = "SELECT Arak.kategoriaNev AS kategoria, Arai.ar AS ara FROM Arak INNER JOIN Arai ON kategoria_ID=kategoriaID WHERE panzio_ID=1";
 $szolgaltatasok = $conn->prepare($szolgaltatasok_sql);
 $szolgaltatasok->execute();
-$szolgaltatasok -> bindColumn("kategoriak",$kategoria);
 if($szolgaltatasok->rowCount()>0){
     $szolgaltatas = $szolgaltatasok->fetchAll(PDO::FETCH_ASSOC);
 }else{
-    $szolgáltatas = "nincs";
+    $szolgaltatas = "nincs";
 }
 
 ?>
