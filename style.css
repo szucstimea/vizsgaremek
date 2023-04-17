@@ -465,11 +465,10 @@ border-radius: 5px;
 }
 #sectionprofile2{
   background-image: url("assets/images/pngfind.com-dog-paw-png-337026.png");
-  background-size: 50%;
+  background-size: 5%;
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: center;
-  opacity: 0.5;
 }
 #updateservice{
   margin-top: 100%;

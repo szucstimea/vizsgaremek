@@ -1,5 +1,12 @@
 <?php
 require_once 'dbconnect.php';
+require './vendor/autoload.php';
+require 'config/config.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 //Vendég beszúrása
 if(!empty($_POST['gazdivez'])){ //
@@ -141,6 +148,76 @@ if(!empty($_POST['gazdivez'])){ //
                     $insertAr->execute();
                 }
             }
+
+            //email kiküldés a foglalásról
+            $mail = new PHPMailer(true);
+            $mail->CharSet = "UTF-8";
+            $mail->IsSMTP();
+            $mail->Mailer = "smtp";
+            $mail->SMTPDebug  = 1;  
+            $mail->SMTPAuth   = TRUE;
+            $mail->SMTPSecure = "tls";
+            $mail->Port       = 587;
+            $mail->Host       = "smtp.gmail.com";
+            $mail->Username   = "$smtpuser";
+            $mail->Password   = "$smtppass";
+            $mail->IsHTML(true);
+            $mail->AddAddress("$email", "$user");
+            $mail->AddEmbeddedImage('assets/images/dog3.png', 'logo_2u');
+            $mail->AddEmbeddedImage('assets/images/kutyusokkicsi.png', 'logo_3u');
+            $mail->SetFrom("lodinnkutyapanzio@gmail.com", "Lodinn Kutyapanzió");
+            $mail->AddReplyTo("lodinnkutyapanzio@gmail.com", "Lodinn Kutyapanzió");
+            $mail->Subject = "Sikeres foglalás!";
+            $content = "
+            <div style='background-color:#498ffc; border-radius: 10px; width: 100%; height: 100%; color:white; text-align: center'>  
+            <img src='cid:logo_2u'><br> <b> <p style='color:white;'> Lodinn Kutyapanzió</p></b>
+            <p>kutyusa második otthona<br></p>
+            </div>
+            <div>
+            <h3>  Kedves $gazdiVnev $gazdiKnev és $kutyaNev!<br></h3>
+            <h3><b>  Köszöjük, hogy megtiszteltél bizalmaddal és foglaltál a Lodinn Kutyapanziónál!</b></h3>
+            <p style='text-align: justify;'>Örülünk, hogy ügyfeleink között köszönthetünk! <br>
+            Mindent megteszünk, hogy $kutyaNev otthonossal érezze magát panziónkban! <br><br> 
+            A foglalásod főbb adatai:<br> 
+            <b> Gazdi neve: </b>$veznev $kernev <br> 
+            <b> Email cím: </b> $email <br>
+            <b> Telefonszám: </b> $telefon <br>
+            <b> Irányítószám: </b> $irsz <br>
+            <b> Megye: </b> $megye <br>
+            <b> Település: </b> $telepules <br>
+            <b> Utca: </b> $utca <br>
+            <b> Házszám: </b> $hazszam <br>
+            <b> Kutya neve: </b> $kutyaNev <br>
+            <b> Kutya kora: </b>  $kutyakor <br>
+            <b> Kutya fajtája: </b> $fajta <br>
+            <b> Foglalás első napja: </b> $elsonap <br>
+            <b> Foglalás utolsó napja: </b> $utolsonap <br>
+            <b> Szállítási igény: </b> $szallitas <br>
+            <b> Speciális igény: </b>  $specigeny <br>
+            <b> Végösszeg: </b>  $vegosszeg ,-Ft <br>
+            <b> Foglalás időpontja: </b> $timestamp <br><br>
+           
+            Mi egy olyan kutyapanziót üzemeltetünk, ahol négylábú barátodnak otthonos és biztonságos környezetet biztosítunk. Nálunk nem csak egy szobában vagy ketrecben tölti az időt kedvenced, hanem szabadon játszhat és futkározhat a nagy kertünkben, ahol más kutyusokkal is megismerkedhet. Ne feledd, hogy az elhelyezés mellett különböző szolgálatásainkkal is meglepheted kutyusod.</p><br>
+            <p style='text-align: justify;'>Várjuk megkeresésed az alábbi elérhetőségeken:<br>
+            Cím: 6782 Mórahalom Dosztig köz 3.<br>
+            Email: lodinnkutyapanzio@gmail.com<br>
+            Telefon: +36(30)123-4567<br>
+            Web: www.lodinn.hu<br><br><br>
+            </div>
+            <div style='background-color:#498ffc; border-radius: 10px; width: 100%; height: 100%;'>      
+            <img src='cid:logo_3u' style='display: block;margin-left: auto; margin-right: auto; width: 30%;'>
+            </div>
+            ";
+            
+            $mail->MsgHTML($content); 
+            if(!$mail->Send()) {
+            echo "Error while sending Email.";
+            } else {
+            echo "Email sent successfully";
+            }
+
+
+
         }//kutyák beszúrása-vége
 
         echo "Köszönjük, foglalását! A megadott e-mail címre értesítést küldtünk a foglalás részleteiről.";

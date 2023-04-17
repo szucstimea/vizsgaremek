@@ -109,7 +109,7 @@ if (isset($_POST["ve"])){
             $content = "
             <div style='background-color:#498ffc; border-radius: 10px; width: 100%; height: 100%; color:white; text-align: center'>  
             <img src='cid:logo_2u'><br> <b> <p style='color:white;'> Lodinn Kutyapanzió</p></b>
-            <p>kutyusa második otthona,<br></p>
+            <p>kutyusa második otthona<br></p>
             </div>
             <div>
             <h3>  Kedves $veznev $keresztnev!<br></h3>
@@ -129,7 +129,6 @@ if (isset($_POST["ve"])){
             $mail->MsgHTML($content); 
             if(!$mail->Send()) {
             echo "Error while sending Email.";
-            var_dump($mail);
             } else {
             echo "Email sent successfully";
             }

@@ -1,8 +1,43 @@
+@media only screen 
+and (min-width : 1024px) {
 .thanks{
-    margin-top: 20%;
+    margin-top: 18%;
     margin-bottom: 20%;
+    padding-top: 10%;
+    padding-left: 40%;
+    background-image: url("assets/images/huskey2.jpg");
+    height: 500px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-y: 5%;
+    background-position-x: 5%;
+    color:white;
+
+}
+.back{
+    height: 100%;
+    width: 100%;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,72,121,1) 13%, rgba(0,212,255,1) 100%);
 }
 
 .thanks h5{
     margin: 2rem 5rem 2rem 5rem !important;
+}
+}
+
+@media only screen 
+and (max-width : 1024px) {
+.thanks{
+    margin-top: 18%;
+    margin-bottom: 20%;
+    padding-top: 10%;
+}
+
+
+.thanks h5{
+    margin: 2rem 5rem 2rem 5rem !important;
+}
+
 }
