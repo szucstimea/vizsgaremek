@@ -1111,6 +1111,6 @@ and (min-width : 1024px) and (max-device-width : 1400px){
 and (min-width : 1400px) {
 	#sectionprofile{
     z-index: 999;
-    margin-top: 5%;
+    margin-top: 9%;
   }
 }
