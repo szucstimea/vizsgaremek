@@ -2,14 +2,13 @@
 include 'insertbooking.php';
 require_once ("inndata.php");
 ?>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 <script src='./jQuery/datepicker-hu.js' type='text/javascript'></script> 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
 <div class="container-fluid" id="booking">
     <div class="text-center">
-        <h1 h1 style="padding:2%;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
+        <h1  style="padding:2%; color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
     <div id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
         <form id="booking-form" class="booking-form" action="" method="post">
@@ -17,11 +16,11 @@ require_once ("inndata.php");
                 <li id="gazdi-adatai" class="form-header-group gazdi-adatok">
                     <ul class="gazdi-ul">
                         <li class="form-header-group">
-                            <h2 id="gazdi_header" class="form-header">Gazdi adatai</h2>
+                            <h2 id="gazdi_header" class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-person"></i>Gazdi adatai</h2>
                             <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
                         </li>
                         <li>
-                            <span>Név</span><br>
+                            <span><i class="bi bi-person"></i> Név</span><br>
                             <div class="row">
                                 <div class="col">
                                     <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" pattern="^[\p{L}]{2,}" required /><br>
@@ -32,13 +31,13 @@ require_once ("inndata.php");
                             </div>
                         </li>
                         <li>
-                            <span>E-mail</span><br>
+                            <span><i class="bi bi-envelope-paper-heart"></i> E-mail</span><br>
                             <div class="col">
                                 <input class="form-textbox" type="email" id="gazdiemail" placeholder="pelda@pelda.hu" pattern="^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$" required /><br>
                             </div>
                         </li>
                         <li>
-                            <span>Telefonszám</span><br>
+                            <span><i class="bi bi-telephone"></i> Telefonszám</span><br>
                             <div class="row">
                                 <div class="col">
                                     <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-4567" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required /><br>
@@ -51,7 +50,7 @@ require_once ("inndata.php");
                 <li id="1kutya-adatai" class="form-header-group kutya-adatok">
                     <ul class="kutya-ul">
                         <li>
-                            <h2 class="form-header">Kutya adatai</h2>
+                            <h2 class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-heart"></i> Kutya adatai</h2>
                             <div class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
                         </li>
                         <li>
@@ -171,12 +170,18 @@ require_once ("inndata.php");
                     </li>
                     <li>
                         <div class="row gombok">
+                        
                             <div class="col">
-                                <button class="btn btn-primary" type="submit" name="submitbooking" id="submitbooking">Foglalás</button>
+                            <div id ="toltes" style = "display:none;">
+                                <img src="assets/images/loadergif.gif" id="gif" style="width:50%; height:auto;">
+
+                            </div>
+                                <button class="btn btn-primary btn-lg" type="submit" name="submitbooking" id="submitbooking"><i class="bi bi-calendar2-check"></i> Foglalás</button>
                             </div>
                             <div class="col">
                                 <p id="vegosszeg"></p>
                             </div>
+                            
                         </div>
                     </li>
                 </li>                
@@ -626,6 +631,11 @@ require_once ("inndata.php");
                                 vegosszeg : vegosszeg
                             },
                             contentType: "application/x-www-form-urlencoded",
+                            beforeSend : function(){
+                                $('#submitbooking').hide();
+                                $('#toltes').show();
+                                },
+
                             success: function(response){
                                 $('#gazdi-adatai').find('input').each(function(){
                                     $(this).val('');
@@ -672,6 +682,8 @@ require_once ("inndata.php");
                     VegCalc(removable,"remove");
                 });
             });
+
+
             //document.ready vége
 
             function convert(str) {

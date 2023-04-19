@@ -327,4 +327,11 @@
   border-radius: 0.375rem;
   color: #212529;
 }
-
+#submitbooking:hover{
+  box-shadow: inset 150px 0 0 0 #63f1bbd2;
+  color: white;
+  text-shadow: 1px 1px 2px #000000;
+  border-color: #63f1bbd2;
+  font-size: 135%;
+  transition: 400ms;
+}

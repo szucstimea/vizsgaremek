@@ -6,7 +6,7 @@ html,body{min-height: 100vh;}
 }
 
 .nav-item {
-    color:#498ffc; 
+    color:hsl(217, 97%, 64%); 
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
@@ -36,9 +36,24 @@ html,body{min-height: 100vh;}
   .navbar-toggler,
   .navbar-toggler-icon{
     margin-right: 10%;
-    margin-left:5%;
+    margin-left:0%;
     font-size: 120%;
   }
+  #OpenMenu{
+    right: 5%;
+    font-size: 110%;
+  }
+  /* #OpenMenu:hover{
+    margin-right: 10%;
+    margin-left:0%;
+    font-size: 130%;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+  outline: none;
+} */
+  
+
 
   .bi-chevron-left,
   .bi-chevron-right{
@@ -473,6 +488,8 @@ border-radius: 5px;
 #updateservice{
   margin-top: 100%;
 }
+
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Galaxy Fold (portrait) ----------- */
 @media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
@@ -644,7 +661,7 @@ border-radius: 5px;
          .navbar-toggler-icon{
             display: flex;
             justify-content: center;
-            margin-right:0%;
+            margin-right:1%;
             margin-left:5%;
             
 

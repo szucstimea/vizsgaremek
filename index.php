@@ -21,16 +21,10 @@ if(file_exists($file)){
         $val = ++$content; 
         $put = file_put_contents($file,$val);
         fwrite($fopen, $val);
+        fclose($fopen);
 
     
-     }else {
-        echo [$_COOKIE['count']];
      }
-
-     fclose($fopen);
-    
 }
-
-
 
 ?>
