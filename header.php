@@ -74,7 +74,7 @@ require 'registmodal.php';
                 <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu position-absolute dropdown-menu-right ">
                         <li><a class="dropdown-item" href="profile.php" id="login"><i class="bi bi-person"></i> Profilom</a></li>
-                        <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-calendar-check"></i> Foglalásaim</a></li>
+                        <li><a class="dropdown-item" href="" id="register"><i class="bi bi-calendar-check"></i> Foglalásaim</a></li>
                         <li><a class="dropdown-item" href="mydogs.php" id="register"><i class="bi bi-heart"></i> Kutyáim</a></li>
                         <li><a class="dropdown-item" href="logout.php" id="register"><i class="bi bi-box-arrow-left"></i> Kijelentkezés</a></li>
                     </ul>
@@ -147,19 +147,19 @@ require 'registmodal.php';
                     <a class="nav-link active text-dark hover-effect" aria-current="page" href="index.php"><i class="bi bi-house-heart"></i> Kezdőlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark hover-effect" href="#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
+                    <a class="nav-link text-dark hover-effect" href="index.php#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark hover-effect" href="#booking"><i class="bi bi-calendar2-check"></i> Foglalás</a>
+                    <a class="nav-link text-dark hover-effect" href="index.php#booking"><i class="bi bi-calendar2-check"></i> Foglalás</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark hover-effect" href="#prices"><i class="bi bi-credit-card"></i> Áraink</a>
+                    <a class="nav-link text-dark hover-effect" href="index.php#prices"><i class="bi bi-credit-card"></i> Áraink</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark hover-effect" href="#news"><i class="bi bi-newspaper"></i> Hírek</a>
+                    <a class="nav-link text-dark hover-effect" href="index.php#news"><i class="bi bi-newspaper"></i> Hírek</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark hover-effect" href="#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
+                    <a class="nav-link text-dark hover-effect" href="index.php#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
                 </li>
             </ul>
             <div class="socialoffcanvas">

@@ -482,12 +482,47 @@ border-radius: 5px;
   background-image: url("assets/images/pngfind.com-dog-paw-png-337026.png");
   background-size: 5%;
   background-repeat: no-repeat;
-  background-position-y: center;
+  background-position-y: right;
   background-position-x: center;
 }
 #updateservice{
   margin-top: 100%;
 }
+
+#form_profile_back{
+  background-image: url("assets/images/huskey.jpg");
+  background-size: 22%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: 0%;
+  background-position-x: 90%;
+
+  }
+  #sectionback{
+    background-image: url("assets/images/office.jpg");
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-y:5%;
+    background-position-x: 25%;
+
+  }
+  #submit_profile:hover{
+    box-shadow: inset 290px 0 0 0 #63f1bbd2;
+    color: white;
+    text-shadow: 1px 1px 2px #000000;
+    border-color: #63f1bbd2;
+    font-size: 135%;
+    transition: 400ms;
+  }
+  #ujszolggomb:hover{
+    box-shadow: inset 390px 0 0 0 #63f1bbd2;
+    color: white;
+    text-shadow: 1px 1px 2px #000000;
+    border-color: #63f1bbd2;
+    font-size: 135%;
+    transition: 400ms;
+  }
 
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -744,7 +779,7 @@ border-radius: 5px;
         }
         #sectionprofile{
           z-index: 999;
-          margin-top: 40%;
+          margin-top: 35%;
         }
 
     }
@@ -989,7 +1024,7 @@ border-radius: 5px;
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
 @media only screen 
-and (min-width : 1024px) {
+and (min-width : 1024px) and (max-device-width : 1400px){
 	.offcanvas-body {
         background-image: url("assets/images/huskey2.jpg");
         background-size: 60%;
@@ -1073,6 +1108,9 @@ and (min-width : 1024px) {
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Large screens ----------- */
 @media only screen 
-and (min-width : 1824px) {
-	/* Styles */
+and (min-width : 1400px) {
+	#sectionprofile{
+    z-index: 999;
+    margin-top: 5%;
+  }
 }

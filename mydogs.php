@@ -21,10 +21,10 @@ if(isset($_SESSION["username"])){
 </div>
 
 <section id="sectionprofile">
-<div class="container text-justify p-3" >
+<div class="container text-justify p-3" id="form_profile_back">
     <div class="text-center">    
         <h1 id="titleprofile"><i class="bi bi-heart"></i> Kutyáim </a></h1>
-        <p> A "Kutyáim" menüpont lehetővé teszi a felhasználók számára, hogy megtekintsék vagy szerkesszék a foglalások során a kutyákról megadott adatokat.</p><br>
+        <p> A "Kutyáim" menüpont lehetővé teszi <br> a felhasználók számára, hogy <br> megtekintsék  vagy szerkesszék a foglalások során  a kutyákról megadott adatokat.</p><br>
     </div>
 </div>
 <!-- kutyák kiolvasása -->

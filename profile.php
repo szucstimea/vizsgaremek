@@ -45,12 +45,12 @@ if(isset($_SESSION["username"])){
 
 ?>
 
-<script src="./jQuery/jquery-3.6.4.min.js"></script>
+
 <section id="sectionprofile">
 <div class="container text-justify p-3" >
         <div class="text-center">    
         <h1 id="titleprofile"><i class="bi bi-person"></i> Profilom</a></h1>
-        <p> A profilom menüpont lehetővé teszi a felhasználók számára, hogy megtekintsék vagy szerkesszék a regisztráció során megadott adataikat.</p><br>
+        <p> A profilom menüpont lehetővé teszi a felhasználók számára, hogy <br> megtekintsék vagy szerkesszék <br>a regisztráció során megadott adataikat.</p><br>
         </div>
         <form id="form_profile" class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method = "post" autocomplete="off">
       <div class="separator">
@@ -346,7 +346,7 @@ function mutat() {
 
 </script>
 
-
+<script src="./jQuery/jquery-3.6.4.min.js"></script>
 <?php 
 require 'footer.php';
 ?>

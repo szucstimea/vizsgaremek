@@ -18,10 +18,11 @@ require 'headeradmin.php';
 
 
 <section >
-<div class="container p-3" >
+<div id="sectionback"> 
+<div class="container p-3" id="sectionprofile">
     <div class="text-center" id="sectionprofile2">    
         <h1 id="titleprofile" style="margin-top: 10%; text-shadow: 1px 1px 2px black;"><i class="bi bi-person-vcard"></i>  Dolgozói felület </a></h1>
-        <p> A dolgozói felület lehetővé teszi, hogy a panzió adatait, árait megtekintsék vagy szerkesszék, a foglalásokat kezeljék vagy akár híreket tegyenek közzé.</p><br>
+        <p> A dolgozói felület lehetővé teszi, hogy a panzió adatait,<br> árait megtekintsék vagy szerkesszék, <br> a foglalásokat kezeljék vagy akár híreket tegyenek közzé.</p><br>
     </div>
 </div>
 <!-- panzió adatainak lekérése -->
@@ -284,7 +285,7 @@ if(isset($_SESSION["usernameadmin"])){
                 </div>
             </form>
     </div>
-
+    </div>
 </section>
 <!-- panzió árainak vége-->
 <!-- panzió foglalásai-->
@@ -297,8 +298,8 @@ if(isset($_SESSION["usernameadmin"])){
     </div>
 </div>
 
-<div class="text-center">  
-<table class="table table-striped" id="datatable" style="width: 100%; overflow-x:auto;">
+<div class="table-responsive text-center">  
+<table class="table table-striped" id="datatable" style="overflow-x:auto;">
 
 <thead>
         <tr style="background-color: #498ffc; color: white;">
