@@ -26,7 +26,7 @@ require_once ("inndata.php");
     }
 ?>
 
-<div class="container-fluid" id="prices">
+<div class="container-fluid" id="prices" data-aos="fade-up" data-aos-duration="1000">
     <div class="text-center">
         <h1 style="padding:2%;"><i class="bi bi-credit-card"></i>  Áraink</h1>
     </div>

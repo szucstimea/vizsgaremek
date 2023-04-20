@@ -4,7 +4,7 @@
 <?php include 'style.css'; ?>
 </style>
 
-<div class="container-fluid" id="aboutus">
+<div class="container-fluid" id="aboutus" data-aos="fade-up">
     <div class="text-center">
         <h1 style="padding:2%;"><i class="bi bi-justify"></i>  Rólunk</h1>
     </div>

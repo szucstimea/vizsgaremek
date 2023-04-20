@@ -7,10 +7,10 @@ require_once ("inndata.php");
 <script src='./jQuery/datepicker-hu.js' type='text/javascript'></script> 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
 <div class="container-fluid" id="booking">
-    <div class="text-center">
-        <h1  style="padding:2%; color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
+    <div class="text-center" data-aos="fade-right">
+        <h1  style="padding:2%; color: white; text-shadow: 2px 2px 6px #080000;" ><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
-    <div id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
+    <div data-aos="fade-right" id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
         <form id="booking-form" class="booking-form" action="" method="post">
             <ul id="booking-list">
                 <li id="gazdi-adatai" class="form-header-group gazdi-adatok">
@@ -23,41 +23,41 @@ require_once ("inndata.php");
                             <span><i class="bi bi-person"></i> Név</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" pattern="^[\p{L}]{2,}" required /><br>
+                                    <input class="form-textbox" type="text" id="gazdiveznev" placeholder="Vezetéknév" pattern="^[\p{L}]{2,}" required data-aos="fade-right" /><br>
                                 </div>
                                 <div class="col">
-                                    <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" pattern="^[\p{L}]{2,}" required /><br>
+                                    <input class="form-textbox" type="text" id="gazdikernev" placeholder="Keresztnév" pattern="^[\p{L}]{2,}" required data-aos="fade-right"/><br>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <span><i class="bi bi-envelope-paper-heart"></i> E-mail</span><br>
+                            <span><i class="bi bi-envelope-paper-heart" ></i> E-mail</span><br>
                             <div class="col">
-                                <input class="form-textbox" type="email" id="gazdiemail" placeholder="pelda@pelda.hu" pattern="^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$" required /><br>
+                                <input class="form-textbox" type="email" id="gazdiemail" placeholder="pelda@pelda.hu" pattern="^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$" required data-aos="fade-right"/><br>
                             </div>
                         </li>
                         <li>
-                            <span><i class="bi bi-telephone"></i> Telefonszám</span><br>
+                            <span><i class="bi bi-telephone" data-aos="fade-right"></i> Telefonszám</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-4567" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required /><br>
+                                    <input class="form-textbox" type="tel" size="20" name="telefonszam" id="gazditel"  maxlength="20" placeholder="+36(99)123-4567" pattern="[\+]36[\(]\d{1,2}[\)]\d{3}[\-]\d{3,4}" required data-aos="fade-right"/><br>
                                     <label class="form-sub-label">Formátum: +36(körzetszám)123-4567</label>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </li>                
-                <li id="1kutya-adatai" class="form-header-group kutya-adatok">
+                <li id="1kutya-adatai" class="form-header-group kutya-adatok" data-aos="fade-right">
                     <ul class="kutya-ul">
                         <li>
-                            <h2 class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-heart"></i> Kutya adatai</h2>
+                            <h2 class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-heart" data-aos="fade-right"></i> Kutya adatai</h2>
                             <div class="form-subHeader">Az alábbi mezőkbe a kutya adatait kell megadni!</div>
                         </li>
                         <li>
                             <span>Kutya neve</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox kutyaneve variable" type="text" required /><br>
+                                    <input class="form-textbox kutyaneve variable" type="text" required data-aos="fade-right"/><br>
                                 </div>
                             </div>
                         </li>
@@ -65,7 +65,7 @@ require_once ("inndata.php");
                             <span>Kutya fajtája</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox kutyafajtaja variable" type="text"><br>
+                                    <input class="form-textbox kutyafajtaja variable" type="text" data-aos="fade-right"><br>
                                 </div>
                             </div>
                         </li>
@@ -73,18 +73,18 @@ require_once ("inndata.php");
                             <span>Hány hónapos?</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input min="0" class="form-textbox honapos variable" type="number"/>
+                                    <input min="0" class="form-textbox honapos variable" type="number" data-aos="fade-right"/>
                                 </div>
                             </div>
                         </li>
                         <li class="idopontok">
                             <span>Foglalás kezdő napja</span><br>
                                 <div class="col-md-3">  
-                                    <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable" readonly="true" />
+                                    <input id='1from_date' type="text" name="from_date" class="form-control form-textbox from_date variable" readonly="true" data-aos="fade-right"/>
                                 </div>
                             <span>Foglalás vége</span><br> 
                                 <div class="col-md-3">  
-                                    <input id='1to_date' type="text" name="to_date" class="form-control form-textbox to_date variable" readonly="true" />
+                                    <input id='1to_date' type="text" name="to_date" class="form-control form-textbox to_date variable" readonly="true" data-aos="fade-right"/>
                                 </div>                         
                         </li>
                         <li>
@@ -92,17 +92,17 @@ require_once ("inndata.php");
                             <div class="szallitasDiv">
                                 <div class="checkbox-wrapper-12 row checkbox-row ">
                                     <div class="cbx col label-col" >
-                                        <input class="szallitas1" name="1szallitas" value='kerek' type="radio" required/>
+                                        <input class="szallitas1" name="1szallitas" value='kerek' type="radio" required data-aos="fade-right"/>
                                         <label></label>
                                     </div>
-                                    <div class="col category-col">Kérek</div>
+                                    <div class="col category-col" data-aos="fade-right">Kérek</div>
                                 </div>
                                 <div class="checkbox-wrapper-12 row checkbox-row">
                                     <div class="cbx col label-col">
                                         <input class="szallitas2" name="1szallitas" value='nemkerek' type="radio"/>
                                         <label for="szallitas2"></label>
                                     </div>
-                                    <div class="col category-col">Nem kérek</div>
+                                    <div class="col category-col" data-aos="fade-right">Nem kérek</div>
                                 </div>
                             </div>
                         </li>
@@ -110,18 +110,18 @@ require_once ("inndata.php");
                             <span>Adja meg a gazdi címét! (Ha bármely kutyának kér szállítást, a mezők kitöltése kötelező!) </span>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox irsz variable" type="number" name="iranyitoszam" placeholder="Irányítószám"/>
-                                    <input class="form-textbox megye variable" type="text" name="megye" placeholder="Megye"/>
-                                    <input class="form-textbox telepules variable" type="text" name="telepules" placeholder="Település"/>
-                                    <input class="form-textbox utca variable" type="text" name="utca" placeholder="Utca">
-                                    <input class="form-textbox hazszam variable" type="text" name="hazszam" placeholder="Házszám"/>
+                                    <input class="form-textbox irsz variable" type="number" name="iranyitoszam" placeholder="Irányítószám" data-aos="fade-right"/>
+                                    <input class="form-textbox megye variable" type="text" name="megye" placeholder="Megye" data-aos="fade-right"/>
+                                    <input class="form-textbox telepules variable" type="text" name="telepules" placeholder="Település" data-aos="fade-right"/>
+                                    <input class="form-textbox utca variable" type="text" name="utca" placeholder="Utca" data-aos="fade-right">
+                                    <input class="form-textbox hazszam variable" type="text" name="hazszam" placeholder="Házszám" data-aos="fade-right"/>
                                 </div>
                             </div>
                         </li>
                         <?php if ($szolgaltatas != "nincs"){
                             echo "<li>
                             <span>Jelölje be mely szolgáltatásokat kéri:</span>
-                            <div class=\"szolgaltatasok\">";
+                            <div class=\"szolgaltatasok\" data-aos=\"fade-right\">";
                             foreach ($szolgaltatas as $szolg)
                             { if($szolg["kategoria"] != "alapár"){
                                 echo                                                                
@@ -154,7 +154,7 @@ require_once ("inndata.php");
                         <span>Egyéb speciális igényeit ide írhatja:</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="form-textbox specigeny variable" />
+                                    <input type="text" class="form-textbox specigeny variable" data-aos="fade-right" />
                                 </div>
                             </div>
                         </li>
@@ -162,26 +162,30 @@ require_once ("inndata.php");
                 </li><!--kutya adatai-->
                 <li>
                     <li>
-                        <div class="row">
+                        <div class="row" data-aos="fade-right">
                             <div class="col">
                                 <button type="button" id="addDog" class="btn btn-primary"><span class="bi bi-plus"></span> Még egy kutyának foglalok</button>
                             </div>
                         </div>
                     </li>
                     <li>
-                        <div class="row gombok">
+                    <div class="container">
+                        <div class="row gombok" data-aos="fade-right">
                         
                             <div class="col">
                             <div id ="toltes" style = "display:none;">
                                 <img src="assets/images/loadergif.gif" id="gif" style="width:50%; height:auto;">
 
                             </div>
+                            <div class="row">
                                 <button class="btn btn-primary btn-lg" type="submit" name="submitbooking" id="submitbooking"><i class="bi bi-calendar2-check"></i> Foglalás</button>
+                            </div>
                             </div>
                             <div class="col">
                                 <p id="vegosszeg"></p>
                             </div>
                             
+                        </div>
                         </div>
                     </li>
                 </li>                
@@ -697,6 +701,12 @@ require_once ("inndata.php");
             $('#confClose, .cancelbtn').click(function(){
                 $('#confirm').hide();
             });
+
+            // document.querySelectorAll("#booking-list li").forEach((li, i) => {
+            // setTimeout(() => {
+            //     li.classList.add('show');
+            // }, 100 * i);
+            // });
 
                        
 

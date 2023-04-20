@@ -72,6 +72,10 @@
     <a class="text-reset fw-bold" href="index.php"><?php echo $panzionev ?> kutyapanzió</a>
   </div>
   <!-- Copyright -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </footer>
 <!-- Footer -->
 <script>    

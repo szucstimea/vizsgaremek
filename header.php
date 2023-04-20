@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bookingform.css">
     <link rel="stylesheet" href="confirmbooking.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -22,7 +23,7 @@ require 'registmodal.php';
 ?>
 
 <nav class="nav navbar navbar-dark fixed-top" style="background-color: #498ffc;">
-<div id="alcim" class="fw-light">kutyusa második otthona</div>
+<div id="alcim" class="fw-light" >kutyusa második otthona</div>
   <div class="container-fluid">
     <a class="navbar" href="index.php" id="cim">
     <img src="assets/images/dog3.png" alt="Logo" class="" id="logo">
@@ -88,11 +89,11 @@ require 'registmodal.php';
                 <a class="nav-link pr-2"><i class="bi bi-person"></i></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                    <ul class="dropdown-menu position-absolute dropdown-menu-right">
+                <a class="nav-link dropdown-toggle " id=""role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    <ul class="dropdown-menu position-absolute dropdown-menu-right fade-up">
                         <li><a class="dropdown-item" href="#" id="login"><i class="bi bi-box-arrow-in-right"></i> Bejelentkezés</a></li>
                         <li><a class="dropdown-item" href="#" id="register"><i class="bi bi-person-add"></i> Regisztráció</a></li>
-                        <li><a class="dropdown-item" href="admin.php" id="admin"><i class="bi bi-person-vcard"></i> Bejelentkezés dolgozóként</a></li>
+                        <li><a class="dropdown-item" href="admin.php" id="admin"><i class="bi bi-person-vcard"></i> Dolgozói felület</a></li>
                     </ul>
             </li>
             <?php
@@ -138,13 +139,13 @@ require 'registmodal.php';
         <div class="offcanvas offcanvas-end nav-background" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header" style="margin-top: 5%;">
             <img src="assets/images/dog3.png" alt="Logo" id="logo2"><br>
-            <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel"> LodInn kutyapanzió</h5>
+            <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel"> LODINN KUTYAPANZIÓ</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body position-relative" >
-            <ul class="navbar-nav position-absolute top-1 start-50 translate-middle-x">
+        <div class="offcanvas-body position-relative text-center" >
+            <ul class="navbar-nav">
                 <li class="nav-item" >
-                    <a class="nav-link active text-dark hover-effect" aria-current="page" href="index.php"><i class="bi bi-house-heart"></i> Kezdőlap</a>
+                    <a class="nav-link active text-dark hover-effect" aria-current="page" href="index.php" ><i class="bi bi-house-heart" ></i> Kezdőlap</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark hover-effect" href="index.php#aboutus"><i class="bi bi-justify"></i> Rólunk</a>
@@ -160,6 +161,9 @@ require 'registmodal.php';
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark hover-effect" href="index.php#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
+                </li>
+                <li class="nav-item">
+                    <img src="assets/images/pngfind.com-dog-paw-png-337026.png" style="width:90%;  transform: rotate(20deg); margin-top:15%;" id="mancs">
                 </li>
             </ul>
             <div class="socialoffcanvas">

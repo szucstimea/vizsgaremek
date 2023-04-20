@@ -2,7 +2,7 @@
 <?php include 'style.css'; ?>
 </style>
 
-<div class="container-fluid" id="news">
+<div class="container-fluid" id="news" data-aos="fade-up">
     <div class="text-center">
         <h1 h1 style="padding:2%;"><i class="bi bi-newspaper"></i>  Hírek</h1>
     </div>
