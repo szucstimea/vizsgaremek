@@ -160,6 +160,10 @@ require 'registmodal.php';
                     <a class="nav-link text-dark hover-effect" href="index.php#news"><i class="bi bi-newspaper"></i> Hírek</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-dark hover-effect" href="index.php#customers"><i class="bi bi-star"></i> Vélemények</a>
+                    
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-dark hover-effect" href="index.php#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
                 </li>
                 <li class="nav-item">
