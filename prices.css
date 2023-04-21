@@ -25,11 +25,11 @@
     color: white;
 }
 
-.nev{
+#prices .nev{
     background-color:#0d6efd;
 }
 
-.ar{
+#prices .ar{
     margin: 0px;
     font-family: Book Antiqua;
     color: #63f1bbd2;
@@ -37,17 +37,103 @@
     text-shadow: 0.5px 0.5px 1px #000000;
 }
 
-b{
+#prices b{
     font-size: 15px;
 }
 
-.elem2{
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    margin: auto;
+@media (max-width: 667px) { 
+    #prices .szolg{
+        width: 275px !important;
+        height: 400px !important;
+    }
+
+    #prices .row{
+        flex-direction: column;
+    }
+
+    #prices .osszes{
+        padding-left: 50px;
+    }
 }
 
-.sor2{
-    width: 261px;
-    height: 395px;
+@media ((min-width: 412px) and (max-width: 896px)) { 
+    #prices .szolg{
+        height: 378px;
+    }
+
+    #prices .row{
+        flex-direction: column;
+    }
+
+    #prices .osszes{
+        padding-left: 75px;
+    }
+}
+
+@media ((min-width: 768px) and (max-width: 1180px)) { 
+    #prices .szolg{
+        font-size: large;
+        width: 470px;
+        min-height: 500px;
+        margin-bottom: 2.5rem !important;
+    }
+
+    #prices .row{
+        flex-direction: column;
+    }
+
+    #prices .osszes{
+        padding-left: 110px;
+    }
+
+    #prices b{
+        font-size: 22px;
+    }
+
+    #prices .leiras{
+        font-size: 20px;
+    }
+
+    #prices img{
+        width: 220px !important;
+        height: 190px !important;
+    }
+}
+
+@media ((min-width: 540px) and (max-width: 720px)) { 
+    #prices .osszes{
+        padding-left: 120px;
+    }
+}
+
+@media ((min-width: 280px) and (max-width: 653px)) { 
+    #prices .szolg{
+        margin-left:0.7rem !important;
+    }
+}
+
+@media ((min-width: 992px)) { 
+    #prices .szolg{
+        margin: 1.2rem;
+    }
+
+    #prices .row{
+        flex-direction: row !important;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #prices .osszes{
+        padding-left: 38px;
+        max-width: 998px;
+    }
+
+    .elem{
+        margin-bottom: 0.5rem !important;
+    }
+
+    .elem2 .szolg{
+        margin: 3rem !important;
+    }
+    
 }
