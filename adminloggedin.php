@@ -427,6 +427,107 @@ if(!empty($db_panzioID)){
 </section>
 <!-- panzió foglalásainak vége-->
 
+<!-- hírek -->
+<section id="hirek">
+<div class="container text-justify p-3" id="hirek">
+        <div class="text-center">  <div class="separator">  
+        <h1 id="titleprofile"><i class="bi bi-newspaper"></i> Hírek </a></h1>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+<div class="row text-center">
+<?php
+  try{ 
+            $sql = "SELECT * FROM lodinn.hirek WHERE hirek.panzio_ID LIKE :id";
+            $result = $conn->prepare($sql);
+            $result -> bindParam(':id',$db_panzioID, PDO::PARAM_STR);
+            $result->execute();
+            
+            if($result ->rowCount() !=0){
+                while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $db_hirID = $row['hirID'];
+                    $db_cim = $row['cim'];
+                    $db_leiras = $row['leiras'];
+                    $db_datum = $row['datum'];
+
+                    $db_leiras = strip_tags($db_leiras);
+                    if (strlen($db_leiras) > 100) {
+
+                        // truncate string
+                        $stringCut = substr($db_leiras, 0, 500);
+                        $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                        $db_leiras = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                        $db_leiras .= '...';
+                    }
+                    echo '
+                   
+                    <div class="col-sm-6 col-md-4 mb-4 mb-md-0" id="hir'.$db_hirID.'">
+                        <div class="card col-12">
+                        <div class="card-body py-4 mt-2">
+                            <div class="justify-content-center mb-4">
+                                <img src="assets/images/dog3.png"
+                                    class="rounded-circle shadow-1-strong" width="80" height="80" />
+                            </div>
+                            <p class="font-weight">'.$db_datum.'</p>
+                            <h6 class="font-weight-bold my-3">'.$db_cim.'</h6>
+                            <p class="mb-2 text-muted justify">
+                            '.$db_leiras.'
+                            </p>
+                            <button type="button" class="btn btn-primary" style="margin-top:5%;"><a style ="text-decoration: none; color:white" href="newsupdate.php?id='.$db_hirID.'"> <i class="bi bi-pen"></i> Szerkesztés</a></button> 
+                            <button onclick="deleteNews('.$db_hirID.')" type="button" class="btn btn-primary" style="margin-top:5%;"><i class="bi bi-trash3"></i> Törlés</a></button>
+                        </div>
+                        </div>
+                    </div>
+
+                    ';
+                }
+            }
+
+    } catch (PDOException $e){
+        echo "Adatbázis hiba: " .$e->getMessage();    
+    } catch (Exception $e){
+        echo "Egyéb hiba: " .$e->getMessage();
+        die();
+    } 
+?>
+</div>
+
+<div class="text-center">
+<button id="ujhirgomb" style="margin-top: 2%;margin-bottom: 2%;" onclick='ujhir()'type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Új hír rögzítése'><i class="bi bi-plus-circle"></i> ÚJ HÍR RÖGZÍTÉSE</button>
+ </div>
+<!-- Új hír rögzítése -->
+ <div style=" padding: 2%; width: 100%; display:none;" id="ujhirdiv">
+    <div class="separator">
+            <h1><i class="bi bi-plus-circle";></i> Új hír hozzáadása</h1>
+    </div> 
+        <!-- Űrlap -->
+        <form method="" id="ujhir" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="form-group ">
+                <label for="hircime"></label><br>
+                <div class="">
+                <input type="text" class="form-control" id="id_panzio" name="id_panzio" required value="<?php if(isset($db_panzioID)) {echo $db_panzioID;};?>" placeholder="panzió id" autofocus style="display:none;">
+                <input type="text" name="hircime" id="hircime" placeholder="Hír címe" class="form-control">
+                </div>
+ 
+                <label for="hirleiras"></label><br>
+                <div class="">
+                <textarea rows="4" name="hirleiras" id="hirleiras" class="form-control" placeholder="Hír leírása"></textarea>
+                </div>
+
+                <div class="col-auto my-2">
+                <input type="submit" value="Rögzítés" name="submit" id="submit" class="btn btn-primary">
+                 </div>
+                 <div class="col" id="visszajelzes3" style="margin-top: 0%;margin-bottom: 1%;"> 
+                </div>  
+                </div>
+            </form>
+    </div>
+    </div>
+    </div>
+<!-- hírek vége -->
 
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
 <script>
@@ -572,6 +673,10 @@ function ujszolgAjax(){
     $("#ujszolgdiv").show('slow');
     
 }
+function ujhir(){
+    $("#ujhirdiv").show('slow');
+    
+}
 
 $('#ujszolg').submit(function(e){
 
@@ -582,6 +687,48 @@ $.ajax({
     success: function(data){
         $('#visszajelzes2').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Szolgáltatás hozzáadva!");  
         setTimeout("window.location.href='adminloggedin.php';",800); 
+    }
+})
+e.preventDefault();
+})
+
+$(document).ready(function() {
+$("#close3").click(function bezar(){
+$("#hozzaaduzenet").fadeOut('slow');
+})
+
+});
+
+
+function deleteNews(id){
+
+if(confirm('Biztos benne, hogy véglegesen törölni szeretné a hírt?')){
+    $.ajax({
+        type: 'POST',
+        url:'deletenews.php',
+        data:{id: id},
+        success: function(data){
+            $('#hir'+id).remove();
+            $("#toroluzenet").show('slow');
+            
+            
+        }
+
+    });
+}
+}
+// Új hír rögzítése
+$('#ujhir').submit(function(e){
+
+$.ajax({
+    type:"POST",
+    url:"insertnews.php",
+    data: $('#ujhir').serialize(),
+    success: function(data){
+        $('#visszajelzes3').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Hír hozzáadva!");
+        $('#ujhir')[0].reset();
+        location.href = 'adminloggedin.php#hirek';
+        location.reload()
     }
 })
 e.preventDefault();

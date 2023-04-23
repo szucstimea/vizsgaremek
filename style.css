@@ -564,7 +564,17 @@ border-radius: 5px;
     font-size: 135%;
     transition: 400ms;
   }
-  #ujszolggomb:hover{
+  #ujszolggomb:hover
+  {
+    box-shadow: inset 390px 0 0 0 #63f1bbd2;
+    color: white;
+    text-shadow: 1px 1px 2px #000000;
+    border-color: #63f1bbd2;
+    font-size: 135%;
+    transition: 400ms;
+  }
+  #ujhirgomb:hover
+  {
     box-shadow: inset 390px 0 0 0 #63f1bbd2;
     color: white;
     text-shadow: 1px 1px 2px #000000;
@@ -596,6 +606,9 @@ border-radius: 5px;
   }
   .card{
     box-shadow: 0px 0px 5px 0px #63f1bbd2;
+  }
+  .card:hover{
+    box-shadow: 1px 1px 1px 1px #63f1bbd2;
   }
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -860,6 +873,10 @@ border-radius: 5px;
         #mancs{
           display: none;
         }
+        #sectionback{
+          background: none;
+      
+        }
 
     }
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -988,6 +1005,10 @@ border-radius: 5px;
           #mancs{
             display: none;
           }
+          #sectionback{
+            background: none;
+        
+          }
        
     }
 
@@ -1105,6 +1126,10 @@ border-radius: 5px;
           #mancs{
             display: none;
           }
+          #sectionback{
+            background: none;
+        
+          }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
@@ -1188,6 +1213,10 @@ and (min-width : 1024px) and (max-device-width : 1400px){
         #sectionprofile{
           z-index: 999;
           margin-top: 10%;
+        }
+        #sectionback{
+          background: none;
+      
         }
     }
 /* ------------------------------------------------------------------------------------------------------------ */
