@@ -1233,3 +1233,7 @@ and (min-width : 1400px) {
 #mybookings .leiras{
   margin-top: 180px;
 }
+
+#mybookings #foglalasok{
+  margin-bottom: 150px;
+}

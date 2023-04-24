@@ -15,7 +15,7 @@ require 'header.php';
     </div>
 
     <!-- foglalások kiolvasása -->
-    <div class="text-center">  
+    <div class="text-center" id="foglalasok">  
     <table class="table table-striped" style="width: 100%;">
         <thead>
                 <tr style="background-color: #498ffc; color: white;">
@@ -24,19 +24,11 @@ require 'header.php';
                     <th scope="col">FOGLALÁS UTOLSÓ NAPJA</th>
                     <th scope="col">SZÁLLÍTÁS</th>
                     <th scope="col">SPECIÁLIS IGÉNY</th>
+                    <th scope="col">SZOLGÁLTATÁSOK</th>
                     <th scope="col">VÉGÖSSZEG</th>
                 </tr>
         </thead>
-        <tbody>
-            
-            <!-- <tr id='kuyta$db_kutyaId'>";
-            <td >$db_kutyaNev</td>";
-            <td>$currentage</td>";
-            <td>$db_kutyaFajta</td>";
-            <td><a href='updatedog.php?id=$db_kutyaId' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Szerkesztés'><i class='bi bi-pen'></i></a></td>";
-            <td><button onclick='deleteAjax($db_kutyaId)'type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Törlés'><i class='bi bi-trash3'></i></button></td>";
-            </tr>"; -->
-            
+        <tbody>            
         </tbody>
     </table>
     </div>
@@ -57,7 +49,21 @@ require 'header.php';
             },
             contentType: "application/x-www-form-urlencoded",
             success: function(response){
-                // adatok = JSON.parse(response)                                                             
+                var foglalasok = JSON.parse(response);
+                if(foglalasok.length>0){
+                    for(var i = 0 ; i < foglalasok.length ; i++){
+                        if(foglalasok[i]["szallitas"]==1){
+                            szallitast = "kérek";
+                        }else{
+                            szallitast = "nem kérek"
+                        }
+                        var sor = "<tr><td>"+foglalasok[i]["kutyaNev"]+"</td><td>"+foglalasok[i]["kezdoDatum"]+"</td><td>"+foglalasok[i]["vegDatum"]+"</td><td>"+szallitast+"</td><td>"+foglalasok[i]["specialisIgenyek"]+"</td><td>"+foglalasok[i]["szolgaltatasok"]+"</td><td>"+foglalasok[i]["vegosszeg"]+"</td></tr>";
+                        $('tbody').append(sor);
+                    };
+                }else{
+                    var elem = "<p>Még nincs foglalás.</p>";
+                    $('#foglalasok').append(elem);
+                }                                                          
             },
             error : function(err){
                 alert(err);
