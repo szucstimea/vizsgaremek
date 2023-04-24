@@ -4,7 +4,7 @@ require 'headeradmin.php';
 ?>
 <div class="position-fixed top-50 start-50">
 <div class="alert alert-success alert-dismissible fade show" role="alert" id="toroluzenet" style="display: none;">
- <i class="bi bi-info-circle-fill"></i> Törlés sikeres!
+ <i class="bi bi-info-circle-fill"></i> Törölés sikeres!
   <button type="button" class="btn-close" data-dismiss="alert" id="close2" aria-label="Close">
   </button>
 </div>
@@ -369,13 +369,13 @@ if(!empty($db_panzioID)){
                                 $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
                                 $currentage = $db_kor + $diff;
 
-                                $sql8 = "SELECT * FROM lodinn.vendegek WHERE vendegek.vendegID = ?";
-                                $result8 = $conn->prepare($sql8);
-                                $result8->bindParam(1, $db_vendeg_ID, PDO::PARAM_INT);
-                                $result8->execute();
-                        
-                                if($result8 ->rowCount() !=0){
-                                    while($row = $result8->fetch(PDO::FETCH_ASSOC)){
+                                $sql9 = "SELECT * FROM lodinn.vendegek WHERE vendegek.vendegID = ?";
+                                $result9 = $conn->prepare($sql9);
+                                $result9->bindParam(1, $db_vendeg_ID, PDO::PARAM_INT);
+                                $result9->execute();
+                            
+                                if($result9 ->rowCount() !=0){
+                                    while($row = $result9->fetch(PDO::FETCH_ASSOC)){
                                         $db_vezNev = $row['vezNev'];
                                         $db_kerNev = $row['kerNev'];
                                         $db_email = $row['email'];
@@ -385,24 +385,40 @@ if(!empty($db_panzioID)){
                                         $db_varos = $row['varos'];
                                         $db_utca = $row['utca'];
                                         $db_hazszam = $row['hazszam']; 
-                        
-                                        echo "<tr id='foglalas$db_foglalID'>";
-                                        echo "<td >$db_rogzites</td>";
-                                        echo "<td>$db_vezNev</td>";
-                                        echo "<td>$db_kerNev</td>";
-                                        echo "<td>$db_kezdoDatum</td>";
-                                        echo "<td>$db_vegDatum</td>";
-                                        echo "<td>$db_kutyaNev</td>";
-                                        echo "<td><button onclick='modalAjax($db_foglalID)'id='bovebben' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Bővebben'> <i class='bi bi-three-dots-vertical'></i></a></td>";
-                                        echo "<td><button onclick='deleteAjax($db_foglalID)'type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Törlés'><i class='bi bi-trash3'></i></button></td>";
-                                        echo "</tr>";
-                                        echo "
-                                        <tr id='legordulo$db_foglalID' style='display: none;'><th> FOGLALÁS TOVÁBBI RÉSZLETEI: </th><br><td><b>Foglaló email címe:</b> <br> $db_email <br><b>Foglaló telefonszáma:</b> <br> $db_telszam </td><td> <b>Irányítószám:</b> $db_iranyitoszam <br> <b>Megye:</b> $db_megye <br> <b>Település:</b> $db_varos <br> <b>Utca:</b> $db_utca <br> <b>Házszám: </b> $db_hazszam</td><td> <b>Szállítási igény:</b> $szallitastker <br> <b>Speciális igények:</b> <br> $db_specialisIgenyek </td><td> <b>Kutya fajtája:</b> $db_fajta <br> <b>Kora:</b> $currentage hónapos</td><td><b>Végösszeg:</b> $db_vegosszeg ,-Ft</td><td><button onclick='hide($db_foglalID)' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Elrejt'>Elrejt</button></td></tr>
-                                         ";
-                                    }     
-                                }  else {
-                                    echo "Nincs eredménye a lekérdezésnek!";
-                                }    
+
+                                            echo "<tr id='foglalas$db_foglalID'>";
+                                            echo "<td >$db_rogzites</td>";
+                                            echo "<td>$db_vezNev</td>";
+                                            echo "<td>$db_kerNev</td>";
+                                            echo "<td>$db_kezdoDatum</td>";
+                                            echo "<td>$db_vegDatum</td>";
+                                            echo "<td>$db_kutyaNev</td>";
+                                            echo "<td><button onclick='modalAjax($db_foglalID)'id='bovebben' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Bővebben'> <i class='bi bi-three-dots-vertical'></i></a></td>";
+                                            echo "<td><button onclick='deleteAjax($db_foglalID)'type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Törlés'><i class='bi bi-trash3'></i></button></td>";
+                                            echo "</tr>";
+                                            echo "
+                                            <tr id='legordulo$db_foglalID' style='display: none;'><th> FOGLALÁS TOVÁBBI RÉSZLETEI: </th><br><td><b>Foglaló email címe:</b> <br> $db_email <br><b>Foglaló telefonszáma:</b> <br> $db_telszam </td><td> <b>Irányítószám:</b> $db_iranyitoszam <br> <b>Megye:</b> $db_megye <br> <b>Település:</b> $db_varos <br> <b>Utca:</b> $db_utca <br> <b>Házszám: </b> $db_hazszam</td><td> <b>Szállítási igény:</b> $szallitastker <br> <b>Speciális igények:</b> <br> $db_specialisIgenyek </td><td> <b>Kutya fajtája:</b> $db_fajta <br> <b>Kora:</b> $currentage hónapos</td><td><b>Végösszeg:</b> $db_vegosszeg ,-Ft <br> <b>Igényelt szolgáltatások:<br></b>
+                                            ";
+
+                                            $sql8 = " SELECT kategoriaNev FROM lodinn.arak INNER JOIN lodinn.ar ON ar.kategoriaAr_ID = arak.kategoriaID WHERE ar.kutyaAr_ID = ? AND ar.foglAr_ID = ?;";
+                                            $result8 = $conn->prepare($sql8);
+                                            $result8->bindParam(1, $db_kutyaID, PDO::PARAM_INT);
+                                            $result8->bindParam(2, $db_foglalID, PDO::PARAM_INT);
+                                            $result8->execute();
+    
+                                            if($result8 ->rowCount() !=0){
+                                            while($row = $result8->fetch(PDO::FETCH_ASSOC)){
+                                                 foreach ($row as $kategoria){
+                                                    echo " -$kategoria <br>";
+                                                }
+                                        } 
+
+                                        echo " </td><td><button onclick='hide($db_foglalID)' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Elrejt'>Elrejt</button></td>
+                                        </tr>
+                                        ";    
+                                    }  else {
+                                        echo "Nincs eredménye a lekérdezésnek!";
+                                    }    
 
                             }    
                         }
@@ -410,7 +426,9 @@ if(!empty($db_panzioID)){
                 }
             }
         }
-    } catch (PDOException $e){
+    } 
+ 
+} }catch (PDOException $e){
         echo "Adatbázis hiba: " .$e->getMessage();    
     } catch (Exception $e){
         echo "Egyéb hiba: " .$e->getMessage();
