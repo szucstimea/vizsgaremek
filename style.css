@@ -1129,7 +1129,7 @@ border-radius: 5px;
           #sectionback{
             background: none;
         
-          }
+          }          
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
@@ -1227,4 +1227,9 @@ and (min-width : 1400px) {
     z-index: 999;
     margin-top: 9%;
   }
+}
+
+/*mybookings*/
+#mybookings .leiras{
+  margin-top: 180px;
 }

@@ -4,7 +4,7 @@ require 'headeradmin.php';
 ?>
 <div class="position-fixed top-50 start-50">
 <div class="alert alert-success alert-dismissible fade show" role="alert" id="toroluzenet" style="display: none;">
- <i class="bi bi-info-circle-fill"></i> Törölés sikeres!
+ <i class="bi bi-info-circle-fill"></i> Törlés sikeres!
   <button type="button" class="btn-close" data-dismiss="alert" id="close2" aria-label="Close">
   </button>
 </div>

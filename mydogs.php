@@ -24,7 +24,7 @@ if(isset($_SESSION["username"])){
 <div class="container text-justify p-3" id="form_profile_back">
     <div class="text-center">    
         <h1 id="titleprofile"><i class="bi bi-heart"></i> Kutyáim </a></h1>
-        <p> A "Kutyáim" menüpont lehetővé teszi <br> a felhasználók számára, hogy <br> megtekintsék  vagy szerkesszék a foglalások során  a kutyákról megadott adatokat.</p><br>
+        <p> A "Kutyáim" menüpont lehetővé teszi <br> a felhasználók számára, hogy <br> megtekintsék vagy szerkesszék a foglalások során  a kutyákról megadott adatokat.</p><br>
     </div>
 </div>
 <!-- kutyák kiolvasása -->
@@ -94,7 +94,7 @@ if(isset($_SESSION["username"])){
                         echo "</tr>";
                     }
                 }  else {
-                    echo "Nincs eredménye a lekérdezésnek!";
+                    echo "<p id=\"megnincs\">Ehhez a profilhoz még nem tartozik kutya</p>";
                 }    
             } catch (PDOException $e){
                         echo "Adatbázis hiba: " .$e->getMessage();                 
@@ -147,7 +147,7 @@ if(isset($_SESSION["username"])){
     //kutya törlése
 function deleteAjax(id){
 
-    if(confirm('Biztos benne, hogy véglegesen törölni szeretné a kuyust?')){
+    if(confirm('Biztos benne, hogy véglegesen törölni szeretné a kutyust?')){
         $.ajax({
             type: 'POST',
             url:'deletedog.php',
@@ -155,8 +155,7 @@ function deleteAjax(id){
             success: function(data){
                 $('#kutya'+id).remove();
                 $("#toroluzenet").show('slow');
-                // setTimeout("window.location.href='mydogs.php';",800);
-                
+                setTimeout("window.location.href='mydogs.php';",800);                
             }
 
         });
@@ -180,6 +179,7 @@ $('#formdog').submit(function(e){
               $('#formdog')[0].reset();
                 var array = $.parseJSON(data);          
                 $('#table_data').append("<tr id='kutya"+array.id+"'><td>"+ array.kutyanev +"</td><td>"+array.kutyakor+"</td><td>"+array.kutyafajta+"</td><td><a href='updatedog.php?id="+array.id+"' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Szerkesztés'><i class='bi bi-pen'></i></a></td><td><button onclick='deleteAjax("+array.id+")' type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' aria-label='Törlés' title='Törlés'><i class='bi bi-trash3'></i></button></td></tr>");     
+                $('#megnincs').hide();
             }
         })
        e.preventDefault();

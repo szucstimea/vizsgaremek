@@ -18,10 +18,10 @@ require_once ("inndata.php");
                     <ul class="gazdi-ul">
                         <li class="form-header-group">
                             <h2 id="gazdi_header" class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-person"></i>Gazdi adatai</h2>
+                            <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
                             <?php if((isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"]=='1')) || (isset($_SESSION["login"]) && $_SESSION["login"]==true)){
                                 echo "<button class=\"btn btn-success\" id=\"profilbol\" type=\"button\">Gazdi adatainak betöltése a profilból</button>";
                             }?>
-                            <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
                         </li>
                         <li>
                             <span><i class="bi bi-person"></i> Név</span><br>

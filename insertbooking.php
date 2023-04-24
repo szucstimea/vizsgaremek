@@ -37,17 +37,11 @@ if(!empty($_POST['gazdivez'])){ //
         $vendegek->bindColumn("vendegID",$vendegID);
         $vendegek->execute();
 
-        //ha már van ilyen felhasználó
+        //van-e ilyen vendég
         if ($vendegek->rowCount()>0){
             while ($row = $vendegek->fetch(PDO::FETCH_BOUND)) {
                 if(strtolower($gazdiVnev) == strtolower($veznev) && strtolower($gazdiKnev) == strtolower($kernev) & strtolower($gazdimail) == strtolower($email)){
                     $gazdiid = $vendegID;
-                    //Ha a meglévő vendég címe üres, vagy eltér a korábban mentettől
-                    if(empty($DBirsz)){ //user oldalon nem engedi, hogy bármely mező üres legyen, ezért elég az egyiket ellenőrizni üres-e
-                        $sql2 = "UPDATE lodinn.vendegek SET iranyitoszam='$irsz',megye='$megye',varos='$telepules',utca='$utca',hazszam='$hazszam' WHERE vendegID='$gazdiid'";
-                        $insertAddress = $conn->prepare($sql2);
-                        $insertAddress->execute();
-                    }
                     $letezik=true;
                     break;
                 }else{
@@ -59,8 +53,17 @@ if(!empty($_POST['gazdivez'])){ //
         }
 
         if(!$letezik){
-            $sql3 = "INSERT INTO lodinn.vendegek (vezNev,kerNev,email,telszam,iranyitoszam,megye,varos,utca,hazszam) VALUES ('$veznev','$kernev','$email','$telefon','$irsz','$megye','$telepules','$utca','$hazszam')";
+            $sql3 = "INSERT INTO lodinn.vendegek (vezNev,kerNev,email,telszam,iranyitoszam,megye,varos,utca,hazszam) VALUES (?,?,?,?,?,?,?,?,?)";
             $insertGuest = $conn->prepare($sql3);
+            $insertGuest->bindParam(1, $veznev);
+            $insertGuest->bindParam(2, $kernev);
+            $insertGuest->bindParam(3, $email);
+            $insertGuest->bindParam(4, $telefon);
+            $insertGuest->bindParam(5, $irsz);
+            $insertGuest->bindParam(6, $megye);
+            $insertGuest->bindParam(7, $telepules);
+            $insertGuest->bindParam(8, $utca);
+            $insertGuest->bindParam(9, $hazszam);
             $insertGuest->execute();
             $gazdiid = $conn->lastInsertId();
         }
@@ -73,8 +76,10 @@ if(!empty($_POST['gazdivez'])){ //
         $panzio_fromDb->fetch(PDO::FETCH_BOUND);
 
         //Foglalások táblába szúrás
-        $sql5 = "INSERT INTO lodinn.foglalasok(panzio_ID,vegosszeg) VALUES('$panzio_DBId','$vegosszeg')";
+        $sql5 = "INSERT INTO lodinn.foglalasok(panzio_ID,vegosszeg) VALUES(?, ?)";
         $insertBooking = $conn->prepare($sql5);
+        $insertBooking->bindParam(1, $panzio_DBId, PDO::PARAM_INT);
+        $insertBooking->bindParam(2, $vegosszeg, PDO::PARAM_INT);
         $insertBooking->execute();
         $foglalasid = $conn->lastInsertId();
 
@@ -107,9 +112,15 @@ if(!empty($_POST['gazdivez'])){ //
 
             //vendég címének módosítása, ha az nem egyezik a korábban mentettel
             if($szallitas == 1 && ($DBirsz != $irsz || $DBmegye != $megye || $DBvaros != $varos || $DButca != $utca || $DBhazszam != $hazszam)){
-                $sql7 = "UPDATE lodinn.vendegek SET iranyitoszam='$irsz',megye='$megye',varos='$telepules',utca='$utca',hazszam='$hazszam' WHERE vendegID='$gazdiid'";
-                $insertAddress2 = $conn->prepare($sql7);
-                $insertAddress2->execute();
+                $sql7 = "UPDATE lodinn.vendegek SET iranyitoszam=?,megye=?,varos=?,utca=?,hazszam=? WHERE vendegID=?";
+                $insertAddress = $conn->prepare($sql7);
+                $insertAddress->bindParam(1, $irsz, PDO::PARAM_INT);
+                $insertAddress->bindParam(2, $megye, PDO::PARAM_STR);
+                $insertAddress->bindParam(3, $telepules, PDO::PARAM_STR);
+                $insertAddress->bindParam(4, $utca, PDO::PARAM_STR);
+                $insertAddress->bindParam(5, $hazszam, PDO::PARAM_STR);
+                $insertAddress->bindParam(6, $gazdiid, PDO::PARAM_INT);
+                $insertAddress->execute();
             }
 
             if ($kutya_sql->rowCount()>0){
@@ -127,29 +138,44 @@ if(!empty($_POST['gazdivez'])){ //
             }
 
             if($uj_kutya){
-                $sql8 = "INSERT INTO lodinn.kutyak(kutyaNev,kor,fajta,vendeg_ID,rogzites) VALUES('$kutyaneve','$kutyakor','$fajta','$gazdiid','$timestamp')";
+                $sql8 = "INSERT INTO lodinn.kutyak(kutyaNev,kor,fajta,vendeg_ID,rogzites) VALUES(?,?,?,?,?)";
                 $insertDog = $conn->prepare($sql8);
+                $insertDog->bindParam(1, $kutyaneve);
+                $insertDog->bindParam(2, $kutyakor);
+                $insertDog->bindParam(3, $fajta);
+                $insertDog->bindParam(4, $gazdiid);
+                $insertDog->bindParam(5, $timestamp);
                 $insertDog->execute();
                 $kutyaid = $conn->lastInsertId();
             }
 
             //Tartozik táblába szúrás
-            $sql8 = "INSERT INTO lodinn.tartozik(kezdoDatum,vegDatum,szallitas,specialisIgenyek,kutya_ID,fogl_ID) VALUES ('$elsonap','$utolsonap','$szallitas','$specigeny','$kutyaid','$foglalasid')";
+            $sql8 = "INSERT INTO lodinn.tartozik(kezdoDatum,vegDatum,szallitas,specialisIgenyek,kutya_ID,fogl_ID) VALUES (?,?,?,?,?,?)";
             $insertTartozik = $conn->prepare($sql8);
+            $insertTartozik->bindParam(1, $elsonap);
+            $insertTartozik->bindParam(2, $utolsonap);
+            $insertTartozik->bindParam(3, $szallitas);
+            $insertTartozik->bindParam(4, $specigeny);
+            $insertTartozik->bindParam(5, $kutyaid);
+            $insertTartozik->bindParam(6, $foglalasid);
             $insertTartozik->execute();
 
             // //Ar táblába szúrás
             if(!empty($szolgaltatasok)){
                 for($m=0 ; $m < count($szolgaltatasok) ; $m++){
                     $szolg_nev = $szolgaltatasok[$m];
-                    $sql10 = "SELECT kategoriaID FROM Arak WHERE kategoriaNev='$szolg_nev'";
+                    $sql10 = "SELECT kategoriaID FROM Arak WHERE kategoriaNev=?";
                     $kategoria_ID = $conn->prepare($sql10);
+                    $kategoria_ID->bindParam(1, $szolg_nev, PDO::PARAM_STR);
                     $kategoria_ID -> bindColumn("kategoriaID",$kategoriaID);
                     $kategoria_ID -> execute();
                     $kategoria_ID->fetch(PDO::FETCH_BOUND);
 
-                    $sql11 = "INSERT INTO lodinn.ar(kategoriaAr_ID,foglAr_ID,kutyaAr_ID) VALUES('$kategoriaID','$foglalasid','$kutyaid')";
+                    $sql11 = "INSERT INTO lodinn.ar(kategoriaAr_ID,foglAr_ID,kutyaAr_ID) VALUES(?,?,?)";
                     $insertAr = $conn->prepare($sql11);
+                    $insertAr->bindParam(1, $kategoriaID, PDO::PARAM_INT);
+                    $insertAr->bindParam(2, $foglalasid, PDO::PARAM_INT);
+                    $insertAr->bindParam(3, $kutyaid, PDO::PARAM_INT);
                     $insertAr->execute();
                 }
             }
