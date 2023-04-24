@@ -2,6 +2,7 @@
 include 'insertbooking.php';
 require_once ("inndata.php");
 ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 <script src='./jQuery/datepicker-hu.js' type='text/javascript'></script> 
@@ -10,13 +11,16 @@ require_once ("inndata.php");
     <div class="text-center" data-aos="fade-right">
         <h1  style="padding:2%; color: white; text-shadow: 2px 2px 6px #080000;" ><i class="bi bi-calendar2-check"></i>  Foglalás</h1>
     </div>
-    <div data-aos="fade-right" id="booking-form-guest" class="booking-form-container" <?php if((isset($_SESSION["loggedin"]) or isset($_COOKIE["loggedin"])) && ($_SESSION["loggedin"]==true || $_COOKIE["loggedin"]=='1')){echo "style=\"display:none\"";} ?>>
+    <div data-aos="fade-right" id="booking-form-guest" class="booking-form-container">
         <form id="booking-form" class="booking-form" action="" method="post">
             <ul id="booking-list">
                 <li id="gazdi-adatai" class="form-header-group gazdi-adatok">
                     <ul class="gazdi-ul">
                         <li class="form-header-group">
                             <h2 id="gazdi_header" class="form-header" style="color: white; text-shadow: 2px 2px 6px #080000;"><i class="bi bi-person"></i>Gazdi adatai</h2>
+                            <?php if((isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"]=='1')) || (isset($_SESSION["login"]) && $_SESSION["login"]==true)){
+                                echo "<button class=\"btn btn-success\" id=\"profilbol\" type=\"button\">Gazdi adatainak betöltése a profilból</button>";
+                            }?>
                             <div class="form-subHeader">Az alábbi mezőkbe a foglaló gazdi adatait kell megadni!</div>
                         </li>
                         <li>
@@ -57,8 +61,15 @@ require_once ("inndata.php");
                             <span>Kutya neve</span><br>
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-textbox kutyaneve variable" type="text" required data-aos="fade-right"/><br>
+                                    <input class="form-textbox kutyaneve variable" type="text" required data-aos="fade-right"/>
                                 </div>
+                                <?php if((isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"]=='1')) || (isset($_SESSION["login"]) && $_SESSION["login"]==true)){
+                                echo "<div class=\"col dropdown\" style=\"display: flex; float: right; align-items: center\">
+                                        <button id=\"kutyaim\" class=\"btn btn-success dropdown-toggle\" data-bs-toggle=\"dropdown\" type=\"button\" style=\"padding: 0.2rem; font-size: 1rem\">Kutyáim</button>
+                                        <div id=\"kutyaim-dropdown\" class=\"dropdown-menu\" aria-labelledby=\"kutyaim\">
+                                        </div>
+                                    </div>";
+                                }?>
                             </div>
                         </li>
                         <li>
@@ -685,9 +696,84 @@ require_once ("inndata.php");
                 $('#delDog').click(function(){
                     VegCalc(removable,"remove");
                 });
+
+                //username session-ből/cookie-ból
+                $('#profilbol').click(function(){
+                    <?php   if((isset($_SESSION["login"]) && $_SESSION["login"]==true)){$uname=$_SESSION['username'];?>
+                        uname = "<?php echo $uname ?>";
+                    <?php }elseif((isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"]=='1'))){$uname=$_COOKIE['username'];?>
+                        uname = "<?php echo $uname ?>";   
+                    <?php }?>
+                    
+                    $.ajax({
+                        url:"userdata.php",
+                        method:"post",   
+                        data:{ uname : uname
+                        },
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function(response){
+                            adatok = JSON.parse(response)
+                            $('#gazdiveznev').val(adatok["vezNev"]);                               
+                            $('#gazdikernev').val(adatok["kerNev"]);                               
+                            $('#gazdiemail').val(adatok["email"]);                               
+                            $('#gazditel').val(adatok["telszam"]);                               
+                            $('.irsz').val(adatok["iranyitoszam"]);                               
+                            $('.megye').val(adatok["megye"]);                               
+                            $('.telepules').val(adatok["varos"]);                               
+                            $('.utca').val(adatok["utca"]);                               
+                            $('.hazszam').val(adatok["hazszam"]);                               
+                        },
+                        error : function(err){
+                            alert(err);
+                        }
+                    });
+                });
+
+                var kutyaim=[];
+
+                $('#kutyaim').one('click', function(){
+                    <?php   if((isset($_SESSION["login"]) && $_SESSION["login"]==true)){$uname=$_SESSION['username'];?>
+                        uname = "<?php echo $uname ?>";
+                    <?php }elseif((isset($_COOKIE["loggedin"]) && ($_COOKIE["loggedin"]=='1'))){$uname=$_COOKIE['username'];?>
+                        uname = "<?php echo $uname ?>";   
+                    <?php }?>
+                    
+                    $.ajax({
+                        url:"userdata.php",
+                        method:"post",   
+                        data:{ gazdaja : uname
+                        },
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function(response){
+                            kutyaim = JSON.parse(response);
+                            if(kutyaim.length>0){ 
+                                for (var k=0;k<kutyaim.length;k++){
+                                    var elem = "<p class=\"dropdown-item kutya-load\">"+kutyaim[k]["kutyaNev"]+"</p>";
+                                    $('#kutyaim-dropdown').append(elem);
+                                }
+                            }else{
+                                var elem = "<p class=\"dropdown-item\">A kutyáim menüpontban felveheti kutyája adatait</p>";
+                                $('#kutyaim-dropdown').append(elem);
+                            }  
+                        },
+                        error : function(err){
+                            alert(err);
+                        }
+                    });
+                });
+
+                $(document).on("click", ".kutya-load", function () {                       
+                    for (var l=0;l<kutyaim.length;l++){
+                        if($(this).text()==kutyaim[l]["kutyaNev"]){
+                            var kutya_adatok = $(this).closest('.kutya-adatok');
+                            kutya_adatok.find('.kutyaneve').val(kutyaim[l]["kutyaNev"]);
+                            kutya_adatok.find('.kutyafajtaja').val(kutyaim[l]["fajta"]);
+                            kutya_adatok.find('.honapos').val(kutyaim[l]["kor"]);
+                            return;
+                        }
+                    }
+                });
             });
-
-
             //document.ready vége
 
             function convert(str) {
@@ -701,14 +787,6 @@ require_once ("inndata.php");
             $('#confClose, .cancelbtn').click(function(){
                 $('#confirm').hide();
             });
-
-            // document.querySelectorAll("#booking-list li").forEach((li, i) => {
-            // setTimeout(() => {
-            //     li.classList.add('show');
-            // }, 100 * i);
-            // });
-
-                       
 
         </script>
     </div>

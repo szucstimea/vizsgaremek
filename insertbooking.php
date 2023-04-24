@@ -30,9 +30,14 @@ if(!empty($_POST['gazdivez'])){ //
         $vendegek->bindColumn("kerNev",$gazdiKnev);
         $vendegek->bindColumn("email",$gazdimail);
         $vendegek->bindColumn("iranyitoszam",$DBirsz);
+        $vendegek->bindColumn("megye",$DBmegye);
+        $vendegek->bindColumn("varos",$DBvaros);
+        $vendegek->bindColumn("utca",$DButca);
+        $vendegek->bindColumn("hazszam",$DBhazszam);
         $vendegek->bindColumn("vendegID",$vendegID);
         $vendegek->execute();
 
+        //ha már van ilyen felhasználó
         if ($vendegek->rowCount()>0){
             while ($row = $vendegek->fetch(PDO::FETCH_BOUND)) {
                 if(strtolower($gazdiVnev) == strtolower($veznev) && strtolower($gazdiKnev) == strtolower($kernev) & strtolower($gazdimail) == strtolower($email)){
@@ -101,7 +106,7 @@ if(!empty($_POST['gazdivez'])){ //
             $kutya_sql->execute();
 
             //vendég címének módosítása, ha az nem egyezik a korábban mentettel
-            if($szallitas == 1 && ($DBirsz != $irsz)){
+            if($szallitas == 1 && ($DBirsz != $irsz || $DBmegye != $megye || $DBvaros != $varos || $DButca != $utca || $DBhazszam != $hazszam)){
                 $sql7 = "UPDATE lodinn.vendegek SET iranyitoszam='$irsz',megye='$megye',varos='$telepules',utca='$utca',hazszam='$hazszam' WHERE vendegID='$gazdiid'";
                 $insertAddress2 = $conn->prepare($sql7);
                 $insertAddress2->execute();
@@ -149,6 +154,12 @@ if(!empty($_POST['gazdivez'])){ //
                 }
             }
 
+            if($szallitas==1){
+                $szalligeny="igen";
+            }else{
+                $szalligeny="nem";
+            }
+
             //email kiküldés a foglalásról
             $mail = new PHPMailer(true);
             $mail->CharSet = "UTF-8";
@@ -175,9 +186,9 @@ if(!empty($_POST['gazdivez'])){ //
             </div>
             <div>
             <h3>  Kedves $gazdiVnev $gazdiKnev és $kutyaNev!<br></h3>
-            <h3><b>  Köszöjük, hogy megtiszteltél bizalmaddal és foglaltál a Lodinn Kutyapanziónál!</b></h3>
+            <h3><b>  Köszönjük, hogy megtiszteltél bizalmaddal és foglaltál a LodInn Kutyapanziónál!</b></h3>
             <p style='text-align: justify;'>Örülünk, hogy ügyfeleink között köszönthetünk! <br>
-            Mindent megteszünk, hogy $kutyaNev otthonossal érezze magát panziónkban! <br><br> 
+            Mindent megteszünk, hogy $kutyaNev otthonossan érezze magát panziónkban! <br><br> 
             A foglalásod főbb adatai:<br> 
             <b> Gazdi neve: </b>$veznev $kernev <br> 
             <b> Email cím: </b> $email <br>
@@ -192,7 +203,7 @@ if(!empty($_POST['gazdivez'])){ //
             <b> Kutya fajtája: </b> $fajta <br>
             <b> Foglalás első napja: </b> $elsonap <br>
             <b> Foglalás utolsó napja: </b> $utolsonap <br>
-            <b> Szállítási igény: </b> $szallitas <br>
+            <b> Szállítást kér: </b> $szalligeny <br>
             <b> Speciális igény: </b>  $specigeny <br>
             <b> Végösszeg: </b>  $vegosszeg ,-Ft <br>
             <b> Foglalás időpontja: </b> $timestamp <br><br>

@@ -339,4 +339,25 @@
   transition: 400ms;
 }
 
-/* 
+#kutyaim-dropdown{
+  padding: 0.1rem;
+  margin: 0.1rem;
+  background: transparent;
+  border-color: white;
+}
+
+#kutyaim-dropdown .dropdown-item{
+  margin: 0.1rem;
+  padding: 0.2rem;
+  color:white;
+  border-radius: 0.2rem;
+}
+
+#kutyaim-dropdown .dropdown-item:hover{
+  box-shadow: none;
+  color:black;
+  background-color: rgba(255, 255, 255, 0.658);
+  font-size: 100%;
+  transition: 400ms;
+  cursor: pointer;
+}

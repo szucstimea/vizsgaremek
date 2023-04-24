@@ -2,7 +2,6 @@
 session_start();
 require_once 'dbconnect.php';
 
-
 if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
 
         $username = $_POST["usern"];
@@ -23,7 +22,7 @@ if(isset($_POST["usern"]) && isset($_POST["pswrd"])){
         } 
         if(password_verify($pass, $db_password))
         {       
-            $_SESSION["loggedin"] = true;
+            $_SESSION["login"] = true;
             $_SESSION["username"] = $_POST["usern"];
            
         } else {
