@@ -417,7 +417,7 @@ if(!empty($db_panzioID)){
                                         </tr>
                                         ";    
                                     }  else {
-                                        echo "Nincs eredménye a lekérdezésnek!";
+                                        echo "A foglalásoz nincs egyéb szolgáltatás igénylés";
                                     }    
 
                             }    
