@@ -1,6 +1,6 @@
 <style>
 <?php include 'prices.css'; 
-require_once ("inndata.php");
+include 'inndata.php';
 ?>
 </style>
 
@@ -47,7 +47,7 @@ require_once ("inndata.php");
                     panziónk biztosítja a napi egyszeri fürdetést <b>szakképzett kutyakozmetikus</b> által. Ezzel garantáljuk, hogy
                     a kutyusok teljes tisztasággal és ápoltsággal kerülhetnek vissza a gazdikhoz.
                 </div>
-                <img src="assets/images/furdetes.jpg" alt="fürdetés" width="160" height="160">
+                <img src="<?php echo $kepek["furdetes"]?>" alt="fürdetés" width="160" height="160">
                 </div>
             <div class="col container szolg">
                 <h5 id="seta" class="nev">Sétáltatás<h3 class="ar"><?php echo $seta ?> Ft</h3> </h5>
@@ -55,7 +55,7 @@ require_once ("inndata.php");
                     esetleg csoportban. Garantáltan <b>biztonságos környéken</b> a kutyusok új ingerekkel találkozhatnak
                     és kikapcsolódhatnak, mint amikor a gazdival teszik meg a napi rutint.                        
                 </div>
-                <img src="assets/images/setaltatas.jpg" style="padding-top: 1rem" alt="sétáltatás" width="160" height="120">
+                <img src="<?php echo $kepek["setaltatas"]?>" style="padding-top: 1rem" alt="sétáltatás" width="160" height="120">
             </div>
         </div>
         <div class="row container text-center elem2">
@@ -65,7 +65,7 @@ require_once ("inndata.php");
                     mellé kérje a tanítás szolgáltatásunkat! <b>Szakképzett oktatóink</b> a kutyusa tudásának megfelelő
                     szintű 1 órás egyéni vagy csoportos kiképzést biztosítanak. Az sem gond, ha az alapokkal kell kezdeni!                      
                 </div>
-                <img src="assets/images/tanitas.jpg" style="padding: 1rem" alt="tanítás" width="160" height="120">
+                <img src="<?php echo $kepek["tanitas"]?>" style="padding: 1rem" alt="tanítás" width="160" height="120">
             </div>
             <div class="col szolg container sor2">
                 <h5 id="kozmetika" class="nev">Kozmetika<h3 class="ar"><?php echo $koz ?> Ft</h3> </h5>
@@ -74,7 +74,7 @@ require_once ("inndata.php");
                     minden kutyafajtának a megfelelő kozmetikai kezelést tudják biztosítani és garantáltan ápoltan 
                     térhetnek haza a négylábúak.                      
                 </div>
-                <img src="assets/images/kozmetika.jpg" style="padding: 1rem" alt="tanítás" width="160" height="120">
+                <img src="<?php echo $kepek["kozmetika"]?>" style="padding: 1rem" alt="tanítás" width="160" height="120">
             </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
-
+<?php
+include 'inndata.php';
+?>
 <div class="container-fluid" id="news" data-aos="fade-up">
     <div class="text-center">
         <h1 style="padding:2%;"><i class="bi bi-newspaper"></i>  Hírek</h1>
@@ -39,7 +41,7 @@
                         <div class="card col-12">
                         <div class="card-body py-4 mt-2">
                             <div class="justify-content-center mb-4">
-                                <img src="assets/images/dog3.png"
+                                <img src="'.$kepek["logo"].'"
                                     class="rounded-circle shadow-1-strong" width="80" height="80" />
                             </div>
                             <p class="font-weight">'.$db_datum.'</p>

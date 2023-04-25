@@ -1,4 +1,8 @@
 
+<?php
+include 'inndata.php';
+?>
+
 <script src="./jQuery/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
@@ -17,7 +21,7 @@ if(isset($_GET["cookie"]) || isset($_COOKIE["cookieSet"])){
 <div class="cookie-consent animated animatedFadeInUp fadeInUp" id="cookieModal">
    <div class="row">
       <div class="col d-sm-none d-md-block d-none d-sm-block text-center">
-          <img src="assets/images/bone.png" width="60%" height="60%" style="padding-top: 5%;" id="cookieimage" class="">
+          <img src="<?php echo $kepek["bone"]?>" width="60%" height="60%" style="padding-top: 5%;" id="cookieimage" class="">
        </div>
     <div class="col-xl-10 col-lg-10 col-md-10 col-12 col-sm-12 col-xs-12">
        <p class="text-muted h6">🍪 Az oldalunk sütiket használ a lehető legjobb felhasználói élmény érdekében. A sütik segítenek nekünk megjegyezni a beállításaidat, javítani a teljesítményünket és személyre szabni az ajánlatainkat.

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'inndata.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -22,7 +23,7 @@ session_start();
 <nav class="nav navbar navbar-dark fixed-top" style="background-color: #498ffc;">
 
 <a class="navbar" href="index.php" id="cim">
-    <img src="assets/images/dog3.png" alt="Logo" class="" id="logo">
+    <img src="<?php echo $kepek["logo"]?>" alt="Logo" class="" id="logo">
     <h2>LODINN KUTYAPANZIÓ</h2><br>
     </a>
   <div class="container">

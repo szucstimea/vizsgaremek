@@ -1,14 +1,14 @@
 <?php
 require_once 'dbconnect.php';
 
-// $kezdo = $_POST["from_date"];
+//panzió kapacitásának lekérdezése
 $sql1 = "SELECT kapacitas FROM lodinn.panziok WHERE nev='LodInn'";
 $getKapacitas = $conn->prepare($sql1);
 $getKapacitas->bindColumn("kapacitas",$kapacitas);
 $getKapacitas->execute();
 $getKapacitas->fetch(PDO::FETCH_BOUND);
-// echo ($kezdo." ".$kapacitas);
 
+//foglalási időszak lekérdezése, a legkorábbi és legkésőbbi foglalások különbségének számítása napokban mérve
 $sql2 = "SELECT MIN(kezdoDatum) AS minDate, MAX(vegDatum) AS maxDate, DATEDIFF(MAX(vegDatum),MIN(kezdoDatum)) AS date_difference FROM lodinn.tartozik";
 $diff = $conn->prepare($sql2);
 $diff->bindColumn("minDate",$minDate,PDO::PARAM_STR);
@@ -16,15 +16,15 @@ $diff->bindColumn("maxDate",$maxDate,PDO::PARAM_STR);
 $diff->bindColumn("date_difference",$difference,PDO::PARAM_STR);
 $diff->execute();
 $diff->fetch(PDO::FETCH_BOUND);
-// echo($minDate);
 
+//$napok tömb létrehozása, mely annyi elemet tartalmaz, amennyi a korábbi különbség és minden elem értéke a kapacitás
 $napok= array_fill(0, $difference, $kapacitas); //a 0 indexűtől tölti fel, tömb mérete, tömbelemek értéke
 
+//$napok tömb elemeinek értékének csökkentése a foglaltság alapján
 $sql3 = "SELECT kezdoDatum,vegDatum FROM tartozik";
 $kezdo_veg = $conn->prepare($sql3);
 $kezdo_veg->bindColumn("kezdoDatum",$kezdoDatum);
 $kezdo_veg->bindColumn("vegDatum",$vegDatum);
-$kezdo_veg->bindColumn("min_diff",$min_diff);
 $kezdo_veg->execute();
 $foglalt = $kezdo_veg->fetchAll(PDO::FETCH_ASSOC);
 foreach($foglalt as $foglalas){

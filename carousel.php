@@ -1,6 +1,10 @@
 
 <style>
-<?php include 'style.css'; ?>
+<?php 
+include 'style.css'; 
+include 'inndata.php';
+?>
+
 </style>
 
  
@@ -12,21 +16,21 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="assets/images/puppies.webp" class="d-block w-100" alt="...">
+      <img src="<?php echo $kepek["carousel1"]?>" class="d-block w-100" alt="...">
       <div class="carousel-caption  d-sm-block d-md-block">
         <h5><i class="bi bi-shield-check"></i> BIZTONSÁG</h5>
         <p>Panziónkban kutyusait a legnagyobb biztonságban tudhatja</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="assets/images/group-portrait-adorable-puppies.webp" class="d-block w-100" alt="...">
+      <img src="<?php echo $kepek["carousel2"]?>" class="d-block w-100" alt="...">
       <div class="carousel-caption  d-sm-block d-md-block">
         <h5><i class="bi bi-people"></i> SZAKÉRTELEM</h5>
         <p>A kutyusok viselkedésének megítélésében jártas szakértőink állnak rendelekezésére</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="assets/images/portrait-collection-adorable-puppies.webp" class="d-block w-100" alt="...">
+      <img src="<?php echo $kepek["carousel3"]?>" class="d-block w-100" alt="...">
       <div class="carousel-caption d-sm-block d-md-block">
         <h5><i class="bi bi-bag-heart"></i> GONDOSKODÁS</h5>
         <p>Szeretjük az állatokat, így a gondoskodás nálunk magától értetődő</p>

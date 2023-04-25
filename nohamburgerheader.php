@@ -1,5 +1,6 @@
 <?php
 require 'loginmodal.php';
+include 'inndata.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ require 'loginmodal.php';
 <nav class="navbar navbar-dark" style="background-color: #498ffc;">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="index.php" id="cim">
-    <img src="assets/images/dog3.png" alt="Logo" class="d-inline-block align-text-top" id="logo">
+    <img src="<?php echo $kepek["logo"]?>" alt="Logo" class="d-inline-block align-text-top" id="logo">
     LODINN KUTYAPANZIÓ<br>
     <div id="alcim" class="fw-light">kutyusa a legjobb kezekben</div>
     </a>

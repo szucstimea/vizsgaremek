@@ -1,6 +1,7 @@
 <?php
 require 'dbconnect.php';
 require 'headeradmin.php';
+include 'inndata.php';
 ?>
 <div class="position-fixed top-50 start-50">
 <div class="alert alert-success alert-dismissible fade show" role="alert" id="toroluzenet" style="display: none;">
@@ -486,7 +487,7 @@ if(!empty($db_panzioID)){
                         <div class="card col-12">
                         <div class="card-body py-4 mt-2">
                             <div class="justify-content-center mb-4">
-                                <img src="assets/images/dog3.png"
+                                <img src="'.$kepek["logo"].'"
                                     class="rounded-circle shadow-1-strong" width="80" height="80" />
                             </div>
                             <p class="font-weight">'.$db_datum.'</p>

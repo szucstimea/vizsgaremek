@@ -1,5 +1,7 @@
 <style>
-<?php include 'style.css'; ?>
+<?php include 'style.css'; 
+include 'inndata.php';
+?>
 </style>
 
 <section style="color: #000; background-color: #f3f2f2;" id="customers" data-aos="fade-up">
@@ -18,7 +20,7 @@
         <div class="card">
           <div class="card-body py-4 mt-2">
             <div class="d-flex justify-content-center mb-4">
-              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80"
+              <img src="<?php echo $kepek["customer1"]?>"
                 class="rounded-circle shadow-1-strong" width="90" height="100" />
             </div>
             <h5 class="font-weight-bold">Nagy Eszter</h5>
@@ -33,7 +35,7 @@
         <div class="card">
           <div class="card-body py-4 mt-2">
             <div class="d-flex justify-content-center mb-4">
-              <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+              <img src="<?php echo $kepek["customer2"]?>"
                 class="rounded-circle shadow-1-strong" width="100" height="100" />
             </div>
             <h5 class="font-weight-bold">Kis István</h5>
@@ -48,7 +50,7 @@
         <div class="card">
           <div class="card-body py-4 mt-2">
             <div class="d-flex justify-content-center mb-4">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+              <img src="<?php echo $kepek["customer3"]?>"
                 class="rounded-circle shadow-1-strong" width="80" height="100" />
             </div>
             <h5 class="font-weight-bold">Kovács Alexa</h5>

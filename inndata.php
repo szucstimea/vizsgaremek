@@ -29,4 +29,14 @@ if($szolgaltatasok->rowCount()>0){
     $szolgaltatas = "nincs";
 }
 
+$kepek_sql = "SELECT kepNev, kepUtvonal FROM Kepek WHERE panzio_ID=1";
+$kepek_query = $conn->prepare($kepek_sql);
+$kepek_query->execute();
+$kepek_lista = $kepek_query->fetchAll(PDO::FETCH_ASSOC);
+$kepek = [];
+foreach ($kepek_lista as $k){
+    $key = $k["kepNev"];
+    $kepek[$key] = $k["kepUtvonal"];
+}
+
 ?>

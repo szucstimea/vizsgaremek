@@ -19,6 +19,7 @@
 <?php
 require 'loginmodal.php';
 require 'registmodal.php';
+include 'inndata.php';
 
 ?>
 
@@ -26,7 +27,7 @@ require 'registmodal.php';
 <div id="alcim" class="fw-light" >kutyusa második otthona</div>
   <div class="container-fluid">
     <a class="navbar" href="index.php" id="cim">
-    <img src="assets/images/dog3.png" alt="Logo" class="" id="logo">
+    <img src="<?php echo $kepek["logo"]?>" alt="Logo" class="" id="logo">
     <h2>LODINN KUTYAPANZIÓ</h2><br>
     </a>
     
@@ -138,7 +139,7 @@ require 'registmodal.php';
         </button>
         <div class="offcanvas offcanvas-end nav-background" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header" style="margin-top: 5%;">
-            <img src="assets/images/dog3.png" alt="Logo" id="logo2"><br>
+            <img src="<?php echo $kepek["logo"]?>" alt="Logo" id="logo2"><br>
             <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel"> LODINN KUTYAPANZIÓ</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -167,7 +168,7 @@ require 'registmodal.php';
                     <a class="nav-link text-dark hover-effect" href="index.php#footer"><i class="bi bi-envelope-paper"></i> Kapcsolat</a>
                 </li>
                 <li class="nav-item">
-                    <img src="assets/images/pngfind.com-dog-paw-png-337026.png" style="width:90%;  transform: rotate(20deg); margin-top:15%;" id="mancs">
+                    <img src="<?php echo $kepek["dog-pow"]?>" style="width:90%;  transform: rotate(20deg); margin-top:15%;" id="mancs">
                 </li>
             </ul>
             <div class="socialoffcanvas">

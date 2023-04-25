@@ -1,6 +1,5 @@
 <?php
-include 'insertbooking.php';
-require_once ("inndata.php");
+include 'inndata.php';
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
@@ -185,7 +184,7 @@ require_once ("inndata.php");
                         
                             <div class="col">
                             <div id ="toltes" style = "display:none;">
-                                <img src="assets/images/loadergif.gif" id="gif" style="width:50%; height:auto;">
+                                <img src="<?php echo $kepek["loadergif"]?>" id="gif" style="width:50%; height:auto;">
 
                             </div>
                             <div class="row">
