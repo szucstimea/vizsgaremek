@@ -501,9 +501,10 @@ include 'inndata.php';
                         osszes.push(osszes_nap[m]);
                     }
              
+                    //Az összes kutya adatait tartalmazó elemek hozzáfűzése a dogs tömbhöz
                     var dogs = new Array();
                     $('.kutya-adatok').each(function(){
-                        dogs.push(this); //this refers to current DOM node inside of each loop
+                        dogs.push(this);
                     });
 
                     //gazdi adatok

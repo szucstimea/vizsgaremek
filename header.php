@@ -145,7 +145,7 @@ include 'inndata.php';
         </div>
         <div class="offcanvas-body position-relative text-center" >
             <ul class="navbar-nav">
-                <li class="nav-item" >
+                <li class="nav-item" id="lenyilo_menu">
                     <a class="nav-link active text-dark hover-effect" aria-current="page" href="index.php" ><i class="bi bi-house-heart" ></i> Kezdőlap</a>
                 </li>
                 <li class="nav-item">

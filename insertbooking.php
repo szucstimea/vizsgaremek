@@ -7,8 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
-//Vendég beszúrása
+//POST adatok változókba mentése
 if(!empty($_POST['gazdivez'])){ //
     $veznev = $_POST["gazdivez"];
     $kernev = $_POST["gazdiker"];
@@ -24,6 +23,7 @@ if(!empty($_POST['gazdivez'])){ //
     $timestamp = date("Y-m-d H:i:s");       
   
     try{
+        //vendégek lekérése az adatbázisból
         $sql = "SELECT * FROM lodinn.vendegek";
         $vendegek = $conn->prepare($sql);
         $vendegek->bindColumn("vezNev",$gazdiVnev);
@@ -52,6 +52,7 @@ if(!empty($_POST['gazdivez'])){ //
             $letezik = false;
         }
 
+        //Amennyiben még nincs ilyen vendég az adatbázisban
         if(!$letezik){
             $sql3 = "INSERT INTO lodinn.vendegek (vezNev,kerNev,email,telszam,iranyitoszam,megye,varos,utca,hazszam) VALUES (?,?,?,?,?,?,?,?,?)";
             $insertGuest = $conn->prepare($sql3);
@@ -82,13 +83,6 @@ if(!empty($_POST['gazdivez'])){ //
         $insertBooking->bindParam(2, $vegosszeg, PDO::PARAM_INT);
         $insertBooking->execute();
         $foglalasid = $conn->lastInsertId();
-
-        //Alapár lekérése
-        $sql9 = "SELECT ar FROM Arai INNER JOIN Arak ON kategoriaID=kategoria_ID WHERE kategoriaNev='alapár' AND panzio_ID=1";
-        $alapar = $conn->prepare($sql9);
-        $alapar -> bindColumn("ar",$alap);
-        $alapar -> execute();
-        $alapar->fetch(PDO::FETCH_BOUND);
 
         //Kutyák beszúrása
         for ($i = 0; $i < count($kutyak); $i++) {
