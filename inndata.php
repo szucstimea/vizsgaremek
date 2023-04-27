@@ -29,6 +29,7 @@ if($szolgaltatasok->rowCount()>0){
     $szolgaltatas = "nincs";
 }
 
+//képek útvonalának lekérdezése
 $kepek_sql = "SELECT kepNev, kepUtvonal FROM Kepek WHERE panzio_ID=1";
 $kepek_query = $conn->prepare($kepek_sql);
 $kepek_query->execute();
@@ -37,6 +38,17 @@ $kepek = [];
 foreach ($kepek_lista as $k){
     $key = $k["kepNev"];
     $kepek[$key] = $k["kepUtvonal"];
+}
+
+//linkek útvonalának lekérdezése
+$linkek_sql = "SELECT linkNev, link FROM linkek WHERE panzio_ID=1";
+$linkek_query = $conn->prepare($linkek_sql);
+$linkek_query->execute();
+$linkek_lista = $linkek_query->fetchAll(PDO::FETCH_ASSOC);
+$linkek = [];
+foreach ($linkek_lista as $l){
+    $key = $l["linkNev"];
+    $linkek[$key] = $l["link"];
 }
 
 ?>

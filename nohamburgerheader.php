@@ -32,13 +32,10 @@ include 'inndata.php';
                 <a class="nav-link pr-2" id="login"><i class="bi bi-person"></i></a>
             </li>
             <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-facebook"></i></a>
+                <a class="nav-link pr-2" href="<?php echo $linkek["facebook"]?>" target="_blank"><i class="bi bi-facebook"></i></a>
             </li>
             <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-messenger"></i></a>
-            </li>
-            <li class="nav-item-icons">
-                <a class="nav-link pr-2"><i class="bi bi-instagram"></i></a>
+                <a class="nav-link pr-2" href="<?php echo $linkek["instagram"]?>" target="_blank"><i class="bi bi-instagram"></i></a>
             </li>
             <li class="nav-item-icons">
                 <a class="nav-link pr-2"  href="mailto:lodinn@lodinn.hu"><i class="bi bi-envelope"></i></a>
