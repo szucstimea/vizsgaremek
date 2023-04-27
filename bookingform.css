@@ -342,14 +342,14 @@
 #kutyaim-dropdown{
   padding: 0.1rem;
   margin: 0.1rem;
-  background: transparent;
+  background: white;
   border-color: white;
 }
 
 #kutyaim-dropdown .dropdown-item{
   margin: 0.1rem;
   padding: 0.2rem;
-  color:white;
+  color:black;
   border-radius: 0.2rem;
 }
 
