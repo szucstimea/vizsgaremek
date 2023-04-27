@@ -29,15 +29,17 @@ if(isset($_POST["fel"])){
                     $sql2 = "SELECT * FROM lodinn.dolgozok WHERE dolgozok.felh_ID = ?";
                     $result2 = $conn->prepare($sql2);
                     $result2->bindParam(1, $db_felhID, PDO::PARAM_INT);
-                    $result2->execute();          
-                } 
-
-                if($result2 ->rowCount() !=0){
+                    $result2->execute();  
                     
-                    $_SESSION["loggedin"] = true;
-                    $_SESSION["usernameadmin"] = $_POST["fel"];  
-
+                    if($result2 ->rowCount() !=0){
+                    
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["usernameadmin"] = $_POST["fel"];  
+    
+                    } 
                 } 
+
+                
                 else {
                     echo "<div><p style='color:red;'><i class='bi bi-exclamation-circle-fill'></i> Nem megfelelő felhasználónév vagy jelszó! Kérem próbálja meg újra!</p></div>";
                 }
