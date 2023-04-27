@@ -132,7 +132,7 @@
             <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-person-add"></i>  Regisztrálok</button>
           </div>  
             <div class="" id="loader" style="display:none;"> 
-              <img src="<?php echo $kepek["loader-dog"]?>" id="gif">
+              <img src="assets/images/dog.gif" id="gif">
             </div>  
             <div class="col" id="visszajelzes"> 
             </div>  
@@ -311,42 +311,65 @@ $(document).ready(function() {
         var utca = $('#utca').val();
         var hazszam = $('#hazszam').val();
         var passw = $('#pswd').val();
-        if((veznev !="")){
-            $.ajax({
-                url:"registinsert.php",
-                method:"post",   
-                data:{
-                  ve: veznev,
-                  ke: keresztnev,
-                  us: user,
-                  ma: mail,
-                  ph: phone,
-                  me : megye,
-                  ir: iranyitoszam,
-                  te: telepules,
-                  ut:utca,
-                  ha:hazszam,
-                  pa:passw
-                },
-                dataType: "text",
+        if((veznev !="")){  
+        $.ajax({
+            url: "regusercheck.php",
+            method: "post",
+            data: {user: user},
+            dataType: "text",
+            success: function(data){
+                $('#res1').html("");
+                if (data != 0){
+                    $('#user').focus();
+                    $('#user').val('');
+                    $('#res1').html(data);
 
-                beforeSend: function(){
-                  $("#loader").show();
-                },
-                complete: function(){
-                  $("#loader").hide();
-                },
+                } else {
 
-                success: function(data){
-                  $('#visszajelzes').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Sikeres regisztráció! Kérem jelentkezzen be a megadott adatokkal!</h5><a href='?modal=1' id='register4'><p><i class='bi bi-box-arrow-in-right'></i>Bejelentkezés </p></a>");
-                    },
-                  error : function(err){
-                      alert(Error);
+                  $.ajax({
+                  url:"registinsert.php",
+                  method:"post",   
+                  data:{
+                    ve: veznev,
+                    ke: keresztnev,
+                    us: user,
+                    ma: mail,
+                    ph: phone,
+                    me : megye,
+                    ir: iranyitoszam,
+                    te: telepules,
+                    ut:utca,
+                    ha:hazszam,
+                    pa:passw
+                  },
+                  dataType: "text",
+
+                  beforeSend: function(){
+                    $("#loader").show();
+                  },
+                  complete: function(){
+                    $("#loader").hide();
                   },
 
-                })
+                  success: function(data){
+                    $('#visszajelzes').html("<i class='bi bi-check' style='color:green;'></i> <h5 style='color:green;'>Sikeres regisztráció! Kérem jelentkezzen be a megadott adatokkal!</h5><a href='?modal=1' id='register4'><p><i class='bi bi-box-arrow-in-right'></i>Bejelentkezés </p></a>");
+                      },
+                    error : function(err){
+                        alert(Error);
+                    },
 
-            }}))});
+                  })
+
+
+                }
+
+
+            }
+          })
+
+        }
+
+          }))});
 
 
 </script>
