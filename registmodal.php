@@ -132,7 +132,7 @@
             <button class="btn btn-primary" type="submit" name="submit" id="submit"><i class="bi bi-person-add"></i>  Regisztrálok</button>
           </div>  
             <div class="" id="loader" style="display:none;"> 
-              <img src="assets/images/dog.gif" id="gif">
+            <img src="<?php echo $kepek["loader-dog"]?>" id="gif">
             </div>  
             <div class="col" id="visszajelzes"> 
             </div>  
