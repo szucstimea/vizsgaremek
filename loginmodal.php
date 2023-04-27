@@ -30,7 +30,7 @@ require 'cookieModal.php';
 
                 <div class="input-group" id="show_hide_password">
                     <input type="password" class="form-control" id="password" name="password" required value="<?php if(isset($_COOKIE ['password'])){echo $_COOKIE ['password'];};?>" placeholder="Kérem adja meg jelszavát"><br><br>    
-                <span class="input-group-text"><a href=""><i class="bi bi-eye"></i></a></span>
+                <span class="input-group-text"><a href=""><i class="bi bi-eye-slash"></i></a></span>
                 </div>          
                 <label>
                     <div id="result2">
@@ -152,12 +152,12 @@ $(document).ready(function() {
         event.preventDefault();
         if($('#show_hide_password input').attr("type") == "text"){
             $('#show_hide_password input').attr('type', 'password');
-            $('#show_hide_password i').addClass( "bi-eye" );
-            $('#show_hide_password i').removeClass( "bi-eye-slash" );
+            $('#show_hide_password i').addClass( "bi-eye-slash" );
+            $('#show_hide_password i').removeClass( "bi-eye" );
         }else if($('#show_hide_password input').attr("type") == "password"){
             $('#show_hide_password input').attr('type', 'text');
-            $('#show_hide_password i').removeClass( "bi-eye" );
-            $('#show_hide_password i').addClass( "bi-eye-slash" );
+            $('#show_hide_password i').removeClass( "bi-eye-slash" );
+            $('#show_hide_password i').addClass( "bi-eye" );
         }
     });
 });

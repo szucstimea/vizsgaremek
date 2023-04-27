@@ -361,3 +361,28 @@
   transition: 400ms;
   cursor: pointer;
 }
+
+@media only screen and (min-device-width : 279px) and (max-device-width : 798px) {
+#kutyaim-dropdown{
+  background:rgb(255, 255, 255);
+}
+
+#kutyaim-dropdown .dropdown-item{
+  color: black;
+}
+
+}
+
+@media only screen and (min-device-width : 279px) and (max-device-width : 319px) {
+  #booking-list .form-textbox{
+    max-width: 100%;
+  }
+
+  .booking-form ul li {
+    padding: 0px;
+  }
+
+  .szolgaltatasok .col {
+    /* flex: none */
+  }
+}

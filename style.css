@@ -694,6 +694,7 @@ border-radius: 5px;
             color:antiquewhite;
             text-shadow: 1px 1px 2px #000000;
             display: flex;
+            padding-bottom: 0.5rem;
          }
          
          #alcim{
@@ -737,6 +738,14 @@ border-radius: 5px;
           }
           #mancs{
             display: none;
+          }
+
+          .navbar-dark{
+            padding-bottom: 1rem;
+          }
+
+          #welcome{
+            padding-top: 0.5rem;
           }
 
 }
@@ -830,14 +839,20 @@ border-radius: 5px;
             color:antiquewhite;
             text-shadow: 1px 1px 2px #000000;
             display: flex;
+            padding-bottom: 0px;
          }
          
          #alcim{
              display: flex;
 
          }
+
          ::-webkit-input-placeholder {
-          font-size: 0px!important;
+          font-size: 0px !important;
+         }
+
+         #booking-form ::-webkit-input-placeholder {
+          font-size: 15px!important;
        }
        .cookie-consent{
         bottom: 2px;
@@ -876,6 +891,10 @@ border-radius: 5px;
         #sectionback{
           background: none;
       
+        }
+
+        .navbar-dark{
+          padding-bottom: 1rem;
         }
 
     }
@@ -1036,7 +1055,7 @@ border-radius: 5px;
             display: flex;
             justify-content: center;
             margin-right:0%;
-            margin-left:5%;
+            margin-left:2%;
             font-size: 90%;
 
          }
@@ -1065,7 +1084,7 @@ border-radius: 5px;
             margin-left: -5%;
         }
         .nav-link{
-            font-size: 130%;
+            font-size: 100%;
         }
         .carousel-caption{
             font-size: 70%;
@@ -1129,7 +1148,11 @@ border-radius: 5px;
           #sectionback{
             background: none;
         
-          }          
+          }  
+          
+          .navbar-dark{
+            padding-bottom: 1rem;
+          }
 }
 /* ------------------------------------------------------------------------------------------------------------ */
 /* Desktops and laptops ----------- */
@@ -1192,7 +1215,7 @@ and (min-width : 1024px) and (max-device-width : 1400px){
             text-shadow: 1px 1px 2px #000000;
             display: flex;
             text-decoration: none;
-            
+            padding-bottom: 0.3rem;
          }
          
          #alcim{
