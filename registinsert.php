@@ -41,50 +41,51 @@ if (isset($_POST["ve"])){
                     $letezik=false;
                 }
             }
-            if($letezik){
-                //ha vendégként már létezik, akkor a felhasználókhoz kell felvenni
-                $sql2 = "INSERT INTO lodinn.felhasznalok (felhNev,jelszo) VALUES (:felhNev,:jelszo)";
-                $queryReg = $conn->prepare($sql2);
-                $queryReg->bindParam(':felhNev',$user,PDO::PARAM_STR);
-                $queryReg->bindParam(':jelszo',$pwhash,PDO::PARAM_STR);
-                $queryReg->execute();
-                $gazdiid = $conn->lastInsertId();
-                //ha korábban vendégként már létezett, de nem regisztrált, akkor nem volt felh_ID-ja, ezért hozzá kell rendelni + ha változtak a címadatok, akkor azokat frissítjük
-                $sql3 = "UPDATE lodinn.vendegek SET felh_ID = ?, megye = ?, iranyitoszam = ?, varos = ?, utca = ?, hazszam = ?  WHERE vendegID = ?";
-                $updateID = $conn->prepare($sql3);
-                $updateID->bindParam(1, $gazdiid, PDO::PARAM_INT);
-                $updateID->bindParam(2, $megye, PDO::PARAM_STR);
-                $updateID->bindParam(3, $iranyitoszam, PDO::PARAM_INT);
-                $updateID->bindParam(4, $telepules, PDO::PARAM_STR);
-                $updateID->bindParam(5, $utca, PDO::PARAM_STR);
-                $updateID->bindParam(6, $hazszam, PDO::PARAM_STR);
-                $updateID->bindParam(7, $ID, PDO::PARAM_INT);
-                $updateID->execute(); 
+        }
 
-            } else {
-           
-                $sql4 = "INSERT INTO lodinn.felhasznalok (felhNev,jelszo) VALUES (:felhNev,:jelszo)";
-                $queryReg1 = $conn->prepare($sql4);
-                $queryReg1->bindParam(':felhNev',$user,PDO::PARAM_STR);
-                $queryReg1->bindParam(':jelszo',$pwhash,PDO::PARAM_STR);
-                $queryReg1->execute();
+        if($letezik){
+            //ha vendégként már létezik, akkor a felhasználókhoz kell felvenni
+            $sql2 = "INSERT INTO lodinn.felhasznalok (felhNev,jelszo) VALUES (:felhNev,:jelszo)";
+            $queryReg = $conn->prepare($sql2);
+            $queryReg->bindParam(':felhNev',$user,PDO::PARAM_STR);
+            $queryReg->bindParam(':jelszo',$pwhash,PDO::PARAM_STR);
+            $queryReg->execute();
+            $gazdiid = $conn->lastInsertId();
+            //ha korábban vendégként már létezett, de nem regisztrált, akkor nem volt felh_ID-ja, ezért hozzá kell rendelni + ha változtak a címadatok, akkor azokat frissítjük
+            $sql3 = "UPDATE lodinn.vendegek SET felh_ID = ?, megye = ?, iranyitoszam = ?, varos = ?, utca = ?, hazszam = ?  WHERE vendegID = ?";
+            $updateID = $conn->prepare($sql3);
+            $updateID->bindParam(1, $gazdiid, PDO::PARAM_INT);
+            $updateID->bindParam(2, $megye, PDO::PARAM_STR);
+            $updateID->bindParam(3, $iranyitoszam, PDO::PARAM_INT);
+            $updateID->bindParam(4, $telepules, PDO::PARAM_STR);
+            $updateID->bindParam(5, $utca, PDO::PARAM_STR);
+            $updateID->bindParam(6, $hazszam, PDO::PARAM_STR);
+            $updateID->bindParam(7, $ID, PDO::PARAM_INT);
+            $updateID->execute(); 
+
+        } else {
         
-                $sql5 = "INSERT INTO lodinn.vendegek (felh_ID,vezNev,kerNev,email,telszam,megye,iranyitoszam,varos,utca,hazszam) VALUES (:felh_ID,:vezNev,:kerNev,:email,:telszam,:megye,:iranyitoszam,:varos,:utca,:hazszam) "; 
-                $lastId = $conn->lastInsertId();
-                $queryReg2 = $conn->prepare($sql5); 
-                $queryReg2->bindParam(":felh_ID",$lastId,PDO::PARAM_INT);    
-                $queryReg2->bindParam(":vezNev",$veznev,PDO::PARAM_STR);
-                $queryReg2->bindParam(":kerNev",$keresztnev,PDO::PARAM_STR);
-                $queryReg2->bindParam(":email",$email,PDO::PARAM_STR);
-                $queryReg2->bindParam(":telszam",$phone,PDO::PARAM_STR);
-                $queryReg2->bindParam(":megye",$megye,PDO::PARAM_STR);
-                $queryReg2->bindParam(":iranyitoszam",$iranyitoszam,PDO::PARAM_INT);
-                $queryReg2->bindParam(":varos",$telepules,PDO::PARAM_STR);
-                $queryReg2->bindParam(":utca",$utca,PDO::PARAM_STR);
-                $queryReg2->bindParam(":hazszam",$hazszam,PDO::PARAM_INT);
-                $queryReg2->execute();
-                $_SESSION["loggedin"] = true;     
-                }
+            $sql4 = "INSERT INTO lodinn.felhasznalok (felhNev,jelszo) VALUES (:felhNev,:jelszo)";
+            $queryReg1 = $conn->prepare($sql4);
+            $queryReg1->bindParam(':felhNev',$user,PDO::PARAM_STR);
+            $queryReg1->bindParam(':jelszo',$pwhash,PDO::PARAM_STR);
+            $queryReg1->execute();
+    
+            $sql5 = "INSERT INTO lodinn.vendegek (felh_ID,vezNev,kerNev,email,telszam,megye,iranyitoszam,varos,utca,hazszam) VALUES (:felh_ID,:vezNev,:kerNev,:email,:telszam,:megye,:iranyitoszam,:varos,:utca,:hazszam) "; 
+            $lastId = $conn->lastInsertId();
+            $queryReg2 = $conn->prepare($sql5); 
+            $queryReg2->bindParam(":felh_ID",$lastId,PDO::PARAM_INT);    
+            $queryReg2->bindParam(":vezNev",$veznev,PDO::PARAM_STR);
+            $queryReg2->bindParam(":kerNev",$keresztnev,PDO::PARAM_STR);
+            $queryReg2->bindParam(":email",$email,PDO::PARAM_STR);
+            $queryReg2->bindParam(":telszam",$phone,PDO::PARAM_STR);
+            $queryReg2->bindParam(":megye",$megye,PDO::PARAM_STR);
+            $queryReg2->bindParam(":iranyitoszam",$iranyitoszam,PDO::PARAM_INT);
+            $queryReg2->bindParam(":varos",$telepules,PDO::PARAM_STR);
+            $queryReg2->bindParam(":utca",$utca,PDO::PARAM_STR);
+            $queryReg2->bindParam(":hazszam",$hazszam,PDO::PARAM_INT);
+            $queryReg2->execute();
+            $_SESSION["loggedin"] = true;     
         } 
         
             //email kiküldés a regisztrációról
