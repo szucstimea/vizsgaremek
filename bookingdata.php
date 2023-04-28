@@ -10,9 +10,13 @@ if(!empty($_POST['uname'])){
         $felh = $conn -> prepare($sql);
         $felh -> bindParam(1,$user);
         $felh -> execute();
-        $vendegID = $felh->fetch(PDO::FETCH_BOUND);
+        if($felh ->rowCount() !=0){
+            while($row = $felh->fetch(PDO::FETCH_ASSOC)){
+                $vendegID = $row['vendegID'];
+            }           
+        }
 
-        $sql2 = "SELECT * FROM lodinn.tartozik INNER JOIN lodinn.kutyak ON tartozik.kutya_ID=kutyak.kutyaID INNER JOIN lodinn.foglalasok ON tartozik.fogl_ID=foglalasok.foglID WHERE vendeg_ID=?";
+        $sql2 = "SELECT * FROM tartozik INNER JOIN kutyak ON tartozik.kutya_ID=kutyak.kutyaID INNER JOIN foglalasok ON tartozik.fogl_ID=foglalasok.foglID WHERE vendeg_ID=?";
         $fogl = $conn -> prepare($sql2);
         $fogl -> bindParam(1,$vendegID);
         $fogl -> execute();
@@ -34,8 +38,8 @@ if(!empty($_POST['uname'])){
                 }
             }
         }
-
-        echo json_encode($foglalas);
+        echo json_encode($foglalas); 
+        
 
     }catch(Exception $e){
         echo $e;

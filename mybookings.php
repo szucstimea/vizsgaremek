@@ -50,6 +50,7 @@ require 'header.php';
             contentType: "application/x-www-form-urlencoded",
             success: function(response){
                 var foglalasok = JSON.parse(response);
+                alert(foglalasok);
                 if(foglalasok.length>0){
                     for(var i = 0 ; i < foglalasok.length ; i++){
                         if(foglalasok[i]["szallitas"]==1){
